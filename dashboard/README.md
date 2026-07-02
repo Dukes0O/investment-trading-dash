@@ -53,4 +53,15 @@ shown. Realized volatility (HV20 + its 1-year percentile rank) stands in for IV
 when ranking premium-selling vs premium-buying options structures — verify
 actual implied volatility with your broker.
 
+## Built with
+
+Charts are rendered by TradingView's open-source
+[lightweight-charts](https://github.com/tradingview/lightweight-charts)
+(Apache-2.0) — candlesticks, pan/zoom, autoscaling and crosshair come from the
+library; the theme, indicator panes, legend and multi-series tooltip are local.
+The indicator math (`indicators.js`) is intentionally hand-written and
+dependency-free: the formulas are small, the popular indicator packages on npm
+are largely unmaintained, and keeping the math local makes the signal scoring
+auditable in one file.
+
 **Decision support only — not financial advice.**

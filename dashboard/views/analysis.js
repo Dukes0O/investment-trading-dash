@@ -4,7 +4,8 @@
 import { el, clear, fmtNum, fmtPct, fmtMoney, fmtDateShort } from '../format.js';
 import { getPositions } from '../store.js';
 import { getMarket } from '../engine.js';
-import { renderChartStack, COLORS } from '../charts.js';
+import { COLORS } from '../charts.js';
+import { renderTradingChart } from '../tvchart.js';
 import { optionsStrategies } from '../signals.js';
 import { sma, rsi as rsiCalc, macd as macdCalc } from '../indicators.js';
 import { decisionBadge, trendMeter, sourceNotice } from './shared.js';
@@ -105,9 +106,12 @@ export async function renderAnalysis(root, navigate, params) {
     draw();
   }
 
+  let disposeChart = null;
+
   function draw() {
     tfBtns.weekly.classList.toggle('seg-active', timeframe === 'weekly');
     tfBtns.daily.classList.toggle('seg-active', timeframe === 'daily');
+    if (disposeChart) { disposeChart(); disposeChart = null; }
     clear(chartArea);
 
     let bars;
@@ -139,39 +143,14 @@ export async function renderAnalysis(root, navigate, params) {
       return;
     }
 
-    renderChartStack(chartArea, bars, [
-      {
-        type: 'price',
-        height: 300,
-        series: overlays,
-        title: timeframe === 'weekly' ? 'Weekly candles · 2y' : 'Daily candles · 6m',
-      },
-      {
-        type: 'lines',
-        height: 90,
-        title: 'RSI (14)',
-        fixedDomain: [0, 100],
-        fixedTicks: [30, 50, 70],
-        bands: [[30, 70]],
-        format: (v) => v.toFixed(0),
-        series: [{ name: 'RSI', color: COLORS.series4, values: rsiVals }],
-      },
-      {
-        type: 'lines',
-        height: 100,
-        title: 'MACD (12, 26, 9)',
-        zeroLine: true,
-        series: [
-          { name: 'Histogram', kind: 'histogram', values: macdVals.histogram, noLegend: true },
-          { name: 'MACD', color: COLORS.series1, values: macdVals.line },
-          { name: 'Signal', color: COLORS.series2, values: macdVals.signal },
-        ],
-      },
-    ], { ariaLabel: symbol + ' ' + timeframe + ' price chart with RSI and MACD' });
+    disposeChart = renderTradingChart(chartArea, bars, {
+      overlays,
+      rsi: rsiVals,
+      macd: macdVals,
+      ariaLabel: symbol + ' ' + timeframe + ' candlestick chart with moving averages, RSI and MACD',
+    });
   }
   draw();
-  const ro = new ResizeObserver(() => { if (!showTable) draw(); });
-  ro.observe(chartArea);
 
   // ---- Decision panel ----
   const reasonList = el('ul', { class: 'reason-list' },

@@ -10,6 +10,7 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
+    "lightweight-charts": "^5.2.0",
     "marked": "^15.0.8"
   }
 }
