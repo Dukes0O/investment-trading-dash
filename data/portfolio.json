@@ -35,6 +35,14 @@
       "costBasis": 0,
       "openedAt": "",
       "notes": "Sample watchlist entry"
+    },
+    {
+      "id": "pseed0005",
+      "symbol": "GLD",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — gold trend / cyclical hedge candidate"
     }
   ]
 }

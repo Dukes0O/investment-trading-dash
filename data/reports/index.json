@@ -1,20 +1,20 @@
 [
   {
-    "date": "2026-06-29",
-    "generatedAt": "2026-06-29T13:00:00Z",
-    "stance": "risk-on",
-    "symbolCount": 4,
+    "date": "2026-07-02",
+    "generatedAt": "2026-07-02T22:45:00Z",
+    "stance": "neutral",
+    "symbolCount": 5,
     "symbols": [
       {
         "symbol": "AAPL",
-        "llmVerdict": "hold",
-        "agreesWithRule": false,
+        "llmVerdict": "add",
+        "agreesWithRule": true,
         "ruleAction": "STRONG BUY",
         "ruleScore": 85
       },
       {
         "symbol": "MSFT",
-        "llmVerdict": "add",
+        "llmVerdict": "hold",
         "agreesWithRule": true,
         "ruleAction": "STRONG BUY",
         "ruleScore": 73
@@ -22,16 +22,23 @@
       {
         "symbol": "SPY",
         "llmVerdict": "hold",
-        "agreesWithRule": true,
+        "agreesWithRule": false,
         "ruleAction": "STRONG BUY",
         "ruleScore": 60
       },
       {
         "symbol": "NVDA",
-        "llmVerdict": "buy",
-        "agreesWithRule": true,
+        "llmVerdict": "hold",
+        "agreesWithRule": false,
         "ruleAction": "BUY",
         "ruleScore": 45
+      },
+      {
+        "symbol": "GLD",
+        "llmVerdict": "avoid",
+        "agreesWithRule": true,
+        "ruleAction": "STRONG SELL",
+        "ruleScore": -100
       }
     ]
   }
