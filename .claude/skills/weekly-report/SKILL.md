@@ -22,12 +22,23 @@ never invent news URLs.
    is analyzing synthetic data — still complete the run, but say so plainly in
    `portfolio.summary`.
 
-2. **Read the dossier in full.** For each symbol you get: price, the rule
+2. **Score last week's calls.**
+   ```sh
+   node scripts/evaluate-outcomes.mjs
+   ```
+   This rewrites `data/outcomes.json` — every prior report call graded against
+   what prices actually did (stop-truncated), including rule-vs-LLM
+   head-to-head on overrides. Read the summary. If matured outcomes exist,
+   let them inform this week's judgment (e.g. a pattern of losing overrides is
+   a reason to defer to the rules more) and mention notable lessons in
+   `portfolio.summary`.
+
+3. **Read the dossier in full.** For each symbol you get: price, the rule
    verdict with its itemized point-by-point reasons, ATR stop levels,
    volatility rank, 52-week range, options ideas, and the position context
    (qty, cost basis, P/L). This is your evidence base.
 
-3. **Research each symbol** (WebSearch, last ~10 days): earnings dates and
+4. **Research each symbol** (WebSearch, last ~10 days): earnings dates and
    results, guidance changes, analyst moves, product/regulatory news, and the
    sector/macro backdrop. Also check the general market regime (index trend,
    notable macro events this week). Rules:
@@ -36,7 +47,7 @@ never invent news URLs.
    - If search is unavailable, write the report from the dossier alone and
      state that limitation in `portfolio.summary`.
 
-4. **Write the report** to a scratch file, following
+5. **Write the report** to a scratch file, following
    `data/reports/SCHEMA.md` exactly. Judgment guidelines:
    - **Arbitrate, don't parrot.** You have the rule score and its reasons;
      agree when the evidence agrees. Override when context the rules can't see
@@ -55,7 +66,7 @@ never invent news URLs.
    - `portfolio.stance` reflects the whole book: risk-on / neutral / defensive,
      with `keyEvents` listing this week's calendar landmines.
 
-5. **Validate and save.**
+6. **Validate and save.**
    ```sh
    node scripts/save-report.mjs <your-draft.json>
    ```
@@ -63,16 +74,16 @@ never invent news URLs.
    (e.g. a held symbol you didn't cover) as errors unless there is a stated
    reason not to.
 
-6. **Commit** the results on the current branch:
+7. **Commit** the results on the current branch:
    ```sh
-   git add data/reports data/portfolio.json
+   git add data/reports data/portfolio.json data/outcomes.json data/dossier-*.json
    git commit -m "Weekly report <reportDate>"
    ```
    Push if the session's instructions call for it (e.g. a Claude Code web
    session working on a designated branch); otherwise leave the push to the
    user.
 
-7. **Tell the user the headline**: stance, any rule-override calls with the
+8. **Tell the user the headline**: stance, any rule-override calls with the
    one-line reason, and the most urgent trade-plan action.
 
 ## Guardrails

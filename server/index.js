@@ -17,8 +17,14 @@ const app = express();
 app.use(express.json({ limit: '1mb' }));
 app.use('/api', createApiRouter(db));
 
-// Static report printouts (same URLs Vite dev serves from the repo root).
+// Static printouts (same URLs Vite dev serves from the repo root). Only the
+// committed JSON artifacts are exposed — never the .db files.
 app.use('/data/reports', express.static(join(ROOT, 'data', 'reports')));
+app.get('/data/outcomes.json', (req, res) => {
+  const p = join(ROOT, 'data', 'outcomes.json');
+  if (!existsSync(p)) return res.status(404).json({ error: 'No outcomes yet' });
+  res.sendFile(p);
+});
 
 // Built frontend, when present.
 const dist = join(ROOT, 'dist');

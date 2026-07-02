@@ -94,6 +94,32 @@ subscription. This works from any Claude Code surface:
   run. The session commits and pushes the report; pull and it appears in
   the Reports view.
 
+## The learning loop (Performance view)
+
+Every weekly verdict is structured data, so the system grades itself. Each
+`/weekly-report` run executes `scripts/evaluate-outcomes.mjs`, which re-scores
+**every past call** against what prices actually did and writes the committed
+`data/outcomes.json`:
+
+- **Stop-truncated forward returns** at 1-week / 4-week / 13-week horizons —
+  if a call's stop was hit, the return is capped there, the way a trend system
+  actually exits.
+- **Hit rates** for the LLM verdicts and the rule signals separately.
+- **Overrides head-to-head** — every time the LLM overrode the rule engine,
+  who turned out right. This is the number that says whether the judgment
+  layer earns its keep.
+- **Signal-component attribution** — which rule reasons (golden cross, RSI
+  regime, breakouts…) actually predicted 4-week moves, shown once a component
+  has ≥8 samples. Persistent losers are the evidence for re-weighting
+  `dashboard/signals.js`.
+
+The Performance view renders all of this, including pending calls that
+haven't matured yet. Dossiers (`data/dossier-*.json`) are committed as the
+evidence archive — they hold the reasons and stops each call was made with.
+The scoring model is documented at the top of `scripts/lib/outcomes.mjs` and
+unit-tested; grade the system for a couple of months before treating any
+single number as meaningful.
+
 ### Division of labor (why hybrid)
 
 | Layer | Does | Never does |

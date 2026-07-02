@@ -1,0 +1,139 @@
+{
+  "generatedAt": "2026-07-02T23:18:52.302Z",
+  "provider": "demo",
+  "scoringNotes": "Stop-truncated forward returns; exposure-weighted scores; ±0.5% flat band; see scripts/lib/outcomes.mjs.",
+  "calls": [
+    {
+      "reportDate": "2026-07-02",
+      "symbol": "AAPL",
+      "llmVerdict": "add",
+      "ruleAction": "STRONG BUY",
+      "ruleScore": 85,
+      "agreesWithRule": true,
+      "confidence": "low",
+      "planAction": "add",
+      "stop": 94.85,
+      "ruleStop": 98.80479277272711,
+      "held": true,
+      "horizons": {
+        "1w": {
+          "matured": false
+        },
+        "4w": {
+          "matured": false
+        },
+        "13w": {
+          "matured": false
+        }
+      }
+    },
+    {
+      "reportDate": "2026-07-02",
+      "symbol": "MSFT",
+      "llmVerdict": "hold",
+      "ruleAction": "STRONG BUY",
+      "ruleScore": 73,
+      "agreesWithRule": true,
+      "confidence": "medium",
+      "planAction": "hold",
+      "stop": 592,
+      "ruleStop": 592.0152117293748,
+      "held": true,
+      "horizons": {
+        "1w": {
+          "matured": false
+        },
+        "4w": {
+          "matured": false
+        },
+        "13w": {
+          "matured": false
+        }
+      }
+    },
+    {
+      "reportDate": "2026-07-02",
+      "symbol": "SPY",
+      "llmVerdict": "hold",
+      "ruleAction": "STRONG BUY",
+      "ruleScore": 60,
+      "agreesWithRule": false,
+      "confidence": "medium",
+      "planAction": "hold",
+      "stop": 369.2,
+      "ruleStop": 369.2169185299006,
+      "held": true,
+      "horizons": {
+        "1w": {
+          "matured": false
+        },
+        "4w": {
+          "matured": false
+        },
+        "13w": {
+          "matured": false
+        }
+      }
+    },
+    {
+      "reportDate": "2026-07-02",
+      "symbol": "NVDA",
+      "llmVerdict": "hold",
+      "ruleAction": "BUY",
+      "ruleScore": 45,
+      "agreesWithRule": false,
+      "confidence": "medium",
+      "planAction": "hold",
+      "stop": 74.55,
+      "ruleStop": 74.55155505454137,
+      "held": false,
+      "horizons": {
+        "1w": {
+          "matured": false
+        },
+        "4w": {
+          "matured": false
+        },
+        "13w": {
+          "matured": false
+        }
+      }
+    },
+    {
+      "reportDate": "2026-07-02",
+      "symbol": "GLD",
+      "llmVerdict": "avoid",
+      "ruleAction": "STRONG SELL",
+      "ruleScore": -100,
+      "agreesWithRule": true,
+      "confidence": "medium",
+      "planAction": "hold",
+      "stop": null,
+      "ruleStop": 45.995734593589205,
+      "held": false,
+      "horizons": {
+        "1w": {
+          "matured": false
+        },
+        "4w": {
+          "matured": false
+        },
+        "13w": {
+          "matured": false
+        }
+      }
+    }
+  ],
+  "summary": {
+    "1w": {
+      "calls": 0
+    },
+    "4w": {
+      "calls": 0
+    },
+    "13w": {
+      "calls": 0
+    }
+  },
+  "reasonStats": []
+}

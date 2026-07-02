@@ -1,0 +1,625 @@
+{
+  "generatedAt": "2026-07-02T22:30:01.304Z",
+  "date": "2026-07-02",
+  "provider": "demo",
+  "sourceKind": "printout",
+  "portfolio": {
+    "totalValue": 16844.5,
+    "totalCost": 18264.7,
+    "totalPL": -1420.2000000000007,
+    "dayChange": 92.96999999999977,
+    "buys": 4,
+    "sells": 1,
+    "symbolsTracked": 5
+  },
+  "positions": [
+    {
+      "symbol": "AAPL",
+      "qty": 25,
+      "costBasis": 168.4,
+      "openedAt": "2025-09-15",
+      "notes": "Sample position — replace with your own"
+    },
+    {
+      "symbol": "MSFT",
+      "qty": 12,
+      "costBasis": 402.1,
+      "openedAt": "2025-11-03",
+      "notes": "Sample position — replace with your own"
+    },
+    {
+      "symbol": "SPY",
+      "qty": 18,
+      "costBasis": 512.75,
+      "openedAt": "2025-06-20",
+      "notes": "Sample position — replace with your own"
+    },
+    {
+      "symbol": "NVDA",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Sample watchlist entry"
+    },
+    {
+      "symbol": "GLD",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — gold trend / cyclical hedge candidate"
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "AAPL",
+      "held": true,
+      "qty": 25,
+      "costBasis": 168.4,
+      "plPct": -38.26603325415677,
+      "price": 103.96,
+      "source": "demo",
+      "dataError": null,
+      "score": 85,
+      "action": "STRONG BUY",
+      "summary": "Weekly and daily trends aligned to the upside. Trend-following long entries are favored; add on pullbacks to the 10-week MA.",
+      "reasons": [
+        {
+          "points": 15,
+          "text": "Weekly close above the 30-week MA (primary uptrend)",
+          "bullish": true
+        },
+        {
+          "points": 12,
+          "text": "10-week MA above 30-week MA (bullish alignment)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "30-week MA is rising",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 40-week (≈200-day) MA",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Golden cross intact (50-day above 200-day MA)",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 64 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 2.0620828909091533,
+        "atrPct": 1.9835349085313134,
+        "suggestedStop": 98.80479277272711,
+        "trailingStop": 98.80479277272711
+      },
+      "vol": {
+        "hv20": 21.639640408302615,
+        "hvRank": 74.20634920634922
+      },
+      "range52": {
+        "high": 124.02,
+        "low": 89.63
+      },
+      "optionsIdeas": [
+        {
+          "name": "Cash-secured put / bull put spread",
+          "fit": "Want to add exposure into an uptrend while volatility is rich",
+          "setup": "Sell a 30–45 DTE put ~0.25–0.30 delta (strike near $97.72), or define risk with a spread 5–10% wide below it.",
+          "why": "Gets paid to buy the pullback. Assignment is acceptable because the weekly trend is up."
+        }
+      ],
+      "optionsVolNote": "Realized volatility is elevated (HV rank 74/100) — favors selling premium.",
+      "recentWeeklyCloses": [
+        93.42,
+        93.91,
+        92.51,
+        95.3,
+        96.84,
+        98.16,
+        98.18,
+        96.42,
+        99.53,
+        96.73,
+        99.36,
+        102.95
+      ],
+      "recentDailyCloses": [
+        99.36,
+        100.27,
+        100.63,
+        102.53,
+        102.3,
+        102.95,
+        103.9,
+        105.18,
+        102.73,
+        103.96
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "held": true,
+      "qty": 12,
+      "costBasis": 402.1000000000001,
+      "plPct": 53.49415568266599,
+      "price": 617.2,
+      "source": "demo",
+      "dataError": null,
+      "score": 73,
+      "action": "STRONG BUY",
+      "summary": "Weekly and daily trends aligned to the upside. Trend-following long entries are favored; add on pullbacks to the 10-week MA.",
+      "reasons": [
+        {
+          "points": 15,
+          "text": "Weekly close above the 30-week MA (primary uptrend)",
+          "bullish": true
+        },
+        {
+          "points": 12,
+          "text": "10-week MA above 30-week MA (bullish alignment)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "30-week MA is rising",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 40-week (≈200-day) MA",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Golden cross intact (50-day above 200-day MA)",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 71 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": -6,
+          "text": "Daily MACD histogram negative",
+          "bullish": false
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 10.073915308250138,
+        "atrPct": 1.6321962586276957,
+        "suggestedStop": 592.0152117293748,
+        "trailingStop": 592.0152117293748
+      },
+      "vol": {
+        "hv20": 19.282099802704252,
+        "hvRank": 58.333333333333336
+      },
+      "range52": {
+        "high": 631.97,
+        "low": 465.43
+      },
+      "optionsIdeas": [
+        {
+          "name": "Bull call spread",
+          "fit": "Bullish continuation with cheap volatility",
+          "setup": "Buy a 60–90 DTE call near the money (~$617.20), sell one ~10% higher (~$678.92).",
+          "why": "Defined-risk upside participation; debit stays modest while HV is low."
+        },
+        {
+          "name": "Long call (LEAPS-style)",
+          "fit": "Strong, confirmed uptrend and low volatility",
+          "setup": "Buy a 6–12 month call, 0.70–0.80 delta (strike ~$555.48). Risk only the premium; size ≤ the risk of a stock position.",
+          "why": "Stock-replacement with less capital; low HV keeps the time premium reasonable."
+        }
+      ],
+      "optionsVolNote": "Volatility is mid-range (HV rank 58/100).",
+      "recentWeeklyCloses": [
+        473.96,
+        500.58,
+        486.84,
+        501.16,
+        499.23,
+        509.9,
+        525.34,
+        531.89,
+        577.09,
+        586.79,
+        612.6,
+        619.55
+      ],
+      "recentDailyCloses": [
+        612.6,
+        611.48,
+        628.28,
+        623.27,
+        626.44,
+        619.55,
+        621.02,
+        620.19,
+        615.24,
+        617.2
+      ]
+    },
+    {
+      "symbol": "SPY",
+      "held": true,
+      "qty": 18,
+      "costBasis": 512.75,
+      "plPct": -25.899561189663583,
+      "price": 379.95,
+      "source": "demo",
+      "dataError": null,
+      "score": 60,
+      "action": "STRONG BUY",
+      "summary": "Weekly and daily trends aligned to the upside. Trend-following long entries are favored; add on pullbacks to the 10-week MA.",
+      "reasons": [
+        {
+          "points": 15,
+          "text": "Weekly close above the 30-week MA (primary uptrend)",
+          "bullish": true
+        },
+        {
+          "points": 12,
+          "text": "10-week MA above 30-week MA (bullish alignment)",
+          "bullish": true
+        },
+        {
+          "points": -10,
+          "text": "30-week MA is falling",
+          "bullish": false
+        },
+        {
+          "points": 8,
+          "text": "Price above the 40-week (≈200-day) MA",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": -10,
+          "text": "Death cross intact (50-day below 200-day MA)",
+          "bullish": false
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 68 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        },
+        {
+          "points": 15,
+          "text": "New 20-day high — breakout in progress",
+          "bullish": true
+        }
+      ],
+      "notes": [
+        "Price closed above the upper Bollinger band — extended; mean reversion risk near-term."
+      ],
+      "risk": {
+        "atr": 4.293232588039747,
+        "atrPct": 1.1299467266850236,
+        "suggestedStop": 369.2169185299006,
+        "trailingStop": 369.2169185299006
+      },
+      "vol": {
+        "hv20": 11.9810294203621,
+        "hvRank": 89.28571428571429
+      },
+      "range52": {
+        "high": 477.66,
+        "low": 343.58
+      },
+      "optionsIdeas": [
+        {
+          "name": "Cash-secured put / bull put spread",
+          "fit": "Want to add exposure into an uptrend while volatility is rich",
+          "setup": "Sell a 30–45 DTE put ~0.25–0.30 delta (strike near $357.15), or define risk with a spread 5–10% wide below it.",
+          "why": "Gets paid to buy the pullback. Assignment is acceptable because the weekly trend is up."
+        }
+      ],
+      "optionsVolNote": "Realized volatility is elevated (HV rank 89/100) — favors selling premium.",
+      "recentWeeklyCloses": [
+        352.97,
+        356.41,
+        354.62,
+        356.29,
+        369.84,
+        367.99,
+        364.81,
+        358.87,
+        364.99,
+        368.17,
+        368.61,
+        371.52
+      ],
+      "recentDailyCloses": [
+        368.61,
+        373.29,
+        374.14,
+        370.11,
+        371.69,
+        371.52,
+        374.39,
+        377.56,
+        377.8,
+        379.95
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "held": false,
+      "qty": 0,
+      "costBasis": 0,
+      "plPct": null,
+      "price": 81.68,
+      "source": "demo",
+      "dataError": null,
+      "score": 45,
+      "action": "BUY",
+      "summary": "Uptrend in place with minor caveats. Long entries favored; size normally and use the suggested stop.",
+      "reasons": [
+        {
+          "points": 15,
+          "text": "Weekly close above the 30-week MA (primary uptrend)",
+          "bullish": true
+        },
+        {
+          "points": 12,
+          "text": "10-week MA above 30-week MA (bullish alignment)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "30-week MA is rising",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 40-week (≈200-day) MA",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Golden cross intact (50-day above 200-day MA)",
+          "bullish": true
+        },
+        {
+          "points": -8,
+          "text": "Price below the 50-day MA",
+          "bullish": false
+        },
+        {
+          "points": -6,
+          "text": "Daily RSI 44 — bearish regime (<50)",
+          "bullish": false
+        },
+        {
+          "points": -6,
+          "text": "Daily MACD histogram negative",
+          "bullish": false
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 2.851377978183458,
+        "atrPct": 3.4909132935644682,
+        "suggestedStop": 74.55155505454137,
+        "trailingStop": 81.92860000000002
+      },
+      "vol": {
+        "hv20": 32.520089068915254,
+        "hvRank": 21.03174603174603
+      },
+      "range52": {
+        "high": 90.87,
+        "low": 39.81
+      },
+      "optionsIdeas": [
+        {
+          "name": "Bull call spread",
+          "fit": "Bullish continuation with cheap volatility",
+          "setup": "Buy a 60–90 DTE call near the money (~$81.68), sell one ~10% higher (~$89.85).",
+          "why": "Defined-risk upside participation; debit stays modest while HV is low."
+        }
+      ],
+      "optionsVolNote": "Realized volatility is depressed (HV rank 21/100) — favors buying premium / debit structures.",
+      "recentWeeklyCloses": [
+        79.98,
+        79.03,
+        74.05,
+        73.79,
+        77.52,
+        81.61,
+        88.99,
+        82.42,
+        81.61,
+        85.38,
+        85.96,
+        88.06
+      ],
+      "recentDailyCloses": [
+        85.96,
+        86.15,
+        85.3,
+        87.16,
+        86.06,
+        88.06,
+        86.21,
+        85.41,
+        80.62,
+        81.68
+      ]
+    },
+    {
+      "symbol": "GLD",
+      "held": false,
+      "qty": 0,
+      "costBasis": 0,
+      "plPct": null,
+      "price": 48.85,
+      "source": "demo",
+      "dataError": null,
+      "score": -100,
+      "action": "STRONG SELL",
+      "summary": "Weekly and daily trends aligned to the downside. Exit or hedge long exposure; trend traders stand aside or look elsewhere.",
+      "reasons": [
+        {
+          "points": -15,
+          "text": "Weekly close below the 30-week MA (primary downtrend)",
+          "bullish": false
+        },
+        {
+          "points": -12,
+          "text": "10-week MA below 30-week MA (bearish alignment)",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "30-week MA is falling",
+          "bullish": false
+        },
+        {
+          "points": -8,
+          "text": "Price below the 40-week (≈200-day) MA",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "Weekly MACD below its signal line (momentum against the trend)",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "Death cross intact (50-day below 200-day MA)",
+          "bullish": false
+        },
+        {
+          "points": -8,
+          "text": "Price below the 50-day MA",
+          "bullish": false
+        },
+        {
+          "points": -6,
+          "text": "Daily RSI 26 — bearish regime (<50)",
+          "bullish": false
+        },
+        {
+          "points": -6,
+          "text": "Daily MACD histogram negative",
+          "bullish": false
+        },
+        {
+          "points": -15,
+          "text": "New 20-day low — breakdown in progress",
+          "bullish": false
+        }
+      ],
+      "notes": [
+        "Daily RSI is oversold (<28): downside may be stretched near-term; avoid panic exits, but respect the trend.",
+        "Price closed below the lower Bollinger band — washed out near-term."
+      ],
+      "risk": {
+        "atr": 1.1417061625643175,
+        "atrPct": 2.337167170039544,
+        "suggestedStop": 45.995734593589205,
+        "trailingStop": 53.35940000000003
+      },
+      "vol": {
+        "hv20": 18.059817518268467,
+        "hvRank": 35.317460317460316
+      },
+      "range52": {
+        "high": 59.33,
+        "low": 47.45
+      },
+      "optionsIdeas": [
+        {
+          "name": "Long put / bear put spread",
+          "fit": "Confirmed downtrend and volatility still cheap",
+          "setup": "Buy a 60–90 DTE put near the money, optionally sell one ~10% lower (near $43.97) to cut the debit.",
+          "why": "Direct downside participation with defined risk while HV is low."
+        }
+      ],
+      "optionsVolNote": "Volatility is mid-range (HV rank 35/100).",
+      "recentWeeklyCloses": [
+        53.32,
+        52.11,
+        54.85,
+        54.31,
+        54.63,
+        55.09,
+        55.29,
+        52.9,
+        53.05,
+        53.99,
+        52.03,
+        51.01
+      ],
+      "recentDailyCloses": [
+        52.03,
+        52.26,
+        51.96,
+        51.35,
+        50.58,
+        51.01,
+        50.88,
+        50.42,
+        49.99,
+        48.85
+      ]
+    }
+  ]
+}
