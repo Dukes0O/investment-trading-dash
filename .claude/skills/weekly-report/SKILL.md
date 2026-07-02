@@ -68,7 +68,9 @@ never invent news URLs.
    git add data/reports data/portfolio.json
    git commit -m "Weekly report <reportDate>"
    ```
-   Do not push unless the session instructions say to (CI pushes itself).
+   Push if the session's instructions call for it (e.g. a Claude Code web
+   session working on a designated branch); otherwise leave the push to the
+   user.
 
 7. **Tell the user the headline**: stance, any rule-override calls with the
    one-line reason, and the most urgent trade-plan action.

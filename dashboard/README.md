@@ -37,7 +37,8 @@ Weekly Claude Code session (/weekly-report skill):
 
 **SQLite is the source of truth** for live state (positions, settings/API
 keys, price-bar cache, reports); human-readable JSON printouts are committed
-so git is the audit trail and CI runs work without the DB. On first contact
+so git is the audit trail and cloud Claude Code sessions (which have no local
+DB) can run the weekly pipeline from the printouts. On first contact
 with an empty server, the app imports your existing localStorage positions
 automatically.
 
@@ -81,10 +82,17 @@ falls back to the most recent cache, then demo data, and says so.
    errors — invented URLs, missing stops, bad enums), and commits it.
 3. Open the **Weekly reports** view.
 
-To schedule it: add an `ANTHROPIC_API_KEY` repo secret and enable the cron in
-`.github/workflows/weekly-report.yml` (manual `workflow_dispatch` works out of
-the box). CI has no DB, so it reads the committed `data/portfolio.json` —
-keep it committed when your positions change.
+No API key is involved anywhere — the session runs on your Claude
+subscription. This works from any Claude Code surface:
+
+- **Local CLI/desktop session**: the pipeline reads positions and keys
+  straight from the SQLite DB.
+- **Claude Code web session** (fresh cloud container, no DB): the pipeline
+  automatically falls back to the committed `data/portfolio.json` — so keep
+  it committed when your positions change (the app rewrites it on every
+  edit), and set a market-data key via env or accept demo pricing for the
+  run. The session commits and pushes the report; pull and it appears in
+  the Reports view.
 
 ### Division of labor (why hybrid)
 

@@ -1,6 +1,6 @@
 // Portfolio + market-data source for pipeline scripts: the SQLite DB when it
 // exists (local runs), otherwise the committed data/portfolio.json printout
-// (CI runs, which have no DB).
+// (cloud Claude Code sessions, which start without a DB).
 
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
