@@ -1,9 +1,19 @@
-// Persistent app state: positions, watchlist, and settings in localStorage.
+// App state with two backends:
+//   - backend mode: REST API over SQLite (server/); reads are served from an
+//     in-memory mirror so views keep a synchronous read surface.
+//   - fallback mode: localStorage, as before, when no server is running
+//     (demo data only).
+// initStore() must be awaited once (app.js does) before views render.
+
+import { detectBackend, apiGet, apiSend } from './api.js';
 
 const POSITIONS_KEY = 'trenddesk.positions.v1';
 const SETTINGS_KEY = 'trenddesk.settings.v1';
 
 const listeners = new Set();
+let backendMode = false;
+let positions = [];
+let settings = { provider: 'demo', alphaVantageKey: '', twelveDataKey: '', hasKeys: null };
 
 export function onChange(fn) {
   listeners.add(fn);
@@ -27,27 +37,58 @@ function save(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
 
-// ---- Positions ----
-// Position: { id, symbol, qty, costBasis (per share), openedAt (ISO date), notes }
-// qty of 0 means watchlist-only.
+export function genId() {
+  return 'p' + Math.random().toString(36).slice(2, 10);
+}
 
-let positions = load(POSITIONS_KEY, null);
-
-if (positions === null) {
-  // First run: seed a small example portfolio so the dashboard demonstrates
-  // itself before the user enters real holdings. Clearly marked as sample data.
-  positions = [
+function samplePositions() {
+  return [
     { id: genId(), symbol: 'AAPL', qty: 25, costBasis: 168.4, openedAt: '2025-09-15', notes: 'Sample position — replace with your own' },
     { id: genId(), symbol: 'MSFT', qty: 12, costBasis: 402.1, openedAt: '2025-11-03', notes: 'Sample position — replace with your own' },
     { id: genId(), symbol: 'SPY', qty: 18, costBasis: 512.75, openedAt: '2025-06-20', notes: 'Sample position — replace with your own' },
     { id: genId(), symbol: 'NVDA', qty: 0, costBasis: 0, openedAt: '', notes: 'Sample watchlist entry' },
   ];
-  save(POSITIONS_KEY, positions);
 }
 
-export function genId() {
-  return 'p' + Math.random().toString(36).slice(2, 10);
+// ---- Init / mode ----
+
+export async function initStore() {
+  const health = await detectBackend();
+  backendMode = Boolean(health?.ok);
+
+  if (!backendMode) {
+    positions = load(POSITIONS_KEY, null);
+    if (positions === null) {
+      positions = samplePositions();
+      save(POSITIONS_KEY, positions);
+    }
+    settings = { ...settings, ...load(SETTINGS_KEY, {}) };
+    return;
+  }
+
+  // One-shot migration: hand the browser's positions (or the sample seed) to
+  // an empty server. The server 409s if it already has data, so this is safe
+  // across reloads and multiple browsers.
+  if (health.positionsCount === 0) {
+    const local = load(POSITIONS_KEY, null) ?? samplePositions();
+    const localSettings = load(SETTINGS_KEY, {});
+    try {
+      await apiSend('POST', '/import', { positions: local, settings: localSettings });
+    } catch { /* another client won the race — fine */ }
+  }
+
+  await refreshFromBackend();
 }
+
+async function refreshFromBackend() {
+  [positions, settings] = await Promise.all([apiGet('/positions'), apiGet('/settings')]);
+}
+
+export function isBackend() {
+  return backendMode;
+}
+
+// ---- Reads (synchronous, same surface as always) ----
 
 export function getPositions() {
   return positions.slice();
@@ -61,42 +102,53 @@ export function getSymbols() {
   return [...new Set(positions.map((p) => p.symbol))];
 }
 
-export function addPosition(pos) {
-  positions.push({ ...pos, id: genId(), symbol: pos.symbol.toUpperCase().trim() });
-  save(POSITIONS_KEY, positions);
-  emit();
-}
-
-export function updatePosition(id, patch) {
-  const i = positions.findIndex((p) => p.id === id);
-  if (i === -1) return;
-  positions[i] = { ...positions[i], ...patch };
-  if (patch.symbol) positions[i].symbol = patch.symbol.toUpperCase().trim();
-  save(POSITIONS_KEY, positions);
-  emit();
-}
-
-export function removePosition(id) {
-  positions = positions.filter((p) => p.id !== id);
-  save(POSITIONS_KEY, positions);
-  emit();
-}
-
-// ---- Settings ----
-// provider: 'demo' | 'alphavantage' | 'twelvedata'
-
-let settings = load(SETTINGS_KEY, {
-  provider: 'demo',
-  alphaVantageKey: '',
-  twelveDataKey: '',
-});
-
 export function getSettings() {
   return { ...settings };
 }
 
-export function updateSettings(patch) {
-  settings = { ...settings, ...patch };
-  save(SETTINGS_KEY, settings);
+// ---- Mutations (async: API in backend mode, localStorage otherwise) ----
+
+export async function addPosition(pos) {
+  if (backendMode) {
+    const created = await apiSend('POST', '/positions', pos);
+    positions.push(created);
+  } else {
+    positions.push({ ...pos, id: genId(), symbol: pos.symbol.toUpperCase().trim() });
+    save(POSITIONS_KEY, positions);
+  }
+  emit();
+}
+
+export async function updatePosition(id, patch) {
+  if (backendMode) {
+    const updated = await apiSend('PUT', '/positions/' + encodeURIComponent(id), patch);
+    const i = positions.findIndex((p) => p.id === id);
+    if (i !== -1) positions[i] = updated;
+  } else {
+    const i = positions.findIndex((p) => p.id === id);
+    if (i === -1) return;
+    positions[i] = { ...positions[i], ...patch };
+    if (patch.symbol) positions[i].symbol = patch.symbol.toUpperCase().trim();
+    save(POSITIONS_KEY, positions);
+  }
+  emit();
+}
+
+export async function removePosition(id) {
+  if (backendMode) {
+    await apiSend('DELETE', '/positions/' + encodeURIComponent(id));
+  }
+  positions = positions.filter((p) => p.id !== id);
+  if (!backendMode) save(POSITIONS_KEY, positions);
+  emit();
+}
+
+export async function updateSettings(patch) {
+  if (backendMode) {
+    settings = await apiSend('PUT', '/settings', patch);
+  } else {
+    settings = { ...settings, ...patch };
+    save(SETTINGS_KEY, settings);
+  }
   emit();
 }

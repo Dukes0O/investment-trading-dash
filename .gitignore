@@ -17,6 +17,12 @@ Thumbs.db
 .env
 .env.*
 
+# Trend Desk live state (JSON printouts in data/ ARE committed)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/dossier-*.json
+
 # IDE/project files
 .vscode/
 .idea/

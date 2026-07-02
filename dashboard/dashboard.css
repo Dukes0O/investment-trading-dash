@@ -419,6 +419,36 @@ html, body {
 .strategy-why { color: var(--muted); }
 .disclaimer { color: var(--muted); font-size: 11.5px; margin: 14px 0 0; max-width: 90ch; }
 
+/* ---- Weekly reports ---- */
+.report-picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.agree-tag {
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 2px 7px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.agree-yes { color: #2fbf2f; background: rgba(12, 163, 12, 0.1); }
+.agree-no { color: var(--warn); background: rgba(250, 178, 25, 0.1); }
+.sym-link { text-decoration: none; }
+.sym-link:hover { color: var(--accent); }
+.md p { margin: 0 0 10px; max-width: 84ch; }
+.md p:last-child { margin-bottom: 0; }
+.md ul, .md ol { margin: 0 0 10px; padding-left: 20px; }
+.md strong { color: var(--ink); }
+.md a { color: var(--accent); }
+.news-list a { color: var(--accent); }
+.news-meta { color: var(--muted); font-size: 12px; }
+.strategy-inline { margin-top: 12px; }
+.notice a { color: var(--accent); }
+
 /* ---- Forms ---- */
 .position-form {
   display: grid;
@@ -471,6 +501,8 @@ input[type='date'].input { color-scheme: dark; }
   margin-bottom: 10px;
 }
 .provider-selected { border-color: var(--accent); background: var(--surface-2); }
+.provider-disabled { opacity: 0.55; }
+code { background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 5px; font-size: 12px; }
 .provider-head {
   display: flex;
   align-items: center;

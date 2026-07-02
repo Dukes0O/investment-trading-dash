@@ -9,6 +9,7 @@ import { renderTradingChart } from '../tvchart.js';
 import { optionsStrategies } from '../signals.js';
 import { sma, rsi as rsiCalc, macd as macdCalc } from '../indicators.js';
 import { decisionBadge, trendMeter, sourceNotice } from './shared.js';
+import { latestReportEntry } from './reports.js';
 
 export async function renderAnalysis(root, navigate, params) {
   clear(root);
@@ -73,6 +74,22 @@ export async function renderAnalysis(root, navigate, params) {
       el('div', { class: 'stat-sub' }, a.vol.hvRank != null ? 'Rank ' + a.vol.hvRank.toFixed(0) + '/100 over 1y' : '')
     ),
   ));
+
+  // ---- Latest weekly-report take on this symbol (when one covers it) ----
+  const reportSlot = el('div');
+  body.append(reportSlot);
+  latestReportEntry().then((entry) => {
+    const take = entry?.symbols?.find((s) => s.symbol === symbol);
+    if (!take) return;
+    const agrees = take.agreesWithRule;
+    reportSlot.append(el('div', { class: 'notice ' + (agrees ? 'notice-info' : 'notice-warn') },
+      el('strong', {}, 'Weekly report (' + entry.date + '): ' + String(take.llmVerdict).toUpperCase() + '. '),
+      agrees
+        ? `Agrees with the rule signal ${take.ruleAction} (${take.ruleScore >= 0 ? '+' : ''}${take.ruleScore}). `
+        : `Overrides the rule signal ${take.ruleAction} (${take.ruleScore >= 0 ? '+' : ''}${take.ruleScore}). `,
+      el('a', { href: '#reports?date=' + encodeURIComponent(entry.date) }, 'Read the full report →')
+    ));
+  });
 
   // ---- Chart card with timeframe + table toggle ----
   const chartArea = el('div', { class: 'chart-area' });

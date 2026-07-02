@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2026-06-29",
+    "generatedAt": "2026-06-29T13:00:00Z",
+    "stance": "risk-on",
+    "symbolCount": 4,
+    "symbols": [
+      {
+        "symbol": "AAPL",
+        "llmVerdict": "hold",
+        "agreesWithRule": false,
+        "ruleAction": "STRONG BUY",
+        "ruleScore": 85
+      },
+      {
+        "symbol": "MSFT",
+        "llmVerdict": "add",
+        "agreesWithRule": true,
+        "ruleAction": "STRONG BUY",
+        "ruleScore": 73
+      },
+      {
+        "symbol": "SPY",
+        "llmVerdict": "hold",
+        "agreesWithRule": true,
+        "ruleAction": "STRONG BUY",
+        "ruleScore": 60
+      },
+      {
+        "symbol": "NVDA",
+        "llmVerdict": "buy",
+        "agreesWithRule": true,
+        "ruleAction": "BUY",
+        "ruleScore": 45
+      }
+    ]
+  }
+]

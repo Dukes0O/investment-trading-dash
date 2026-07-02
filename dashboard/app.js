@@ -1,14 +1,17 @@
 // Trend Desk — entry point. Hash router + shell (sidebar nav, content pane).
 
 import { el, clear } from './format.js';
+import { initStore } from './store.js';
 import { renderOverview } from './views/overview.js';
 import { renderAnalysis } from './views/analysis.js';
 import { renderPortfolio } from './views/portfolio.js';
+import { renderReports } from './views/reports.js';
 import { renderSettings } from './views/settings.js';
 
 const VIEWS = {
   overview: { title: 'Overview', render: renderOverview, icon: '◈' },
   portfolio: { title: 'Positions', render: renderPortfolio, icon: '☰' },
+  reports: { title: 'Weekly reports', render: renderReports, icon: '¶' },
   analysis: { title: 'Analysis', render: renderAnalysis, icon: '⌁', hidden: true },
   settings: { title: 'Settings', render: renderSettings, icon: '⚙' },
 };
@@ -77,4 +80,7 @@ async function route() {
 }
 
 window.addEventListener('hashchange', route);
-route();
+initStore().then(route, (err) => {
+  clear(content);
+  content.append(el('div', { class: 'empty-state' }, 'Failed to start: ' + err.message));
+});

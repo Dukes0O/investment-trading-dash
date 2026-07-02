@@ -1,67 +1,100 @@
-# Trend Desk — Investment Trading Dashboard
+# Trend Desk — Hybrid Investment Trading Platform
 
-A self-contained dashboard for weekly trend analysis, buy/sell decision support,
-and options-strategy ideas across your holdings. Lives alongside the chat app in
-this repo as its own page.
+Weekly trend analysis, buy/sell decision support, and options-strategy ideas
+for your portfolio. **Hybrid by design**: the code computes every indicator
+and mechanical signal deterministically; a weekly **Claude Code session
+supplies the judgment** — it reads the computed dossier, researches news, and
+issues the final calls, explicitly agreeing with or overriding the rule
+engine. Lives alongside the chat app in this repo.
 
 ## Run it
 
 ```sh
 npm install
-npm run dev
+npm run server     # backend: Express + SQLite on :3001
+npm run dev        # frontend: Vite on :3000 (proxies /api to the backend)
 ```
 
 Open **http://localhost:3000/dashboard.html** (the chat app remains at `/`).
+For production: `npm run build && npm start` and open
+http://localhost:3001/dashboard.html.
 
-## What it does
+Without the backend the dashboard still runs in demo mode (synthetic data,
+positions in localStorage) — live providers and weekly reports need the server.
 
-- **Positions** — enter holdings (symbol, quantity, cost basis, open date, notes).
-  Quantity 0 keeps a symbol on the watchlist for analysis without P/L tracking.
-  Everything is stored in the browser's localStorage; nothing leaves your machine
-  except price requests to the provider you choose.
-- **Overview** — portfolio value, day change, total P/L, holdings table with
-  90-day trend sparklines, and a weekly signal board.
-- **Analysis (click any symbol)** — weekly and daily candlestick charts with
-  10/30/40-week (or 20/50/200-day) moving averages, RSI(14) and MACD(12,26,9)
-  panes with crosshair tooltips and a table view; a scored, fully explained
-  buy/sell decision; ATR-based stop levels; and rule-based options-strategy
-  ideas (covered calls, cash-secured puts, spreads, collars, protective puts)
-  keyed to the trend score, your share count, and the volatility regime.
-- **Settings** — pick the market-data provider.
+## Architecture
+
+```
+Browser (dashboard)  ──REST──▶  server/ (Express 5 + better-sqlite3)
+  demo fallback if                 │ data/trenddesk.db      ← live state (gitignored)
+  backend not running              │ data/portfolio.json    ← auto-exported printout (committed)
+                                   ▼
+Weekly Claude Code session (/weekly-report skill):
+  npm run dossier  →  data/dossier-<date>.json   (technicals, gitignored)
+  reads dossier → WebSearch news per symbol → writes draft report
+  node scripts/save-report.mjs draft  →  data/reports/<date>.json + index.json (committed)
+```
+
+**SQLite is the source of truth** for live state (positions, settings/API
+keys, price-bar cache, reports); human-readable JSON printouts are committed
+so git is the audit trail and CI runs work without the DB. On first contact
+with an empty server, the app imports your existing localStorage positions
+automatically.
+
+## Views
+
+- **Overview** — portfolio value, day change, P/L, holdings table with trend
+  sparklines, weekly signal board.
+- **Positions** — enter holdings (symbol, quantity, cost basis); quantity 0 =
+  watchlist. Every change is saved to SQLite and re-exported to
+  `data/portfolio.json`.
+- **Weekly reports** — the LLM-written portfolio analysis: stance, trade-plan
+  table (rule signal vs LLM verdict with agreement flags), per-symbol
+  narratives with news citations, risks, and options plays. Full history,
+  one file per week.
+- **Analysis (click any symbol)** — candlestick charts
+  ([lightweight-charts](https://github.com/tradingview/lightweight-charts),
+  Apache-2.0) with 10/30/40-week or 20/50/200-day MAs, RSI, MACD; the scored
+  rule verdict with itemized reasons; ATR stops; rule-based options ideas —
+  plus the latest weekly report's take on that symbol when one exists.
+- **Settings** — market data provider. Keys are stored server-side in the
+  gitignored DB and never echoed back to the browser.
 
 ## Market data
 
 | Provider | Key | Free tier |
 |---|---|---|
-| Demo data (default) | none | Synthetic prices; works offline so the app demos itself |
-| [Alpha Vantage](https://www.alphavantage.co/support/#api-key) | free | 25 requests/day — responses cached per day |
-| [Twelve Data](https://twelvedata.com/) | free | 800 credits/day, 8/min — responses cached per day |
+| Demo data (default) | none | Synthetic prices; works offline |
+| [Alpha Vantage](https://www.alphavantage.co/support/#api-key) | free | 25 requests/day |
+| [Twelve Data](https://twelvedata.com/) | free | 800 credits/day, 8/min |
 
-API keys are stored in localStorage and sent only to that provider. Daily bars
-are cached per calendar day to stay inside free-tier limits; if a fetch fails,
-the app falls back to the most recent cache, then to demo data, and tells you.
+Daily bars are cached in SQLite per calendar day; on provider errors the app
+falls back to the most recent cache, then demo data, and says so.
 
-## Methodology (trend trading)
+## The weekly report ritual
 
-The **weekly** chart sets the trend: price vs the 30-week MA, 10>30-week MA
-alignment, 30-week MA slope, the 40-week (≈200-day) MA, and weekly MACD.
-The **daily** chart confirms and times: golden/death cross, price vs 50-day MA,
-RSI regime, MACD histogram, and 20-day breakouts/breakdowns. Each check adds or
-subtracts points; the composite score in [−100, +100] maps to
-STRONG BUY / BUY / HOLD / SELL / STRONG SELL, and every contributing reason is
-shown. Realized volatility (HV20 + its 1-year percentile rank) stands in for IV
-when ranking premium-selling vs premium-buying options structures — verify
-actual implied volatility with your broker.
+1. Open a Claude Code session on this repo (web, CLI, or desktop).
+2. Run **`/weekly-report`**. The session builds the dossier
+   (`npm run dossier`), reads it, researches each holding with web search,
+   writes the report against `data/reports/SCHEMA.md`, validates it with
+   `scripts/save-report.mjs` (invalid reports are rejected with itemized
+   errors — invented URLs, missing stops, bad enums), and commits it.
+3. Open the **Weekly reports** view.
 
-## Built with
+To schedule it: add an `ANTHROPIC_API_KEY` repo secret and enable the cron in
+`.github/workflows/weekly-report.yml` (manual `workflow_dispatch` works out of
+the box). CI has no DB, so it reads the committed `data/portfolio.json` —
+keep it committed when your positions change.
 
-Charts are rendered by TradingView's open-source
-[lightweight-charts](https://github.com/tradingview/lightweight-charts)
-(Apache-2.0) — candlesticks, pan/zoom, autoscaling and crosshair come from the
-library; the theme, indicator panes, legend and multi-series tooltip are local.
-The indicator math (`indicators.js`) is intentionally hand-written and
-dependency-free: the formulas are small, the popular indicator packages on npm
-are largely unmaintained, and keeping the math local makes the signal scoring
-auditable in one file.
+### Division of labor (why hybrid)
+
+| Layer | Does | Never does |
+|---|---|---|
+| `dashboard/indicators.js` + `signals.js` (code) | SMA/RSI/MACD/ATR/Bollinger/HV math, weekly resample, rule score in [−100,+100] with itemized reasons, ATR stops, options-fit shortlist | interpret news, time earnings, weigh conflicting evidence |
+| Weekly Claude session (LLM) | reads the computed dossier, researches news/earnings/macro, arbitrates — agrees or overrides the rule verdict with stated reasons, writes the trade plan | recalculate indicators, invent prices or URLs |
+
+The report schema forces the honesty: every symbol carries both the rule
+signal and the LLM verdict plus an `agreesWithRule` flag, so you can always
+see where judgment departed from mechanics — and review how those calls aged.
 
 **Decision support only — not financial advice.**

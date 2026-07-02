@@ -32,7 +32,7 @@ export function renderPortfolio(root, navigate) {
     const notes = input('text', 'optional', editing?.notes ?? '');
     const errBox = el('div', { class: 'form-error', role: 'alert' });
 
-    const submit = (e) => {
+    const submit = async (e) => {
       e.preventDefault();
       clear(errBox);
       const sym = symbol.value.trim().toUpperCase();
@@ -45,8 +45,13 @@ export function renderPortfolio(root, navigate) {
       if (!isFinite(q) || q < 0) { errBox.append('Quantity must be zero or positive.'); return; }
       if (q > 0 && (!isFinite(c) || c <= 0)) { errBox.append('A held position needs a cost basis per share.'); return; }
       const data = { symbol: sym, qty: q, costBasis: c, openedAt: opened.value || '', notes: notes.value.trim() };
-      if (editing) updatePosition(editing.id, data);
-      else addPosition(data);
+      try {
+        if (editing) await updatePosition(editing.id, data);
+        else await addPosition(data);
+      } catch (err) {
+        errBox.append(err.message);
+        return;
+      }
       editingId = null;
       drawForm();
       drawList();
@@ -92,10 +97,14 @@ export function renderPortfolio(root, navigate) {
           el('button', { class: 'btn btn-ghost btn-sm', onclick: () => { editingId = p.id; drawForm(); formCard.scrollIntoView({ behavior: 'smooth' }); } }, 'Edit'),
           el('button', {
             class: 'btn btn-ghost btn-sm btn-danger',
-            onclick: () => {
+            onclick: async () => {
               if (confirm(`Remove ${p.symbol}${p.qty > 0 ? ` (${fmtQty(p.qty)} shares)` : ''} from the portfolio?`)) {
                 if (editingId === p.id) { editingId = null; drawForm(); }
-                removePosition(p.id);
+                try {
+                  await removePosition(p.id);
+                } catch (err) {
+                  alert('Remove failed: ' + err.message);
+                }
                 drawList();
               }
             },
