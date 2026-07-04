@@ -9,11 +9,13 @@ import { detectBackend, apiGet, apiSend } from './api.js';
 
 const POSITIONS_KEY = 'trenddesk.positions.v1';
 const SETTINGS_KEY = 'trenddesk.settings.v1';
+const TRADES_KEY = 'trenddesk.trades.v1';
 
 const listeners = new Set();
 let backendMode = false;
 let positions = [];
-let settings = { provider: 'demo', alphaVantageKey: '', twelveDataKey: '', hasKeys: null };
+let trades = [];
+let settings = { provider: 'demo', alphaVantageKey: '', twelveDataKey: '', hasKeys: null, accountSize: 0, riskPct: 1 };
 
 export function onChange(fn) {
   listeners.add(fn);
@@ -62,6 +64,7 @@ export async function initStore() {
       positions = samplePositions();
       save(POSITIONS_KEY, positions);
     }
+    trades = load(TRADES_KEY, []);
     settings = { ...settings, ...load(SETTINGS_KEY, {}) };
     return;
   }
@@ -71,9 +74,10 @@ export async function initStore() {
   // across reloads and multiple browsers.
   if (health.positionsCount === 0) {
     const local = load(POSITIONS_KEY, null) ?? samplePositions();
+    const localTrades = load(TRADES_KEY, []);
     const localSettings = load(SETTINGS_KEY, {});
     try {
-      await apiSend('POST', '/import', { positions: local, settings: localSettings });
+      await apiSend('POST', '/import', { positions: local, trades: localTrades, settings: localSettings });
     } catch { /* another client won the race — fine */ }
   }
 
@@ -81,7 +85,7 @@ export async function initStore() {
 }
 
 async function refreshFromBackend() {
-  [positions, settings] = await Promise.all([apiGet('/positions'), apiGet('/settings')]);
+  [positions, trades, settings] = await Promise.all([apiGet('/positions'), apiGet('/trades'), apiGet('/settings')]);
 }
 
 export function isBackend() {
@@ -104,6 +108,11 @@ export function getSymbols() {
 
 export function getSettings() {
   return { ...settings };
+}
+
+export function getTrades() {
+  if (backendMode) return trades.slice();
+  return trades.slice().sort((a, b) => (a.executedAt < b.executedAt ? 1 : a.executedAt > b.executedAt ? -1 : 0));
 }
 
 // ---- Mutations (async: API in backend mode, localStorage otherwise) ----

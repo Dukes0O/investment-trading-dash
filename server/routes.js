@@ -4,9 +4,9 @@
 import { Router } from 'express';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, positionToApi, getSetting, setSetting, genId } from './db.js';
+import { ROOT, positionToApi, tradeToApi, getSetting, setSetting, genId } from './db.js';
 import { getDailyBars, marketConfig } from './marketdata.js';
-import { writePortfolioPrintout } from './export.js';
+import { writePortfolioPrintout, writeTradesPrintout } from './export.js';
 import { indexEntry } from '../scripts/lib/report-schema.mjs';
 import { runBacktests } from '../scripts/lib/runbacktest.mjs';
 
@@ -28,6 +28,29 @@ function validatePosition(body) {
       costBasis,
       openedAt: String(body.openedAt ?? ''),
       notes: String(body.notes ?? ''),
+    },
+  };
+}
+
+function validateTrade(body) {
+  const symbol = String(body.symbol ?? '').toUpperCase().trim();
+  const side = String(body.side ?? '').toLowerCase().trim();
+  const qty = Number(body.qty);
+  const price = Number(body.price);
+  const executedAt = String(body.executedAt ?? '');
+  if (!SYMBOL_RE.test(symbol)) return { error: 'Enter a valid ticker symbol (letters, dots or dashes).' };
+  if (side !== 'buy' && side !== 'sell') return { error: 'Side must be buy or sell.' };
+  if (!isFinite(qty) || qty <= 0) return { error: 'Quantity must be a positive number.' };
+  if (!isFinite(price) || price <= 0) return { error: 'Price must be a positive number.' };
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(executedAt)) return { error: 'Executed date must be in YYYY-MM-DD format.' };
+  return {
+    value: {
+      symbol,
+      side,
+      qty,
+      price,
+      executedAt,
+      note: String(body.note ?? ''),
     },
   };
 }
@@ -78,14 +101,40 @@ export function createApiRouter(db) {
     res.json({ ok: true });
   });
 
+  // ---- Trades ----
+
+  router.get('/trades', (req, res) => {
+    res.json(db.prepare('SELECT * FROM trades ORDER BY executed_at DESC, created_at DESC').all().map(tradeToApi));
+  });
+
+  router.post('/trades', (req, res) => {
+    const { error, value } = validateTrade(req.body ?? {});
+    if (error) return res.status(400).json({ error });
+    const id = genId();
+    db.prepare(
+      'INSERT INTO trades (id, symbol, side, qty, price, executed_at, note) VALUES (?, ?, ?, ?, ?, ?, ?)'
+    ).run(id, value.symbol, value.side, value.qty, value.price, value.executedAt, value.note);
+    writeTradesPrintout(db);
+    res.status(201).json(tradeToApi(db.prepare('SELECT * FROM trades WHERE id = ?').get(id)));
+  });
+
+  router.delete('/trades/:id', (req, res) => {
+    const info = db.prepare('DELETE FROM trades WHERE id = ?').run(req.params.id);
+    if (!info.changes) return res.status(404).json({ error: 'Trade not found' });
+    writeTradesPrintout(db);
+    res.json({ ok: true });
+  });
+
   // One-shot localStorage migration: only accepted while the table is empty,
   // so repeat calls (or multiple browsers) can't duplicate.
   router.post('/import', (req, res) => {
     const { c } = db.prepare('SELECT COUNT(*) AS c FROM positions').get();
     if (c > 0) return res.status(409).json({ error: 'Positions already exist — import is only allowed into an empty database.' });
     const positions = Array.isArray(req.body?.positions) ? req.body.positions : [];
+    const trades = Array.isArray(req.body?.trades) ? req.body.trades : [];
     const settings = req.body?.settings ?? {};
     let imported = 0;
+    const { c: tradesCount } = db.prepare('SELECT COUNT(*) AS c FROM trades').get();
     db.transaction(() => {
       for (const p of positions) {
         const { error, value } = validatePosition(p);
@@ -95,11 +144,31 @@ export function createApiRouter(db) {
         ).run(typeof p.id === 'string' && p.id ? p.id : genId(), value.symbol, value.qty, value.costBasis, value.openedAt, value.notes);
         imported++;
       }
+      // Trades already exist — skip import silently (the positions 409 above
+      // already guards the main flow; this table has its own empty check).
+      if (tradesCount === 0) {
+        for (const t of trades) {
+          const { error, value } = validateTrade(t);
+          if (error) continue;
+          db.prepare(
+            'INSERT INTO trades (id, symbol, side, qty, price, executed_at, note) VALUES (?, ?, ?, ?, ?, ?, ?)'
+          ).run(typeof t.id === 'string' && t.id ? t.id : genId(), value.symbol, value.side, value.qty, value.price, value.executedAt, value.note);
+        }
+      }
       for (const key of ['provider', 'alphaVantageKey', 'twelveDataKey']) {
         if (typeof settings[key] === 'string' && settings[key]) setSetting(db, key, settings[key]);
       }
+      if (settings.accountSize != null) {
+        const accountSize = Number(settings.accountSize);
+        if (isFinite(accountSize) && accountSize >= 0) setSetting(db, 'accountSize', accountSize);
+      }
+      if (settings.riskPct != null) {
+        const riskPct = Number(settings.riskPct);
+        if (isFinite(riskPct) && riskPct > 0 && riskPct <= 10) setSetting(db, 'riskPct', riskPct);
+      }
     })();
     writePortfolioPrintout(db);
+    if (tradesCount === 0) writeTradesPrintout(db);
     res.json({ imported });
   });
 
@@ -112,6 +181,8 @@ export function createApiRouter(db) {
         alphavantage: Boolean(getSetting(db, 'alphaVantageKey', '')),
         twelvedata: Boolean(getSetting(db, 'twelveDataKey', '')),
       },
+      accountSize: getSetting(db, 'accountSize', 0),
+      riskPct: getSetting(db, 'riskPct', 1),
     };
   }
 
@@ -127,6 +198,16 @@ export function createApiRouter(db) {
     }
     if (typeof body.alphaVantageKey === 'string') setSetting(db, 'alphaVantageKey', body.alphaVantageKey.trim());
     if (typeof body.twelveDataKey === 'string') setSetting(db, 'twelveDataKey', body.twelveDataKey.trim());
+    if (body.accountSize != null) {
+      const accountSize = Number(body.accountSize);
+      if (!isFinite(accountSize) || accountSize < 0) return res.status(400).json({ error: 'Account size must be zero or positive.' });
+      setSetting(db, 'accountSize', accountSize);
+    }
+    if (body.riskPct != null) {
+      const riskPct = Number(body.riskPct);
+      if (!isFinite(riskPct) || riskPct <= 0 || riskPct > 10) return res.status(400).json({ error: 'Risk % must be between 0 and 10.' });
+      setSetting(db, 'riskPct', riskPct);
+    }
     writePortfolioPrintout(db);
     res.json(maskedSettings());
   });

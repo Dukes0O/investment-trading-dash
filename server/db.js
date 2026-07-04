@@ -57,6 +57,21 @@ const MIGRATIONS = [
   `,
 ];
 
+// v2 — trade journal
+MIGRATIONS.push(`
+  CREATE TABLE trades (
+    id           TEXT PRIMARY KEY,
+    symbol       TEXT NOT NULL,
+    side         TEXT NOT NULL,
+    qty          REAL NOT NULL,
+    price        REAL NOT NULL,
+    executed_at  TEXT NOT NULL,
+    note         TEXT NOT NULL DEFAULT '',
+    created_at   TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+  );
+  CREATE INDEX idx_trades_symbol ON trades(symbol);
+`);
+
 export function openDb(path = DB_PATH) {
   mkdirSync(dirname(path), { recursive: true });
   const db = new Database(path);
@@ -83,6 +98,18 @@ export function positionToApi(row) {
     costBasis: row.cost_basis,
     openedAt: row.opened_at,
     notes: row.notes,
+  };
+}
+
+export function tradeToApi(row) {
+  return {
+    id: row.id,
+    symbol: row.symbol,
+    side: row.side,
+    qty: row.qty,
+    price: row.price,
+    executedAt: row.executed_at,
+    note: row.note,
   };
 }
 
