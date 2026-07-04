@@ -172,7 +172,7 @@ export async function addTrade(t) {
     trades.unshift(created);
     sortTradesDesc();
   } else {
-    trades.push({ ...t, id: genId(), symbol: t.symbol.toUpperCase().trim() });
+    trades.push({ ...t, id: genId(), symbol: t.symbol.toUpperCase().trim(), createdAt: new Date().toISOString() });
     sortTradesDesc();
     save(TRADES_KEY, trades);
   }

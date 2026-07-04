@@ -51,10 +51,15 @@ automatically.
 - **Positions** — enter holdings (symbol, quantity, cost basis); quantity 0 =
   watchlist. Every change is saved to SQLite and re-exported to
   `data/portfolio.json`.
-- **Trade journal** — log individual buy/sell executions (symbol, side,
-  quantity, price, date, note) separately from the current-holdings table
-  above; saved to SQLite and re-exported to `data/trades.json`, alongside an
-  account size and risk-per-trade % setting used for position sizing.
+- **Trade journal** — log every actual fill (symbol, side, quantity, price,
+  date, note); saved to SQLite, exported to `data/trades.json`. Each fill is
+  graded against the weekly report that was live when you traded: **on plan**,
+  **chased above the entry zone**, **plan said hold**, or **against plan** —
+  including conditional plans (a "hold" with an entry zone counts as on-plan
+  when you buy inside the zone). FIFO realized P/L, on-plan %, and a drift
+  check that flags when journal quantities disagree with recorded positions.
+  This measures the discipline gap — the difference between what the system
+  said and what you did.
 - **Weekly reports** — the LLM-written portfolio analysis: stance, trade-plan
   table (rule signal vs LLM verdict with agreement flags), per-symbol
   narratives with news citations, risks, and options plays. Full history,
@@ -62,8 +67,10 @@ automatically.
 - **Analysis (click any symbol)** — candlestick charts
   ([lightweight-charts](https://github.com/tradingview/lightweight-charts),
   Apache-2.0) with 10/30/40-week or 20/50/200-day MAs, RSI, MACD; the scored
-  rule verdict with itemized reasons; ATR stops; rule-based options ideas —
-  plus the latest weekly report's take on that symbol when one exists.
+  rule verdict with itemized reasons; ATR stops; rule-based options ideas;
+  the latest weekly report's take on that symbol; and a **position sizing
+  calculator** (account size × risk % ÷ stop distance = shares, with a
+  capital cap warning — account size and risk % persist in settings).
 - **Settings** — market data provider. Keys are stored server-side in the
   gitignored DB and never echoed back to the browser.
 

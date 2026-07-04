@@ -19,9 +19,16 @@ export function fifoRealized(trades) {
   const unmatchedSells = [];
 
   for (const [symbol, symTrades] of bySymbol) {
+    // Chronological: executedAt, then createdAt (entry order — the input
+    // array is usually newest-first, so raw array order must NOT decide
+    // same-day ties), then input index as a last resort.
     symTrades.sort((a, b) => {
       if (a.executedAt < b.executedAt) return -1;
       if (a.executedAt > b.executedAt) return 1;
+      const ca = a.createdAt ?? '';
+      const cb = b.createdAt ?? '';
+      if (ca < cb) return -1;
+      if (ca > cb) return 1;
       return a._i - b._i;
     });
 
@@ -64,10 +71,6 @@ const BUY_LIKE = ['buy', 'add'];
 const HOLD_LIKE = ['hold'];
 const EXIT_LIKE = ['trim', 'exit', 'avoid'];
 
-function includesAny(str, list) {
-  return list.some((k) => str.includes(k));
-}
-
 // trade: { symbol, side, price, ... }
 // planEntry: the report's symbol entry active at trade time, or null:
 //   { llmVerdict, tradePlan: { action, entryZone: {low, high} | null, stop } }
@@ -80,33 +83,50 @@ export function matchTradeToPlan(trade, planEntry) {
   const action = String(rawAction).toLowerCase();
   const entryZone = planEntry.tradePlan?.entryZone;
 
+  const chased = entryZone && trade.price > entryZone.high * 1.01;
+  const insideZone = entryZone && trade.price <= entryZone.high * 1.01;
+
   if (trade.side === 'buy') {
-    if (includesAny(action, BUY_LIKE)) {
-      if (entryZone && trade.price > entryZone.high * 1.01) {
+    if (BUY_LIKE.includes(action)) {
+      if (chased) {
         return {
           status: 'off-plan',
           detail: `Chased above the entry zone (paid ${fmt(trade.price)} vs ${fmt(entryZone.low)}–${fmt(entryZone.high)})`,
         };
       }
-      return { status: 'on-plan', detail: 'Within the planned entry zone' };
+      return {
+        status: 'on-plan',
+        detail: entryZone ? 'Within the planned entry zone' : 'Plan called for buying',
+      };
     }
-    if (includesAny(action, HOLD_LIKE)) {
+    if (HOLD_LIKE.includes(action)) {
+      // Reports use "hold + entry zone" for conditional plans ("initiate only
+      // at the trigger level") — a buy inside that zone is following the plan.
+      if (insideZone) {
+        return { status: 'on-plan', detail: `Conditional entry taken inside the planned zone (${fmt(entryZone.low)}–${fmt(entryZone.high)})` };
+      }
+      if (chased) {
+        return { status: 'off-plan', detail: `Chased above the entry zone (paid ${fmt(trade.price)} vs ${fmt(entryZone.low)}–${fmt(entryZone.high)})` };
+      }
       return { status: 'off-plan', detail: 'Plan said hold' };
     }
-    return { status: 'against-plan', detail: `Plan said ${rawAction.toUpperCase()}` };
+    if (EXIT_LIKE.includes(action)) {
+      return { status: 'against-plan', detail: `Plan said ${rawAction.toUpperCase()}` };
+    }
+    return { status: 'off-plan', detail: `Plan said ${rawAction.toUpperCase() || 'nothing recognizable'}` };
   }
 
   // sell
-  if (includesAny(action, EXIT_LIKE)) {
+  if (EXIT_LIKE.includes(action)) {
     return { status: 'on-plan', detail: `Plan said ${rawAction.toUpperCase()}` };
   }
-  if (includesAny(action, HOLD_LIKE)) {
+  if (HOLD_LIKE.includes(action)) {
     return { status: 'off-plan', detail: 'Plan said hold' };
   }
-  if (includesAny(action, BUY_LIKE)) {
+  if (BUY_LIKE.includes(action)) {
     return { status: 'against-plan', detail: `Plan said ${rawAction.toUpperCase()}` };
   }
-  return { status: 'off-plan', detail: `Plan said ${rawAction.toUpperCase()}` };
+  return { status: 'off-plan', detail: `Plan said ${rawAction.toUpperCase() || 'nothing recognizable'}` };
 }
 
 function fmt(v) {

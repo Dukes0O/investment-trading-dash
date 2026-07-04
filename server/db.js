@@ -110,6 +110,8 @@ export function tradeToApi(row) {
     price: row.price,
     executedAt: row.executed_at,
     note: row.note,
+    // Tie-break for same-day trades in FIFO math (journalmath.js).
+    createdAt: row.created_at,
   };
 }
 

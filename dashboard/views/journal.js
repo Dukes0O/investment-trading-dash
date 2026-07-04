@@ -172,7 +172,7 @@ export async function renderJournal(root, navigate) {
     body.className = '';
 
     body.append(el('div', { class: 'tile-row' },
-      tile('Realized P/L', fmtMoney(realizedPL, { sign: true }), null, realizedPL >= 0 ? 'delta-up' : 'delta-down'),
+      tile('Realized P/L', fmtMoney(realizedPL, { sign: true }), 'closed lots, FIFO', '', realizedPL >= 0 ? 'delta-up' : 'delta-down'),
       tile('Total trades', String(trades.length)),
       tile('On-plan %', onPlanPct == null ? '—' : onPlanPct.toFixed(0) + '%', onPlanPct == null ? 'no trades matched to a report' : `${onPlanCount} of ${withPlan.length} matched trades`),
       tile('Open drift', drift.length ? String(drift.length) : '—', drift.length ? 'symbol(s) disagree with positions' : 'journal matches positions'),
@@ -246,10 +246,10 @@ function todayISO() {
   return new Date().toISOString().slice(0, 10);
 }
 
-function tile(label, value, sub, subClass = '') {
+function tile(label, value, sub, subClass = '', valueClass = '') {
   return el('div', { class: 'stat-tile' },
     el('div', { class: 'stat-label' }, label),
-    el('div', { class: 'stat-value' }, value),
+    el('div', { class: 'stat-value ' + valueClass }, value),
     sub ? el('div', { class: 'stat-sub ' + subClass }, sub) : null
   );
 }

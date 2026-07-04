@@ -283,7 +283,11 @@ function sizingCard(a) {
     const entry = parseFloat(entryInput.value);
     const stop = parseFloat(stopInput.value);
 
-    if (!isFinite(entry) || !isFinite(stop) || stop >= entry) {
+    if (!isFinite(entry) || !isFinite(stop)) {
+      output.append(el('p', { class: 'card-note' }, 'Enter an entry price and a stop to size the position.'));
+      return;
+    }
+    if (stop >= entry) {
       output.append(el('p', { class: 'form-error' }, 'Stop must be below entry for a long position.'));
       return;
     }
@@ -320,11 +324,14 @@ function sizingCard(a) {
 
   let flashTimer = null;
   async function persist() {
+    const patch = {};
+    const account = parseFloat(accountInput.value);
+    const riskPct = parseFloat(riskInput.value);
+    if (isFinite(account) && account >= 0) patch.accountSize = account;
+    if (isFinite(riskPct) && riskPct > 0 && riskPct <= 10) patch.riskPct = riskPct;
+    if (!Object.keys(patch).length) return;
     try {
-      await updateSettings({
-        accountSize: parseFloat(accountInput.value) || 0,
-        riskPct: parseFloat(riskInput.value) || 0,
-      });
+      await updateSettings(patch);
       saveFlash.textContent = 'saved ✓';
     } catch (err) {
       saveFlash.textContent = err.message;
