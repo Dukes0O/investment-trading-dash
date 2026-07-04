@@ -51,6 +51,10 @@ automatically.
 - **Positions** — enter holdings (symbol, quantity, cost basis); quantity 0 =
   watchlist. Every change is saved to SQLite and re-exported to
   `data/portfolio.json`.
+- **Trade journal** — log individual buy/sell executions (symbol, side,
+  quantity, price, date, note) separately from the current-holdings table
+  above; saved to SQLite and re-exported to `data/trades.json`, alongside an
+  account size and risk-per-trade % setting used for position sizing.
 - **Weekly reports** — the LLM-written portfolio analysis: stance, trade-plan
   table (rule signal vs LLM verdict with agreement flags), per-symbol
   narratives with news citations, risks, and options plays. Full history,

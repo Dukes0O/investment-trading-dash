@@ -161,3 +161,29 @@ export async function updateSettings(patch) {
   }
   emit();
 }
+
+function sortTradesDesc() {
+  trades.sort((a, b) => (a.executedAt < b.executedAt ? 1 : a.executedAt > b.executedAt ? -1 : 0));
+}
+
+export async function addTrade(t) {
+  if (backendMode) {
+    const created = await apiSend('POST', '/trades', t);
+    trades.unshift(created);
+    sortTradesDesc();
+  } else {
+    trades.push({ ...t, id: genId(), symbol: t.symbol.toUpperCase().trim() });
+    sortTradesDesc();
+    save(TRADES_KEY, trades);
+  }
+  emit();
+}
+
+export async function removeTrade(id) {
+  if (backendMode) {
+    await apiSend('DELETE', '/trades/' + encodeURIComponent(id));
+  }
+  trades = trades.filter((t) => t.id !== id);
+  if (!backendMode) save(TRADES_KEY, trades);
+  emit();
+}

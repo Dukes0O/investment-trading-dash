@@ -29,6 +29,11 @@ async function fetchReport(date) {
   return res.json();
 }
 
+// Thin exports for other views (journal.js) that need to look up which
+// report covered a symbol on a given date without duplicating the
+// backend/static fallback logic above.
+export { fetchIndex as fetchReportIndex, fetchReport };
+
 // Latest-report lookup used by the analysis view's cross-link card.
 export async function latestReportEntry() {
   try {

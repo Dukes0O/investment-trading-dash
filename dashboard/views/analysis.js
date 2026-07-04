@@ -2,7 +2,7 @@
 // decision panel with every scored reason, risk levels, and options strategies.
 
 import { el, clear, fmtNum, fmtPct, fmtMoney, fmtDateShort } from '../format.js';
-import { getPositions } from '../store.js';
+import { getPositions, getSettings, updateSettings } from '../store.js';
 import { getMarket } from '../engine.js';
 import { COLORS } from '../charts.js';
 import { renderTradingChart } from '../tvchart.js';
@@ -191,9 +191,12 @@ export async function renderAnalysis(root, navigate, params) {
       reasonList,
       notesBlock
     ),
-    el('div', { class: 'card' },
-      el('div', { class: 'card-head' }, el('h2', {}, 'Position management')),
-      riskBlock(a, sharesHeld)
+    el('div', {},
+      el('div', { class: 'card' },
+        el('div', { class: 'card-head' }, el('h2', {}, 'Position management')),
+        riskBlock(a, sharesHeld)
+      ),
+      sizingCard(a)
     )
   ));
 
@@ -245,6 +248,107 @@ function riskBlock(a, sharesHeld) {
     ),
     el('p', { class: 'card-note' },
       'Trend-trading exits: honor the stop without negotiation; trail it up as the 50-day MA rises. Position size so a stop-out costs ≤1–2% of the account.')
+  );
+}
+
+function sizingField(label, control) {
+  return el('label', { class: 'field' }, el('span', { class: 'field-label' }, label), control);
+}
+
+function sizingCard(a) {
+  const settings = getSettings();
+  const accountInput = el('input', {
+    class: 'input', type: 'number', min: '0', step: 'any', placeholder: 'e.g. 50000',
+    value: settings.accountSize ? settings.accountSize : '',
+  });
+  const riskInput = el('input', {
+    class: 'input', type: 'number', min: '0', step: 'any',
+    value: settings.riskPct || 1,
+  });
+  const entryInput = el('input', {
+    class: 'input', type: 'number', min: '0', step: 'any',
+    value: a.price != null ? a.price : '',
+  });
+  const stopInput = el('input', {
+    class: 'input', type: 'number', min: '0', step: 'any',
+    value: a.risk?.suggestedStop != null ? a.risk.suggestedStop.toFixed(2) : '',
+  });
+  const output = el('div');
+  const saveFlash = el('span', { class: 'save-flash', role: 'status' });
+
+  function recompute() {
+    clear(output);
+    const account = parseFloat(accountInput.value);
+    const riskPct = parseFloat(riskInput.value);
+    const entry = parseFloat(entryInput.value);
+    const stop = parseFloat(stopInput.value);
+
+    if (!isFinite(entry) || !isFinite(stop) || stop >= entry) {
+      output.append(el('p', { class: 'form-error' }, 'Stop must be below entry for a long position.'));
+      return;
+    }
+    if (!isFinite(account) || account <= 0 || !isFinite(riskPct) || riskPct <= 0) {
+      output.append(el('p', { class: 'card-note' }, 'Enter an account size and risk % above to size the position.'));
+      return;
+    }
+
+    const riskDollars = account * (riskPct / 100);
+    const perShareRisk = entry - stop;
+    const shares = Math.floor(riskDollars / perShareRisk);
+    const cost = shares * entry;
+    const pctOfAccount = (cost / account) * 100;
+
+    const rows = [
+      ['Risk budget ($)', fmtMoney(riskDollars), false],
+      ['Risk per share', fmtMoney(perShareRisk), false],
+      ['Shares to buy', String(shares), true],
+      ['Position cost', fmtMoney(cost), false],
+      ['% of account', pctOfAccount.toFixed(1) + '%', false],
+    ];
+    output.append(el('table', { class: 'kv-table' },
+      el('tbody', {}, rows.map(([k, v, strong]) =>
+        el('tr', {}, el('td', {}, k), el('td', { class: 'num' }, strong ? el('strong', { class: 'sizing-shares' }, v) : v))
+      ))
+    ));
+
+    if (cost > account) {
+      const cappedShares = Math.floor(account / entry);
+      output.append(el('p', { class: 'notice notice-warn' },
+        `Position cost exceeds the account — size is capped by capital, not risk. Capped shares: ${cappedShares}.`));
+    }
+  }
+
+  let flashTimer = null;
+  async function persist() {
+    try {
+      await updateSettings({
+        accountSize: parseFloat(accountInput.value) || 0,
+        riskPct: parseFloat(riskInput.value) || 0,
+      });
+      saveFlash.textContent = 'saved ✓';
+    } catch (err) {
+      saveFlash.textContent = err.message;
+    }
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(() => { saveFlash.textContent = ''; }, 2500);
+  }
+
+  for (const inp of [accountInput, riskInput, entryInput, stopInput]) inp.addEventListener('input', recompute);
+  accountInput.addEventListener('change', persist);
+  riskInput.addEventListener('change', persist);
+
+  recompute();
+
+  return el('div', { class: 'card' },
+    el('div', { class: 'card-head' }, el('h2', {}, 'Position sizing'), saveFlash),
+    el('div', { class: 'position-form' },
+      sizingField('Account size ($)', accountInput),
+      sizingField('Risk per trade (%)', riskInput),
+      sizingField('Entry price', entryInput),
+      sizingField('Stop', stopInput),
+    ),
+    output,
+    el('p', { class: 'card-note' }, 'Risk 1–2% per position. The stop is the dossier\'s 2.5×ATR suggestion — tighten it only with a structural reason.')
   );
 }
 
