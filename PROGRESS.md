@@ -2,6 +2,10 @@
 
 _Last updated: 2025-04-21_
 
+> **New (2026-07):** the repo now also hosts **Trend Desk**, an investment
+> trading dashboard, at `/dashboard.html` — see `dashboard/README.md`.
+> The chat app below is unchanged.
+
 ## What Has Been Accomplished
 - **Sidebar now shows persistent chats:** The session list in the sidebar is populated from the backend `/sessions` endpoint. Creating/selecting sessions is fully integrated—no more mock data.
 - **Model picker is populated:** The model picker dropdown is now dynamically loaded from the `/models` endpoint, reflecting available models in real time.

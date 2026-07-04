@@ -1,0 +1,48 @@
+{
+  "exportedAt": "2026-07-04T04:53:01.192Z",
+  "settings": {
+    "provider": "demo"
+  },
+  "positions": [
+    {
+      "id": "p4zyynwoa",
+      "symbol": "AAPL",
+      "qty": 25,
+      "costBasis": 168.4,
+      "openedAt": "2025-09-15",
+      "notes": "Sample position — replace with your own"
+    },
+    {
+      "id": "p7bvxx5ck",
+      "symbol": "MSFT",
+      "qty": 12,
+      "costBasis": 402.1,
+      "openedAt": "2025-11-03",
+      "notes": "Sample position — replace with your own"
+    },
+    {
+      "id": "piqmx90np",
+      "symbol": "SPY",
+      "qty": 18,
+      "costBasis": 512.75,
+      "openedAt": "2025-06-20",
+      "notes": "Sample position — replace with your own"
+    },
+    {
+      "id": "pnkbqn1t7",
+      "symbol": "NVDA",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Sample watchlist entry"
+    },
+    {
+      "id": "p57gbb1vk",
+      "symbol": "GLD",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — gold trend / cyclical hedge candidate"
+    }
+  ]
+}

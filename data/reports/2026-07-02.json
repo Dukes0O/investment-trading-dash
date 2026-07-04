@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "reportDate": "2026-07-02",
+  "generatedAt": "2026-07-02T22:45:00Z",
+  "dossierDate": "2026-07-02",
+  "portfolio": {
+    "stance": "neutral",
+    "summary": "**Pipeline test run — synthetic prices, real news.** This session could not reach a market-data API, so every chart-derived number below (prices, scores, stops, entry zones) comes from the demo data generator; treat them as a dress rehearsal of the format, not as levels to trade. The news research, however, is real, and it argues for a *neutral* stance this week regardless of what the synthetic charts say: June payrolls printed 57k against ~110k expected, and under new Fed Chair Kevin Warsh the market has been debating a *hike* rather than cuts — a regime where chasing extended breakouts is poor risk/reward. Re-run this report from a machine with a Twelve Data or Alpha Vantage key before acting on any level in it.",
+    "totalValue": 16844.5,
+    "keyEvents": [
+      "AAPL earnings July 30 after the close (confirmed) — 4 weeks out, inside a 30–45 DTE options window",
+      "June jobs report shock already landed (57k vs ~110k expected); Fed-hike repricing continues under Chair Warsh",
+      "Holiday-shortened week; oil down ~10% this week eased rate pressure"
+    ]
+  },
+  "symbols": [
+    {
+      "symbol": "AAPL",
+      "ruleSignal": {
+        "action": "STRONG BUY",
+        "score": 85
+      },
+      "llmVerdict": "add",
+      "agreesWithRule": true,
+      "confidence": "low",
+      "narrative": "The dossier's technicals are unambiguous — all nine checks bullish (+85), weekly and daily aligned, HV rank 74 favoring premium selling. The real-world calendar cooperates for now: earnings are confirmed for July 30 after the close, four weeks away, so there is room to add on a pullback and reassess before the print. Agreeing with the rule signal, with the standard caveat that these price levels are synthetic: the *plan structure* (add on a 10-week-MA pullback, never right before earnings) is the part to keep.",
+      "news": [
+        {
+          "title": "Apple (AAPL) Earnings Date and Reports 2026",
+          "url": "https://www.marketbeat.com/stocks/NASDAQ/AAPL/earnings/",
+          "source": "MarketBeat",
+          "date": "2026-07-02",
+          "takeaway": "Next earnings confirmed July 30 after close — plan adds and any short premium around that date."
+        }
+      ],
+      "risks": [
+        "Earnings on July 30 is a binary event; an add close to the print carries gap risk",
+        "Synthetic price levels — entry zone and stop must be recomputed with real data"
+      ],
+      "tradePlan": {
+        "action": "add",
+        "entryZone": {
+          "low": 99.4,
+          "high": 101.5
+        },
+        "stop": 94.85,
+        "sizeNote": "Add up to 10 shares on the pullback only; stop is 2.5×ATR below the entry zone, keeping the stop-out ≤1.5% of the book.",
+        "optionsPlay": {
+          "name": "Cash-secured put (pre-earnings expiry)",
+          "setup": "Sell a ~0.25–0.30 delta put expiring on or before July 24 — before the July 30 earnings print — rather than the standard 30–45 DTE.",
+          "rationale": "HV rank 74 pays sellers, but the dossier's default 30–45 DTE window would straddle earnings; shortening the tenor keeps the trade a volatility harvest, not an earnings bet."
+        }
+      }
+    },
+    {
+      "symbol": "MSFT",
+      "ruleSignal": {
+        "action": "STRONG BUY",
+        "score": 73
+      },
+      "llmVerdict": "hold",
+      "agreesWithRule": true,
+      "confidence": "medium",
+      "narrative": "Trend intact per the dossier (+73) with one early wobble (daily MACD histogram negative). The real news is two-sided: consensus remains Buy/Strong Buy across ~97 analysts, but the bear case centers on FY2026 AI capex of $80–146B, and average street targets ($565–592) sit *below* the synthetic price here — a coincidence worth remembering as a pattern: when price runs ahead of consensus targets, adds get harder to justify. Holding the position (+53% on cost) and letting the trailing stop do the work is consistent with the rule signal; this is a hold-and-trail, not an add.",
+      "news": [
+        {
+          "title": "Microsoft (MSFT) Stock Outlook for 2026",
+          "url": "https://www.forbes.com/sites/investor-hub/article/microsoft-msft-stock-outlook-2026/",
+          "source": "Forbes",
+          "date": "2026-06-30",
+          "takeaway": "Bear case is FY2026 AI capex ($80–146B); bull case is Copilot/Azure AI adoption already at franchise scale."
+        },
+        {
+          "title": "Microsoft (MSFT) Stock Forecast & Analyst Price Targets",
+          "url": "https://stockanalysis.com/stocks/msft/forecast/",
+          "source": "StockAnalysis",
+          "date": "2026-07-02",
+          "takeaway": "Buy consensus from 32 analysts; average targets in the $565–592 area."
+        }
+      ],
+      "risks": [
+        "AI capex scrutiny can compress multiples quickly if Azure growth decelerates",
+        "Daily MACD histogram already negative — momentum cooling before price"
+      ],
+      "tradePlan": {
+        "action": "hold",
+        "entryZone": null,
+        "stop": 592,
+        "sizeNote": "12 shares is under a covered-call lot; no options available. Trail the stop at the dossier level (max of 2.5×ATR and the 50-day MA) and revisit if the weekly MACD turns.",
+        "optionsPlay": null
+      }
+    },
+    {
+      "symbol": "SPY",
+      "ruleSignal": {
+        "action": "STRONG BUY",
+        "score": 60
+      },
+      "llmVerdict": "hold",
+      "agreesWithRule": false,
+      "confidence": "medium",
+      "narrative": "Overriding the rule signal's STRONG BUY. Three things the composite score underweights line up badly: the dossier itself shows internal contradiction (falling 30-week MA and a death cross *inside* a +60 score, price closing above the upper Bollinger band on a fresh 20-day breakout — extension, not confirmation); and the real macro tape is mid-regime-change — June payrolls at 57k vs ~110k expected with the market repricing Fed-hike odds under Chair Warsh. Buying an extended index breakout while the rate regime is being re-guessed in real time is exactly the trade trend-followers regret. Hold what's held, keep the stop, add nothing this week.",
+      "news": [
+        {
+          "title": "Stock Market Live July 2, 2026: S&P 500 (SPY) Flat with New Jobs Data",
+          "url": "https://247wallst.com/investing/2026/07/02/stock-market-live-july-2-2026-sp-500-spy-flat-with-new-jobs-data/",
+          "source": "24/7 Wall St.",
+          "date": "2026-07-02",
+          "takeaway": "June payrolls 57k vs ~110k expected; index flat as rate expectations reprice."
+        },
+        {
+          "title": "Markets Rise Early After Jobs Report Disappoints",
+          "url": "https://www.schwab.com/learn/story/stock-market-update-open",
+          "source": "Charles Schwab",
+          "date": "2026-07-02",
+          "takeaway": "Weak jobs pushed back Fed-hike expectations; tech volatile, traditional sectors leading."
+        }
+      ],
+      "risks": [
+        "If the Fed-hike narrative re-accelerates, extended breakouts unwind fastest",
+        "Death cross + falling 30-week MA in the dossier say the longer trend hasn't fully repaired"
+      ],
+      "tradePlan": {
+        "action": "hold",
+        "entryZone": null,
+        "stop": 369.2,
+        "sizeNote": "No adds into extension; if price retests the 10-week MA and holds while hike odds fade, revisit. Elevated HV (rank 89) makes premium selling tempting — skip it during a macro repricing week.",
+        "optionsPlay": null
+      }
+    },
+    {
+      "symbol": "NVDA",
+      "ruleSignal": {
+        "action": "BUY",
+        "score": 45
+      },
+      "llmVerdict": "hold",
+      "agreesWithRule": false,
+      "confidence": "medium",
+      "narrative": "Overriding BUY to hold-off on this watchlist name. The dossier's own daily checks are the first reason: price below the 50-day MA, RSI 44, negative MACD histogram — the weekly uptrend is intact but the entry timing isn't there. The real news is the second: Jensen Huang says NVIDIA has 'largely conceded' China's AI chip market to Huawei with China data-center revenue effectively zero, Commerce is closing the offshore-subsidiary loophole, and it's the worst-performing major semiconductor stock this year even with 36/37 analysts at Buy. That combination — deteriorating daily momentum plus a structural revenue headwind everyone is still rating Buy — argues for waiting for the daily chart to repair before initiating.",
+      "news": [
+        {
+          "title": "Why Is NVIDIA Stock Falling? China, AI Demand & Valuation",
+          "url": "https://www.indmoney.com/blog/us-stocks/why-is-nvidia-stock-falling-dip-analysis-nvda-outlook",
+          "source": "INDmoney",
+          "date": "2026-06-28",
+          "takeaway": "China AI-chip market conceded to Huawei; China DC revenue ~zero; worst major semi YTD despite near-unanimous Buy ratings."
+        }
+      ],
+      "risks": [
+        "Waiting for confirmation can miss the turn — define the reclaim trigger and honor it",
+        "Further export-control tightening is an ongoing headline risk"
+      ],
+      "tradePlan": {
+        "action": "hold",
+        "entryZone": {
+          "low": 84.5,
+          "high": 86.5
+        },
+        "stop": 74.55,
+        "sizeNote": "Stay flat. Initiate a half-size starter only on a daily close back above the 50-day MA (entry zone above); the wide ATR stop means half-size keeps a stop-out near 1% of the book.",
+        "optionsPlay": {
+          "name": "Bull call spread (on trigger only)",
+          "setup": "If the 50-day reclaim triggers: buy a 60–90 DTE call near the money, sell one ~10% higher.",
+          "rationale": "HV rank 21 makes debit structures cheap; defined risk suits a name with binary headline exposure."
+        }
+      }
+    },
+    {
+      "symbol": "GLD",
+      "ruleSignal": {
+        "action": "STRONG SELL",
+        "score": -100
+      },
+      "llmVerdict": "avoid",
+      "agreesWithRule": true,
+      "confidence": "medium",
+      "narrative": "Agreeing with the rule engine's maximum-bearish read: every one of ten checks negative, fresh 20-day low, and the dossier flags the one nuance that matters — daily RSI 26 and a close below the lower Bollinger band mean the *short* side is late too. The real-world picture rhymes: gold sits roughly 25% below its January record (~$4,200/oz vs ~$5,589 peak) after the Fed-won't-cut repricing, with Goldman cutting its year-end target to $4,900. But the structural bid is real — central banks bought 244t in Q1 and China has added for 18 straight months, with JPMorgan still at $6,000 by Q4. Translation for a trend trader: stand aside, don't knife-catch, don't chase weakness; define the re-entry trigger (weekly close back above the 30-week MA) and let the cyclical retracement finish.",
+      "news": [
+        {
+          "title": "Gold Mid-Year Outlook 2026 | World Gold Council",
+          "url": "https://www.gold.org/goldhub/research/gold-mid-year-outlook-2026",
+          "source": "World Gold Council",
+          "date": "2026-06-25",
+          "takeaway": "Central-bank buying (244t in Q1, China 18 straight months) is the structural support under the correction."
+        },
+        {
+          "title": "JPMorgan Gold Forecast 2026: $6,000 Target Despite Trim",
+          "url": "https://www.canadianminingreport.com/blog/jpmorgan-s-latest-gold-forecast-what-the-world-s-largest-bank-is-telling-investors",
+          "source": "Canadian Mining Report",
+          "date": "2026-06-27",
+          "takeaway": "Street targets diverge widely (Goldman $4,900 vs JPM $6,000) — a contested trend, not a settled one."
+        },
+        {
+          "title": "Gold Price Outlook June 2026: What CPI and the Fed Mean",
+          "url": "https://goldsilver.com/industry-news/article/gold-price-outlook-june-2026/",
+          "source": "GoldSilver",
+          "date": "2026-06-20",
+          "takeaway": "May CPI at 4.2% with the Fed on hold-or-hike removed the rate-cut tailwind that drove the January record."
+        }
+      ],
+      "risks": [
+        "Oversold bounces in downtrends are violent — shorting here has poor entry quality",
+        "A Fed pivot back toward cuts would restart the structural bull case quickly"
+      ],
+      "tradePlan": {
+        "action": "hold",
+        "entryZone": null,
+        "stop": null,
+        "sizeNote": "Stay flat. Re-entry trigger for the long side: a weekly close back above the 30-week MA; until then this is a watchlist name in an active downtrend.",
+        "optionsPlay": null
+      }
+    }
+  ]
+}
