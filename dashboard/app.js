@@ -7,6 +7,7 @@ import { renderAnalysis } from './views/analysis.js';
 import { renderPortfolio } from './views/portfolio.js';
 import { renderReports } from './views/reports.js';
 import { renderPerformance } from './views/performance.js';
+import { renderStrategyLab } from './views/strategylab.js';
 import { renderSettings } from './views/settings.js';
 
 const VIEWS = {
@@ -14,6 +15,7 @@ const VIEWS = {
   portfolio: { title: 'Positions', render: renderPortfolio, icon: '☰' },
   reports: { title: 'Weekly reports', render: renderReports, icon: '¶' },
   performance: { title: 'Performance', render: renderPerformance, icon: '✦' },
+  strategylab: { title: 'Strategy lab', render: renderStrategyLab, icon: '⚗' },
   analysis: { title: 'Analysis', render: renderAnalysis, icon: '⌁', hidden: true },
   settings: { title: 'Settings', render: renderSettings, icon: '⚙' },
 };

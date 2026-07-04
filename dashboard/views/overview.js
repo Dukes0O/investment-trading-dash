@@ -1,11 +1,69 @@
 // Overview: portfolio stat tiles, holdings table with P/L and signals,
 // and the weekly signal board.
 
-import { el, clear, fmtMoney, fmtPct, fmtQty, fmtNum } from '../format.js';
+import { el, clear, fmtMoney, fmtPct, fmtQty, fmtNum, fmtDate } from '../format.js';
 import { getPositions, getHoldings } from '../store.js';
 import { getMarkets } from '../engine.js';
 import { sparkline, COLORS } from '../charts.js';
 import { decisionBadge, sourceNotice, trendMeter } from './shared.js';
+import { latestReport } from './reports.js';
+
+// Alerts: compare latest closes against the active weekly report's levels.
+// A close below the stop is the loud one; "approaching" fires within 3%.
+const STOP_APPROACH_PCT = 3;
+
+function computeAlerts(report, markets) {
+  if (!report) return [];
+  const alerts = [];
+  for (const s of report.symbols ?? []) {
+    const price = markets.get(s.symbol)?.analysis?.price;
+    const plan = s.tradePlan;
+    if (price == null || !plan) continue;
+    if (plan.stop != null && plan.stop > 0) {
+      const distPct = ((price - plan.stop) / plan.stop) * 100;
+      if (price <= plan.stop) {
+        alerts.push({
+          tone: 'critical',
+          symbol: s.symbol,
+          text: `closed at ${fmtNum(price)}, below the ${fmtDate(report.reportDate)} report's stop of ${fmtNum(plan.stop)} — the plan says exit or reassess.`,
+        });
+      } else if (distPct <= STOP_APPROACH_PCT) {
+        alerts.push({
+          tone: 'warn',
+          symbol: s.symbol,
+          text: `is ${distPct.toFixed(1)}% above its ${fmtNum(plan.stop)} stop — within striking distance; review before it triggers.`,
+        });
+      }
+    }
+    if (plan.entryZone && price >= plan.entryZone.low && price <= plan.entryZone.high) {
+      alerts.push({
+        tone: 'good',
+        symbol: s.symbol,
+        text: `at ${fmtNum(price)} is inside the report's entry zone (${fmtNum(plan.entryZone.low)} – ${fmtNum(plan.entryZone.high)}); planned action: ${plan.action}.`,
+      });
+    }
+  }
+  return alerts;
+}
+
+function alertStrip(report, markets) {
+  const alerts = computeAlerts(report, markets);
+  if (!alerts.length) return null;
+  const toneClass = { critical: 'alert-critical', warn: 'alert-warn', good: 'alert-good' };
+  return el('div', { class: 'card alert-card' },
+    el('div', { class: 'card-head' },
+      el('h2', {}, 'Alerts'),
+      el('span', { class: 'stat-sub' }, 'vs the ' + fmtDate(report.reportDate) + ' report levels')
+    ),
+    el('ul', { class: 'alert-list' }, alerts.map((a) =>
+      el('li', { class: 'alert ' + toneClass[a.tone] },
+        el('span', { class: 'alert-dot', 'aria-hidden': 'true' }),
+        el('strong', {}, a.symbol + ' '),
+        a.text
+      )
+    ))
+  );
+}
 
 export async function renderOverview(root, navigate) {
   clear(root);
@@ -30,8 +88,9 @@ export async function renderOverview(root, navigate) {
 
   const symbols = [...new Set(positions.map((p) => p.symbol))];
   let markets;
+  let report = null;
   try {
-    markets = await getMarkets(symbols);
+    [markets, report] = await Promise.all([getMarkets(symbols), latestReport()]);
   } catch (err) {
     clear(body);
     body.className = 'empty-state';
@@ -70,6 +129,9 @@ export async function renderOverview(root, navigate) {
   ));
 
   sourceNotice(body, markets);
+
+  const strip = alertStrip(report, markets);
+  if (strip) body.append(strip);
 
   // ---- Holdings table ----
   const table = el('table', { class: 'data-table' },

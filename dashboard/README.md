@@ -45,7 +45,9 @@ automatically.
 ## Views
 
 - **Overview** — portfolio value, day change, P/L, holdings table with trend
-  sparklines, weekly signal board.
+  sparklines, weekly signal board, and an **alerts strip** that checks every
+  close against the active report's levels: stop breached, within 3% of the
+  stop, or inside a planned entry zone.
 - **Positions** — enter holdings (symbol, quantity, cost basis); quantity 0 =
   watchlist. Every change is saved to SQLite and re-exported to
   `data/portfolio.json`.
@@ -63,11 +65,12 @@ automatically.
 
 ## Market data
 
-| Provider | Key | Free tier |
+| Provider | Key | Notes |
 |---|---|---|
 | Demo data (default) | none | Synthetic prices; works offline |
-| [Alpha Vantage](https://www.alphavantage.co/support/#api-key) | free | 25 requests/day |
-| [Twelve Data](https://twelvedata.com/) | free | 800 credits/day, 8/min |
+| [Stooq](https://stooq.com/) | none | **Recommended** — free daily OHLCV with decades of history (what the Strategy lab wants); be polite to their daily limits |
+| [Alpha Vantage](https://www.alphavantage.co/support/#api-key) | free key | 25 requests/day, ~2.4y history |
+| [Twelve Data](https://twelvedata.com/) | free key | 800 credits/day, 8/min, ~2.4y history |
 
 Daily bars are cached in SQLite per calendar day; on provider errors the app
 falls back to the most recent cache, then demo data, and says so.
@@ -93,6 +96,26 @@ subscription. This works from any Claude Code surface:
   edit), and set a market-data key via env or accept demo pricing for the
   run. The session commits and pushes the report; pull and it appears in
   the Reports view.
+
+## Strategy lab
+
+Replay three trend-trading styles over a symbol's full price history and
+compare them against buy-and-hold: **30-week trend following** (own the
+weekly uptrend, exit when the 30-week MA is lost), **Donchian 20-day
+breakout** (turtle-style: buy strength in a long-term uptrend, exit on a
+10-day low), and **pullback/retracement** (buy the dip-and-turn inside an
+uptrend, ride a 2.5×ATR chandelier stop).
+
+The simulator is deliberately honest: signals on the close execute at the
+*next open*, trailing stops are checked intrabar (gaps fill at the open),
+0.1% round-trip costs apply, and drawdowns are mark-to-market. It is also
+deliberately simple — long/flat, one position, no dividends — so use it to
+**compare styles, not forecast returns**. Strategies live in
+`scripts/lib/strategies.mjs`; add a preset there and it appears everywhere.
+With the backend running the lab computes fresh results per symbol
+(`GET /api/backtest/:symbol`); `node scripts/backtest.mjs` writes the
+committed `data/backtests.json` fallback. Use the Stooq provider for
+decades-deep history — a 2-year backtest of a 30-week system is noise.
 
 ## The learning loop (Performance view)
 

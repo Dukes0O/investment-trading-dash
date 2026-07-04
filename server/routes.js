@@ -8,6 +8,7 @@ import { ROOT, positionToApi, getSetting, setSetting, genId } from './db.js';
 import { getDailyBars, marketConfig } from './marketdata.js';
 import { writePortfolioPrintout } from './export.js';
 import { indexEntry } from '../scripts/lib/report-schema.mjs';
+import { runBacktests } from '../scripts/lib/runbacktest.mjs';
 
 const REPORTS_DIR = join(ROOT, 'data', 'reports');
 
@@ -119,7 +120,7 @@ export function createApiRouter(db) {
   router.put('/settings', (req, res) => {
     const body = req.body ?? {};
     if (body.provider != null) {
-      if (!['demo', 'alphavantage', 'twelvedata'].includes(body.provider)) {
+      if (!['demo', 'stooq', 'alphavantage', 'twelvedata'].includes(body.provider)) {
         return res.status(400).json({ error: 'Unknown provider' });
       }
       setSetting(db, 'provider', body.provider);
@@ -137,7 +138,24 @@ export function createApiRouter(db) {
     if (!SYMBOL_RE.test(symbol)) return res.status(400).json({ error: 'Invalid symbol' });
     const { provider, keys } = marketConfig(db, getSetting);
     try {
-      res.json(await getDailyBars(symbol, { db, provider, keys }));
+      const result = await getDailyBars(symbol, { db, provider, keys });
+      // Stooq returns decades of history; the dashboard only charts ~2.5y.
+      // Full history stays in the DB for the backtester.
+      res.json({ ...result, bars: result.bars.slice(-650) });
+    } catch (err) {
+      res.status(502).json({ error: err.message });
+    }
+  });
+
+  // Fresh backtest for one symbol (full cached history; strategies defined
+  // in scripts/lib/strategies.mjs).
+  router.get('/backtest/:symbol', async (req, res) => {
+    const symbol = String(req.params.symbol).toUpperCase();
+    if (!SYMBOL_RE.test(symbol)) return res.status(400).json({ error: 'Invalid symbol' });
+    const { provider, keys } = marketConfig(db, getSetting);
+    try {
+      const { bars, source, error } = await getDailyBars(symbol, { db, provider, keys });
+      res.json(runBacktests(symbol, bars, source + (error ? ` (${error})` : '')));
     } catch (err) {
       res.status(502).json({ error: err.message });
     }

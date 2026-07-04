@@ -39,6 +39,17 @@ export async function latestReportEntry() {
   }
 }
 
+// Full latest report (trade-plan levels included) — used by the Overview
+// alerts strip.
+export async function latestReport() {
+  try {
+    const entry = await latestReportEntry();
+    return entry ? await fetchReport(entry.date) : null;
+  } catch {
+    return null;
+  }
+}
+
 // Markdown rendered from the LLM report. marked escapes/normalizes, but keep
 // it defensive: render into a detached node and strip any script/handler.
 function md(text) {

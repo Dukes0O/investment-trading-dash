@@ -14,6 +14,11 @@ const PROVIDERS = [
     blurb: 'Deterministic synthetic prices so the dashboard works offline. Good for exploring; not for trading decisions.',
   },
   {
+    id: 'stooq',
+    name: 'Stooq (free, no key required)',
+    blurb: 'Free daily OHLCV from stooq.com with decades of history — the recommended default. US tickers only need the plain symbol (AAPL); polite use stays under their daily limits, and responses are cached for the day.',
+  },
+  {
     id: 'alphavantage',
     name: 'Alpha Vantage',
     blurb: 'Free API key at alphavantage.co (25 requests/day on the free tier). Daily OHLCV for US equities and ETFs. Responses are cached for the day.',

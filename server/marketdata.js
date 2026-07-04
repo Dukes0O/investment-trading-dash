@@ -4,7 +4,7 @@
 //   provider fetch → demo.
 
 import { demoBars } from '../dashboard/demo.js';
-import { fetchAlphaVantage, fetchTwelveData } from './providers.js';
+import { fetchAlphaVantage, fetchTwelveData, fetchStooq } from './providers.js';
 
 function today() {
   return new Date().toISOString().slice(0, 10);
@@ -52,7 +52,9 @@ export async function getDailyBars(symbol, { db = null, provider = 'demo', keys 
 
   try {
     let bars;
-    if (provider === 'alphavantage') {
+    if (provider === 'stooq') {
+      bars = await fetchStooq(symbol);
+    } else if (provider === 'alphavantage') {
       if (!keys.alphaVantageKey) throw new Error('No Alpha Vantage API key set — add one in Settings.');
       bars = await fetchAlphaVantage(symbol, keys.alphaVantageKey);
     } else if (provider === 'twelvedata') {

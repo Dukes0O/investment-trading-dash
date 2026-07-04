@@ -312,6 +312,9 @@ html, body {
 /* ---- Charts ---- */
 .chart-area { position: relative; }
 .tv-host { position: relative; height: 520px; }
+.tv-host-short { height: 340px; }
+.strategy-style { font-size: 11.5px; color: var(--muted); margin-top: 2px; white-space: normal; max-width: 320px; }
+.bh-row td { border-top: 1px solid var(--axis); }
 .chart-empty { color: var(--muted); padding: 30px; text-align: center; }
 
 .chart-legend {
@@ -418,6 +421,29 @@ html, body {
 .strategy-card p:last-child { margin-bottom: 0; }
 .strategy-why { color: var(--muted); }
 .disclaimer { color: var(--muted); font-size: 11.5px; margin: 14px 0 0; max-width: 90ch; }
+
+/* ---- Alerts ---- */
+.alert-list { list-style: none; margin: 0; padding: 0; }
+.alert {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--grid);
+  font-size: 13px;
+}
+.alert:last-child { border-bottom: none; }
+.alert strong { color: var(--ink); }
+.alert-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  align-self: center;
+}
+.alert-critical .alert-dot { background: var(--critical); }
+.alert-warn .alert-dot { background: var(--warn); }
+.alert-good .alert-dot { background: var(--good); }
 
 /* ---- Weekly reports ---- */
 .report-picker {
