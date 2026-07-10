@@ -228,6 +228,79 @@ export function createApiRouter(db) {
     }
   });
 
+  // Compact portfolio rollup for external consumers. Same math as the
+  // dashboard overview: value = qty × last close, day change vs prior close,
+  // P/L vs cost basis, summed over held positions (qty > 0). Bars come from
+  // the same cache ladder as /bars/:symbol; a symbol whose bars are stale,
+  // demo-fallback, or missing is reported in notes (and excluded from the
+  // sums when missing) rather than failing the response.
+  router.get('/summary', async (req, res) => {
+    const { provider, keys } = marketConfig(db, getSetting);
+    const positions = db.prepare('SELECT * FROM positions ORDER BY created_at').all().map(positionToApi);
+    const held = positions.filter((p) => p.qty > 0);
+    const symbols = [...new Set(held.map((p) => p.symbol))];
+
+    const bars = new Map();
+    const notes = [];
+    await Promise.all(symbols.map(async (symbol) => {
+      try {
+        const result = await getDailyBars(symbol, { db, provider, keys });
+        if (result.error) notes.push(`${symbol}: ${result.error} (${result.source})`);
+        if (result.bars.length) bars.set(symbol, result.bars);
+        else notes.push(`${symbol}: no bars available`);
+      } catch (err) {
+        notes.push(`${symbol}: ${err.message}`);
+      }
+    }));
+
+    let totalValue = 0;
+    let totalCost = 0;
+    let dayChange = 0;
+    for (const p of held) {
+      const b = bars.get(p.symbol);
+      if (!b) continue;
+      const price = b[b.length - 1].close;
+      const prev = b.length > 1 ? b[b.length - 2].close : null;
+      totalValue += price * p.qty;
+      totalCost += p.costBasis * p.qty;
+      if (prev != null) dayChange += (price - prev) * p.qty;
+    }
+
+    const movers = symbols
+      .map((symbol) => {
+        const b = bars.get(symbol);
+        if (!b || b.length < 2 || !b[b.length - 2].close) return null;
+        const price = b[b.length - 1].close;
+        const prev = b[b.length - 2].close;
+        return { symbol, dayPct: ((price - prev) / prev) * 100, price };
+      })
+      .filter(Boolean)
+      .sort((a, b) => Math.abs(b.dayPct) - Math.abs(a.dayPct))
+      .slice(0, 3);
+
+    const prevValue = totalValue - dayChange;
+    let barsDate = null;
+    for (const b of bars.values()) {
+      const d = b[b.length - 1].date;
+      if (barsDate == null || d > barsDate) barsDate = d;
+    }
+
+    res.json({
+      asOf: new Date().toISOString(),
+      provider,
+      positionsCount: held.length,
+      watchlistCount: positions.length - held.length,
+      totalValue,
+      dayChange,
+      dayChangePct: prevValue > 0 ? (dayChange / prevValue) * 100 : null,
+      totalPL: totalValue - totalCost,
+      movers,
+      barsDate,
+      degraded: notes.length > 0,
+      notes,
+    });
+  });
+
   // Fresh backtest for one symbol (full cached history; strategies defined
   // in scripts/lib/strategies.mjs).
   router.get('/backtest/:symbol', async (req, res) => {
