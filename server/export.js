@@ -5,6 +5,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { ROOT, positionToApi, tradeToApi, getSetting } from './db.js';
+import { DEFAULT_PROVIDER, normalizeProvider } from './marketdata.js';
 
 export const PORTFOLIO_PATH = join(ROOT, 'data', 'portfolio.json');
 export const TRADES_PATH = join(ROOT, 'data', 'trades.json');
@@ -13,7 +14,7 @@ export function writePortfolioPrintout(db) {
   const positions = db.prepare('SELECT * FROM positions ORDER BY created_at').all().map(positionToApi);
   const printout = {
     exportedAt: new Date().toISOString(),
-    settings: { provider: getSetting(db, 'provider', 'demo') },
+    settings: { provider: normalizeProvider(getSetting(db, 'provider', DEFAULT_PROVIDER)) },
     positions,
   };
   mkdirSync(dirname(PORTFOLIO_PATH), { recursive: true });

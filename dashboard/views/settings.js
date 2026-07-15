@@ -14,22 +14,17 @@ const PROVIDERS = [
     blurb: 'Deterministic synthetic prices so the dashboard works offline. Good for exploring; not for trading decisions.',
   },
   {
-    id: 'stooq',
-    name: 'Stooq (free, no key required)',
-    blurb: 'Free daily OHLCV from stooq.com with decades of history — the recommended default. US tickers only need the plain symbol (AAPL); polite use stays under their daily limits, and responses are cached for the day.',
-  },
-  {
     id: 'alphavantage',
     name: 'Alpha Vantage',
-    blurb: 'Free API key at alphavantage.co (25 requests/day on the free tier). Daily OHLCV for US equities and ETFs. Responses are cached for the day.',
+    blurb: 'Optional fallback. Free API key at alphavantage.co; the free tier returns a compact daily history and is not suitable for deep Strategy Lab backtests. Responses are cached for the day.',
     keyField: 'alphaVantageKey',
     hasKey: 'alphavantage',
     keyLabel: 'Alpha Vantage API key',
   },
   {
     id: 'twelvedata',
-    name: 'Twelve Data',
-    blurb: 'Free API key at twelvedata.com (800 credits/day, 8/minute on the free tier). Daily OHLCV for stocks and ETFs. Responses are cached for the day.',
+    name: 'Twelve Data (recommended)',
+    blurb: 'Create a free API key at twelvedata.com. Daily OHLCV with up to 5,000 records per request, suitable for the Strategy Lab; the Basic plan allows 800 credits/day and 8/minute. Responses are cached for the day.',
     keyField: 'twelveDataKey',
     hasKey: 'twelvedata',
     keyLabel: 'Twelve Data API key',
@@ -84,7 +79,9 @@ export function renderSettings(root) {
         el('label', { class: 'provider-head', for: 'prov-' + p.id }, radio, el('strong', {}, p.name)),
         el('p', { class: 'provider-blurb' }, p.blurb + (disabled ? ' (Requires the backend.)' : '')),
       );
-      if (p.keyField && selected && backend) {
+      // Both keys may be used when Twelve Data is selected: TSX symbols can
+      // transparently fall back to Alpha Vantage on its free tier.
+      if (p.keyField && backend) {
         const keySet = Boolean(settings.hasKeys?.[p.hasKey]);
         const keyInput = el('input', {
           class: 'input', type: 'password',

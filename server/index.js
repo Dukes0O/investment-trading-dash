@@ -40,6 +40,6 @@ app.listen(PORT, () => {
   console.log(`Trend Desk backend listening on http://localhost:${PORT}`);
   console.log(`DB: ${process.env.TRENDDESK_DB || join(ROOT, 'data', 'trenddesk.db')}`);
   if (!existsSync(dist)) {
-    console.log('No dist/ build found — dev mode. Run `npm run dev` and open http://localhost:3000/dashboard.html');
+    console.log('No dist/ build found — dev mode. Run `npm run dev` and open http://localhost:3000/');
   }
 });

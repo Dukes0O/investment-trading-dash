@@ -62,7 +62,7 @@ for (const symbol of symbols) {
   if (a.score >= 25) buys++;
   if (a.score <= -25) sells++;
 
-  const opt = optionsStrategies(a, qty);
+  const opt = optionsStrategies(a, qty, symbol);
   const weeklyCloses = a.weeklyBars.slice(-12).map((b) => b.close);
   const dailyCloses = a.daily.bars.slice(-10).map((b) => b.close);
 

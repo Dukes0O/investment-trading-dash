@@ -4,7 +4,18 @@
 //   provider fetch → demo.
 
 import { demoBars } from '../dashboard/demo.js';
-import { fetchAlphaVantage, fetchTwelveData, fetchStooq } from './providers.js';
+import { fetchAlphaVantage, fetchTwelveData } from './providers.js';
+import { alphaVantageLimiter, twelveDataLimiter } from './ratelimit.js';
+
+export const DEFAULT_PROVIDER = 'twelvedata';
+
+// Existing local databases may still contain the old Stooq selection. Treat
+// it as a migration alias so upgrading the code does not strand the app on a
+// provider that is no longer supported.
+export function normalizeProvider(provider) {
+  if (!provider) return DEFAULT_PROVIDER;
+  return provider === 'stooq' ? DEFAULT_PROVIDER : provider;
+}
 
 function today() {
   return new Date().toISOString().slice(0, 10);
@@ -35,8 +46,9 @@ function writeBars(db, provider, symbol, bars) {
 }
 
 // Returns { bars, source, error? } — same shape the dashboard has always used.
-export async function getDailyBars(symbol, { db = null, provider = 'demo', keys = {} } = {}) {
+export async function getDailyBars(symbol, { db = null, provider = DEFAULT_PROVIDER, keys = {} } = {}) {
   symbol = symbol.toUpperCase();
+  provider = normalizeProvider(provider);
 
   if (provider === 'demo') {
     return { bars: demoBars(symbol), source: 'demo' };
@@ -52,19 +64,34 @@ export async function getDailyBars(symbol, { db = null, provider = 'demo', keys 
 
   try {
     let bars;
-    if (provider === 'stooq') {
-      bars = await fetchStooq(symbol);
-    } else if (provider === 'alphavantage') {
+    let source = provider;
+    if (provider === 'alphavantage') {
       if (!keys.alphaVantageKey) throw new Error('No Alpha Vantage API key set — add one in Settings.');
+      await alphaVantageLimiter.acquire();
       bars = await fetchAlphaVantage(symbol, keys.alphaVantageKey);
     } else if (provider === 'twelvedata') {
       if (!keys.twelveDataKey) throw new Error('No Twelve Data API key set — add one in Settings.');
-      bars = await fetchTwelveData(symbol, keys.twelveDataKey);
+      try {
+        await twelveDataLimiter.acquire();
+        bars = await fetchTwelveData(symbol, keys.twelveDataKey);
+      } catch (twelveError) {
+        // Twelve Data's free plan does not cover TSX. If the user has also
+        // supplied a free Alpha Vantage key, use its `.TRT` daily endpoint for
+        // Canadian listings while keeping Twelve Data for crypto/US symbols.
+        if (!symbol.endsWith(':TSX') || !keys.alphaVantageKey) throw twelveError;
+        try {
+          await alphaVantageLimiter.acquire();
+          bars = await fetchAlphaVantage(symbol, keys.alphaVantageKey);
+          source = 'alphavantage (TSX fallback)';
+        } catch (alphaError) {
+          throw new Error(`${twelveError.message}; Alpha Vantage fallback: ${alphaError.message}`);
+        }
+      }
     } else {
       throw new Error(`Unknown provider ${provider}`);
     }
     if (db) writeBars(db, provider, symbol, bars);
-    return { bars, source: provider };
+    return { bars, source };
   } catch (err) {
     if (db) {
       const stale = readBars(db, provider, symbol);
@@ -81,7 +108,7 @@ export async function getDailyBars(symbol, { db = null, provider = 'demo', keys 
 // (env is how CI supplies keys).
 export function marketConfig(db, getSetting) {
   return {
-    provider: getSetting(db, 'provider', process.env.TRENDDESK_PROVIDER || 'demo'),
+    provider: normalizeProvider(getSetting(db, 'provider', process.env.TRENDDESK_PROVIDER || DEFAULT_PROVIDER)),
     keys: {
       alphaVantageKey: getSetting(db, 'alphaVantageKey', '') || process.env.ALPHAVANTAGE_API_KEY || '',
       twelveDataKey: getSetting(db, 'twelveDataKey', '') || process.env.TWELVEDATA_API_KEY || '',

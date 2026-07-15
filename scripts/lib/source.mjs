@@ -5,7 +5,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, DB_PATH, openDb, positionToApi, getSetting } from '../../server/db.js';
-import { marketConfig } from '../../server/marketdata.js';
+import { DEFAULT_PROVIDER, marketConfig, normalizeProvider } from '../../server/marketdata.js';
 
 export function loadPortfolio() {
   if (existsSync(DB_PATH)) {
@@ -22,7 +22,7 @@ export function loadPortfolio() {
   return {
     db: null,
     positions: printout.positions ?? [],
-    provider: process.env.TRENDDESK_PROVIDER || printout.settings?.provider || 'demo',
+    provider: normalizeProvider(process.env.TRENDDESK_PROVIDER || printout.settings?.provider || DEFAULT_PROVIDER),
     keys: {
       alphaVantageKey: process.env.ALPHAVANTAGE_API_KEY || '',
       twelveDataKey: process.env.TWELVEDATA_API_KEY || '',

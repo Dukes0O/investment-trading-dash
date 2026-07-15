@@ -72,6 +72,12 @@ MIGRATIONS.push(`
   CREATE INDEX idx_trades_symbol ON trades(symbol);
 `);
 
+// v3 — retire Stooq as a live provider. Existing local databases keep their
+// cached bars, but the active setting moves to the supported Twelve Data path.
+MIGRATIONS.push(`
+  UPDATE settings SET value = '"twelvedata"' WHERE key = 'provider' AND value = '"stooq"';
+`);
+
 export function openDb(path = DB_PATH) {
   mkdirSync(dirname(path), { recursive: true });
   const db = new Database(path);

@@ -5,22 +5,25 @@ import { Router } from 'express';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, positionToApi, tradeToApi, getSetting, setSetting, genId } from './db.js';
-import { getDailyBars, marketConfig } from './marketdata.js';
+import { DEFAULT_PROVIDER, getDailyBars, marketConfig, normalizeProvider } from './marketdata.js';
 import { writePortfolioPrintout, writeTradesPrintout } from './export.js';
 import { indexEntry } from '../scripts/lib/report-schema.mjs';
 import { runBacktests } from '../scripts/lib/runbacktest.mjs';
 
 const REPORTS_DIR = join(ROOT, 'data', 'reports');
 
-const SYMBOL_RE = /^[A-Z.\-]{1,10}$/;
+// Stocks/ETFs use symbols such as AAPL or BRK.B; Twelve Data crypto pairs use
+// Crypto pairs use a slash (ETH/CAD); an exchange suffix disambiguates
+// listings such as BMO:TSX from similarly named U.S. instruments.
+const SYMBOL_RE = /^(?=.{1,20}$)[A-Z0-9.\-]+(?::[A-Z0-9.\-]+)?(?:\/[A-Z0-9.\-]+)?$/;
 
 function validatePosition(body) {
   const symbol = String(body.symbol ?? '').toUpperCase().trim();
   const qty = body.qty === '' || body.qty == null ? 0 : Number(body.qty);
   const costBasis = body.costBasis === '' || body.costBasis == null ? 0 : Number(body.costBasis);
-  if (!SYMBOL_RE.test(symbol)) return { error: 'Enter a valid ticker symbol (letters, dots or dashes).' };
+  if (!SYMBOL_RE.test(symbol)) return { error: 'Enter a valid symbol (e.g. AAPL, BMO:TSX, or ETH/CAD).' };
   if (!isFinite(qty) || qty < 0) return { error: 'Quantity must be zero or positive.' };
-  if (qty > 0 && (!isFinite(costBasis) || costBasis <= 0)) return { error: 'A held position needs a cost basis per share.' };
+  if (qty > 0 && (!isFinite(costBasis) || costBasis <= 0)) return { error: 'A held position needs a cost basis per unit.' };
   return {
     value: {
       symbol,
@@ -38,7 +41,7 @@ function validateTrade(body) {
   const qty = Number(body.qty);
   const price = Number(body.price);
   const executedAt = String(body.executedAt ?? '');
-  if (!SYMBOL_RE.test(symbol)) return { error: 'Enter a valid ticker symbol (letters, dots or dashes).' };
+  if (!SYMBOL_RE.test(symbol)) return { error: 'Enter a valid symbol (e.g. AAPL, BMO:TSX, or ETH/CAD).' };
   if (side !== 'buy' && side !== 'sell') return { error: 'Side must be buy or sell.' };
   if (!isFinite(qty) || qty <= 0) return { error: 'Quantity must be a positive number.' };
   if (!isFinite(price) || price <= 0) return { error: 'Price must be a positive number.' };
@@ -176,7 +179,7 @@ export function createApiRouter(db) {
 
   function maskedSettings() {
     return {
-      provider: getSetting(db, 'provider', 'demo'),
+      provider: normalizeProvider(getSetting(db, 'provider', DEFAULT_PROVIDER)),
       hasKeys: {
         alphavantage: Boolean(getSetting(db, 'alphaVantageKey', '')),
         twelvedata: Boolean(getSetting(db, 'twelveDataKey', '')),
@@ -191,7 +194,7 @@ export function createApiRouter(db) {
   router.put('/settings', (req, res) => {
     const body = req.body ?? {};
     if (body.provider != null) {
-      if (!['demo', 'stooq', 'alphavantage', 'twelvedata'].includes(body.provider)) {
+      if (!['demo', 'alphavantage', 'twelvedata'].includes(body.provider)) {
         return res.status(400).json({ error: 'Unknown provider' });
       }
       setSetting(db, 'provider', body.provider);
@@ -220,7 +223,7 @@ export function createApiRouter(db) {
     const { provider, keys } = marketConfig(db, getSetting);
     try {
       const result = await getDailyBars(symbol, { db, provider, keys });
-      // Stooq returns decades of history; the dashboard only charts ~2.5y.
+      // Twelve Data can return deep history; the dashboard only charts ~2.5y.
       // Full history stays in the DB for the backtester.
       res.json({ ...result, bars: result.bars.slice(-650) });
     } catch (err) {

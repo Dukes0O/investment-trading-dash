@@ -1,48 +1,96 @@
 {
-  "exportedAt": "2026-07-04T04:53:01.192Z",
+  "exportedAt": "2026-07-14T16:41:35.299Z",
   "settings": {
-    "provider": "demo"
+    "provider": "twelvedata"
   },
   "positions": [
     {
-      "id": "p4zyynwoa",
-      "symbol": "AAPL",
-      "qty": 25,
-      "costBasis": 168.4,
-      "openedAt": "2025-09-15",
-      "notes": "Sample position — replace with your own"
+      "id": "p_tfsa_bmo",
+      "symbol": "BMO:TSX",
+      "qty": 94.93817,
+      "costBasis": 176.4525,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
     },
     {
-      "id": "p7bvxx5ck",
-      "symbol": "MSFT",
-      "qty": 12,
-      "costBasis": 402.1,
-      "openedAt": "2025-11-03",
-      "notes": "Sample position — replace with your own"
+      "id": "p_tfsa_dol",
+      "symbol": "DOL:TSX",
+      "qty": 45.83719,
+      "costBasis": 201.835,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
     },
     {
-      "id": "piqmx90np",
-      "symbol": "SPY",
-      "qty": 18,
-      "costBasis": 512.75,
-      "openedAt": "2025-06-20",
-      "notes": "Sample position — replace with your own"
+      "id": "p_tfsa_xiu",
+      "symbol": "XIU:TSX",
+      "qty": 134.01077,
+      "costBasis": 46.3432,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
     },
     {
-      "id": "pnkbqn1t7",
+      "id": "p_tfsa_na",
+      "symbol": "NA:TSX",
+      "qty": 101.39544,
+      "costBasis": 167.6636,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
+    },
+    {
+      "id": "p_tfsa_ry",
+      "symbol": "RY:TSX",
+      "qty": 124.72857,
+      "costBasis": 215.1585,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
+    },
+    {
+      "id": "p_watch_btc",
+      "symbol": "BTC/CAD",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — crypto quoted in CAD"
+    },
+    {
+      "id": "p_watch_nvda",
       "symbol": "NVDA",
       "qty": 0,
       "costBasis": 0,
       "openedAt": "",
-      "notes": "Sample watchlist entry"
+      "notes": "Watchlist — trade candidate"
     },
     {
-      "id": "p57gbb1vk",
+      "id": "p_watch_spy",
+      "symbol": "SPY",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — trade candidate"
+    },
+    {
+      "id": "p_watch_aapl",
+      "symbol": "AAPL",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — trade candidate"
+    },
+    {
+      "id": "p_watch_gld",
       "symbol": "GLD",
       "qty": 0,
       "costBasis": 0,
       "openedAt": "",
-      "notes": "Watchlist — gold trend / cyclical hedge candidate"
+      "notes": "Watchlist — trade candidate"
+    },
+    {
+      "id": "p_hold_ethcad",
+      "symbol": "ETH/CAD",
+      "qty": 31.459862,
+      "costBasis": 2561.183834817839,
+      "openedAt": "2023-04-26",
+      "notes": "Crypto holding — CAD; weighted cost from three Newton purchases totaling CAD $80,574.49. Purchase quantities sum to 31.459863; current balance supplied as 31.459862."
     }
   ]
 }

@@ -61,7 +61,7 @@ export async function renderStrategyLab(root, navigate, params) {
     body.append(
       el('p', {}, 'No backtest available for ' + symbol + '.'),
       el('p', { class: 'view-sub' }, isBackend()
-        ? 'Not enough price history (the presets need ~1 year of bars to warm up). Switch to the Stooq provider in Settings for decades of history.'
+        ? 'Not enough price history (the presets need ~1 year of bars to warm up). Select Twelve Data in Settings and add your API key for deeper history.'
         : 'Run `node scripts/backtest.mjs` to generate the committed results, or start the backend for live runs.')
     );
     return;
@@ -70,7 +70,7 @@ export async function renderStrategyLab(root, navigate, params) {
   if (String(data.source).startsWith('demo')) {
     body.append(el('div', { class: 'notice notice-info' },
       el('strong', {}, 'Demo data. '),
-      'These curves are computed on synthetic prices — switch to Stooq (free, no key) in Settings for real, decades-deep history.'
+      'These curves are computed on synthetic prices — select Twelve Data in Settings and add your API key for real market history.'
     ));
   }
   body.append(el('p', { class: 'view-sub' },

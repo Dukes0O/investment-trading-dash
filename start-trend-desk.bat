@@ -1,5 +1,5 @@
 @echo off
-rem Start Trend Desk (API + built frontend) on http://127.0.0.1:3001/dashboard.html
+rem Start Trend Desk (API + built frontend) on http://127.0.0.1:3001/
 rem Idempotent: exits silently if something already listens on 3001.
 rem Self-healing cold start: installs deps and builds the frontend when missing.
 cd /d "%~dp0"

@@ -161,8 +161,11 @@ function decide(score) {
 
 // Rule-based options strategies given the trend score, volatility regime and
 // whether the account holds ≥100 shares (enables covered strategies).
-export function optionsStrategies(analysis, sharesHeld = 0) {
+export function optionsStrategies(analysis, sharesHeld = 0, symbol = '') {
   if (!analysis) return [];
+  if (String(symbol).includes('/')) {
+    return { strategies: [], volNote: 'Crypto pair — options ideas are not generated.' };
+  }
   const { score, vol, price, risk } = analysis;
   const out = [];
   const highVol = vol.hvRank != null && vol.hvRank >= 60;

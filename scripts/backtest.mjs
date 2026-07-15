@@ -4,7 +4,7 @@
 // fallback). With the backend running, the lab can also compute fresh
 // results per symbol via GET /api/backtest/:symbol.
 //
-// Usage: node scripts/backtest.mjs [--symbol GLD] [--provider stooq|demo|...]
+// Usage: node scripts/backtest.mjs [--symbol GLD] [--provider twelvedata|demo|...]
 
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';

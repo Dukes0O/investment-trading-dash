@@ -71,7 +71,7 @@ export async function renderJournal(root, navigate) {
 
   function drawForm() {
     clear(formCard);
-    const symbol = input('text', 'e.g. AAPL');
+    const symbol = input('text', 'e.g. AAPL, BMO:TSX, or ETH/CAD');
     symbol.style.textTransform = 'uppercase';
     const side = el('select', { class: 'input' },
       el('option', { value: 'buy' }, 'Buy'),
@@ -93,8 +93,8 @@ export async function renderJournal(root, navigate) {
       const q = parseFloat(qty.value);
       const p = parseFloat(price.value);
       const date = executed.value;
-      if (!/^[A-Z.\-]{1,10}$/.test(sym)) {
-        errBox.append('Enter a valid ticker symbol (letters, dots or dashes).');
+      if (!/^(?=.{1,20}$)[A-Z0-9.\-]+(?::[A-Z0-9.\-]+)?(?:\/[A-Z0-9.\-]+)?$/.test(sym)) {
+        errBox.append('Enter a valid symbol (e.g. AAPL, BMO:TSX, or ETH/CAD).');
         return;
       }
       if (!isFinite(q) || q <= 0) { errBox.append('Quantity must be greater than zero.'); return; }

@@ -20,12 +20,12 @@ export function renderPortfolio(root, navigate) {
     clear(formCard);
     const editing = editingId ? getPositions().find((p) => p.id === editingId) : null;
 
-    const symbol = input('text', 'e.g. AAPL', editing?.symbol ?? '');
+    const symbol = input('text', 'e.g. AAPL, BMO:TSX, or ETH/CAD', editing?.symbol ?? '');
     symbol.style.textTransform = 'uppercase';
     const qty = input('number', '0 for watchlist', editing?.qty ?? '');
     qty.step = 'any';
     qty.min = '0';
-    const cost = input('number', 'per share', editing?.costBasis || '');
+    const cost = input('number', 'per unit', editing?.costBasis || '');
     cost.step = 'any';
     cost.min = '0';
     const opened = input('date', '', editing?.openedAt ?? '');
@@ -38,12 +38,12 @@ export function renderPortfolio(root, navigate) {
       const sym = symbol.value.trim().toUpperCase();
       const q = qty.value === '' ? 0 : parseFloat(qty.value);
       const c = cost.value === '' ? 0 : parseFloat(cost.value);
-      if (!/^[A-Z.\-]{1,10}$/.test(sym)) {
-        errBox.append('Enter a valid ticker symbol (letters, dots or dashes).');
+      if (!/^(?=.{1,20}$)[A-Z0-9.\-]+(?::[A-Z0-9.\-]+)?(?:\/[A-Z0-9.\-]+)?$/.test(sym)) {
+        errBox.append('Enter a valid symbol (e.g. AAPL, BMO:TSX, or ETH/CAD).');
         return;
       }
       if (!isFinite(q) || q < 0) { errBox.append('Quantity must be zero or positive.'); return; }
-      if (q > 0 && (!isFinite(c) || c <= 0)) { errBox.append('A held position needs a cost basis per share.'); return; }
+      if (q > 0 && (!isFinite(c) || c <= 0)) { errBox.append('A held position needs a cost basis per unit.'); return; }
       const data = { symbol: sym, qty: q, costBasis: c, openedAt: opened.value || '', notes: notes.value.trim() };
       try {
         if (editing) await updatePosition(editing.id, data);
@@ -62,7 +62,7 @@ export function renderPortfolio(root, navigate) {
       el('form', { class: 'position-form', onsubmit: submit },
         field('Symbol', symbol),
         field('Quantity', qty),
-        field('Cost basis ($/share)', cost),
+        field('Cost basis ($/unit)', cost),
         field('Opened', opened),
         field('Notes', notes, 'field-wide'),
         el('div', { class: 'form-actions' },

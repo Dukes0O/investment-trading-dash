@@ -5,7 +5,7 @@ for your portfolio. **Hybrid by design**: the code computes every indicator
 and mechanical signal deterministically; a weekly **Claude Code session
 supplies the judgment** — it reads the computed dossier, researches news, and
 issues the final calls, explicitly agreeing with or overriding the rule
-engine. Lives alongside the chat app in this repo.
+engine.
 
 ## Run it
 
@@ -15,9 +15,8 @@ npm run server     # backend: Express + SQLite on :3001
 npm run dev        # frontend: Vite on :3000 (proxies /api to the backend)
 ```
 
-Open **http://localhost:3000/dashboard.html** (the chat app remains at `/`).
-For production: `npm run build && npm start` and open
-http://localhost:3001/dashboard.html.
+Open **http://localhost:3000/**. For production: `npm run build && npm start`
+and open http://localhost:3001/.
 
 Without the backend the dashboard still runs in demo mode (synthetic data,
 positions in localStorage) — live providers and weekly reports need the server.
@@ -78,13 +77,35 @@ automatically.
 
 | Provider | Key | Notes |
 |---|---|---|
-| Demo data (default) | none | Synthetic prices; works offline |
-| [Stooq](https://stooq.com/) | none | **Recommended** — free daily OHLCV with decades of history (what the Strategy lab wants); be polite to their daily limits |
-| [Alpha Vantage](https://www.alphavantage.co/support/#api-key) | free key | 25 requests/day, ~2.4y history |
-| [Twelve Data](https://twelvedata.com/) | free key | 800 credits/day, 8/min, ~2.4y history |
+| Demo data (offline fallback) | none | Synthetic prices; works without the backend or a provider key |
+| [Twelve Data](https://twelvedata.com/) | free key | **Recommended** — daily OHLCV, up to 5,000 records per request, 800 credits/day and 8/min on the Basic plan |
+| [Alpha Vantage](https://www.alphavantage.co/support/#api-key) | free key | Optional TSX fallback; free compact daily history and 25 requests/day |
 
 Daily bars are cached in SQLite per calendar day; on provider errors the app
 falls back to the most recent cache, then demo data, and says so.
+
+A refresh fetches every portfolio and watchlist symbol, which used to fire all
+provider calls in one burst and trip the free-tier per-minute cap (HTTP 429).
+The server now paces outbound calls through a rolling-window limiter — 8 Twelve
+Data and 5 Alpha Vantage requests per minute by default — so a large refresh
+goes out in waves and stays under the cap. Uncached symbols in a later wave wait
+their turn rather than failing. On a paid plan, raise the caps with
+`TWELVEDATA_RPM` and `ALPHAVANTAGE_RPM`. The per-day SQLite cache means a second
+refresh the same day is instant and consumes no credits.
+
+To use the recommended provider, create a Twelve Data account, generate an API
+key, start the backend, and choose **Twelve Data** in Settings. Paste the key
+there (it is stored in the gitignored SQLite database), or provide it to server
+scripts through `TWELVEDATA_API_KEY`. Set `TRENDDESK_PROVIDER=twelvedata` when
+running scripts in a fresh environment. Never commit the key or put it in
+`data/portfolio.json`.
+
+The app can use a free Alpha Vantage key as a TSX fallback while Twelve Data
+remains selected. Add it in the Alpha Vantage key field in Settings, or set
+`ALPHAVANTAGE_API_KEY` for scripts. Canadian symbols such as `BMO:TSX` are
+translated to Alpha Vantage's `BMO.TRT` format. The free Alpha Vantage response
+is compact (100 daily bars), so it supports current charts and volume but not
+the deep-history Strategy Lab backtests.
 
 ## The weekly report ritual
 
@@ -125,8 +146,10 @@ deliberately simple — long/flat, one position, no dividends — so use it to
 `scripts/lib/strategies.mjs`; add a preset there and it appears everywhere.
 With the backend running the lab computes fresh results per symbol
 (`GET /api/backtest/:symbol`); `node scripts/backtest.mjs` writes the
-committed `data/backtests.json` fallback. Use the Stooq provider for
-decades-deep history — a 2-year backtest of a 30-week system is noise.
+committed `data/backtests.json` fallback. Use Twelve Data for deeper history —
+a 2-year backtest of a 30-week system is noise. The Twelve Data adapter asks
+for up to 5,000 daily bars; responses are cached in SQLite and refreshed once
+per calendar day.
 
 ## The learning loop (Performance view)
 

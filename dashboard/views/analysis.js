@@ -201,27 +201,36 @@ export async function renderAnalysis(root, navigate, params) {
   ));
 
   // ---- Options strategies ----
-  const opt = optionsStrategies(a, sharesHeld);
-  body.append(el('div', { class: 'card' },
-    el('div', { class: 'card-head' }, el('h2', {}, 'Options strategy ideas')),
-    el('p', { class: 'card-lede' }, opt.volNote + (sharesHeld >= 100
-      ? ` You hold ${sharesHeld} shares (${Math.floor(sharesHeld / 100)} covered lot${Math.floor(sharesHeld / 100) > 1 ? 's' : ''}).`
-      : sharesHeld > 0
-        ? ` You hold ${sharesHeld} shares — under 100, so covered strategies aren't available yet.`
-        : '')),
-    el('div', { class: 'strategy-grid' },
-      opt.strategies.map((s) =>
-        el('div', { class: 'strategy-card' },
-          el('h3', {}, s.name),
-          el('div', { class: 'strategy-fit' }, s.fit),
-          el('p', {}, el('strong', {}, 'Setup: '), s.setup),
-          el('p', { class: 'strategy-why' }, s.why)
+  if (symbol.includes('/')) {
+    body.append(el('div', { class: 'card' },
+      el('div', { class: 'card-head' }, el('h2', {}, 'Options strategy ideas')),
+      el('p', { class: 'card-lede' }, 'Options ideas are omitted for crypto pairs. The trend, risk, and position-sizing analysis above still applies.'),
+      el('p', { class: 'disclaimer' },
+        'Analytics are computed from historical prices and simple rules; they are decision support, not financial advice.')
+    ));
+  } else {
+    const opt = optionsStrategies(a, sharesHeld, symbol);
+    body.append(el('div', { class: 'card' },
+      el('div', { class: 'card-head' }, el('h2', {}, 'Options strategy ideas')),
+      el('p', { class: 'card-lede' }, opt.volNote + (sharesHeld >= 100
+        ? ` You hold ${sharesHeld} shares (${Math.floor(sharesHeld / 100)} covered lot${Math.floor(sharesHeld / 100) > 1 ? 's' : ''}).`
+        : sharesHeld > 0
+          ? ` You hold ${sharesHeld} shares — under 100, so covered strategies aren't available yet.`
+          : '')),
+      el('div', { class: 'strategy-grid' },
+        opt.strategies.map((s) =>
+          el('div', { class: 'strategy-card' },
+            el('h3', {}, s.name),
+            el('div', { class: 'strategy-fit' }, s.fit),
+            el('p', {}, el('strong', {}, 'Setup: '), s.setup),
+            el('p', { class: 'strategy-why' }, s.why)
+          )
         )
-      )
-    ),
-    el('p', { class: 'disclaimer' },
-      'Analytics are computed from historical prices and simple rules; they are decision support, not financial advice. Options involve substantial risk — verify strikes, deltas and implied volatility with your broker before trading.')
-  ));
+      ),
+      el('p', { class: 'disclaimer' },
+        'Analytics are computed from historical prices and simple rules; they are decision support, not financial advice. Options involve substantial risk — verify strikes, deltas and implied volatility with your broker before trading.')
+    ));
+  }
 }
 
 function positionInRange(a) {

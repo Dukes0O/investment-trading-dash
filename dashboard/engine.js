@@ -36,3 +36,18 @@ export async function getMarkets(symbols) {
   for (const [s, r] of results) out.set(s, r);
   return out;
 }
+
+// Like getMarkets, but invokes onResult(symbol, result, accumulated) as each
+// symbol resolves. The server paces provider calls into per-minute waves, so a
+// large refresh streams in rather than landing all at once — this lets the UI
+// fill each tile as its wave arrives instead of blocking on the whole set.
+export async function getMarketsStream(symbols, onResult) {
+  const out = new Map();
+  await Promise.all(symbols.map((s) =>
+    getMarket(s).then((r) => {
+      out.set(s, r);
+      try { onResult?.(s, r, out); } catch { /* a render error for one symbol must not abort the rest */ }
+    })
+  ));
+  return out;
+}
