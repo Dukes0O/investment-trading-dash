@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "provider": "tiingo",
+  "symbol": "TLT",
+  "snapshotDate": "2026-07-22",
+  "rows": 6032,
+  "from": "2002-07-30",
+  "to": "2026-07-21",
+  "sha256": "93659996ec8dbb1966456c21f0ec3bc48647deb4d9f7642f72c0e7cbd787fd74",
+  "recordedAt": "2026-07-22T17:40:05.035467+00:00"
+}

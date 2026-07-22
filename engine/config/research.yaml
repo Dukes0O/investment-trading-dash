@@ -1,0 +1,21 @@
+strategy:
+  id: trend-30w
+  version: 1
+  weekly_fast_period: 10
+  weekly_slow_period: 30
+  warmup_daily_bars: 210
+walk_forward:
+  train_years: 8
+  test_years: 1
+  step_years: 1
+  embargo_sessions: 5
+holdout:
+  months: 18
+costs:
+  commission_bps_per_side: 0.0
+  slippage_bps_per_side: 5.0
+validation:
+  maximum_calendar_gap_days: 7
+  reconcile_close_tolerance_pct: 0.5
+  reconcile_hard_limit_pct: 1.0
+  reconcile_maximum_outlier_fraction: 0.001

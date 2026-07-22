@@ -12,6 +12,7 @@ import { loadPortfolio } from './lib/source.mjs';
 import { getDailyBars } from '../server/marketdata.js';
 import { ROOT } from '../server/db.js';
 import { analyzeSymbol, optionsStrategies } from '../dashboard/signals.js';
+import { loadEngineActions } from './lib/engine-actions.mjs';
 
 function arg(name, fallback = null) {
   const i = process.argv.indexOf('--' + name);
@@ -22,6 +23,9 @@ const date = arg('date', new Date().toISOString().slice(0, 10));
 const source = loadPortfolio();
 const provider = arg('provider', process.env.TRENDDESK_PROVIDER || source.provider);
 const outPath = arg('out', join(ROOT, 'data', `dossier-${date}.json`));
+const engineActionsPath = arg('engine-actions', join(ROOT, 'data', 'reports', `engine-actions-${date}.json`));
+
+const engineActions = loadEngineActions(engineActionsPath, { reportDate: date });
 
 const positions = source.positions;
 if (!positions.length) {
@@ -107,6 +111,7 @@ const dossier = {
   },
   positions: positions.map((p) => ({ symbol: p.symbol, qty: p.qty, costBasis: p.costBasis, openedAt: p.openedAt, notes: p.notes })),
   symbols: symbolEntries,
+  engineActions,
 };
 
 mkdirSync(dirname(outPath), { recursive: true });

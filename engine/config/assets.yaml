@@ -1,0 +1,11 @@
+provider: tiingo
+assets:
+  - symbol: GLD
+    currency: USD
+    inception: 2004-11-18
+  - symbol: SPY
+    currency: USD
+    inception: 1993-01-29
+  - symbol: TLT
+    currency: USD
+    inception: 2002-07-30

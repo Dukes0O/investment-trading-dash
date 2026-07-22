@@ -1,0 +1,1318 @@
+{
+  "generatedAt": "2026-07-22T17:49:54.169Z",
+  "date": "2026-07-22",
+  "provider": "twelvedata",
+  "sourceKind": "db",
+  "portfolio": {
+    "totalValue": 186643.76508648,
+    "totalCost": 156625.34112416802,
+    "totalPL": 30018.423962311994,
+    "dayChange": 727.5761042600003,
+    "buys": 3,
+    "sells": 3,
+    "symbolsTracked": 11
+  },
+  "positions": [
+    {
+      "symbol": "BMO:TSX",
+      "qty": 94.93817,
+      "costBasis": 176.4525,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
+    },
+    {
+      "symbol": "DOL:TSX",
+      "qty": 45.83719,
+      "costBasis": 201.835,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
+    },
+    {
+      "symbol": "XIU:TSX",
+      "qty": 134.01077,
+      "costBasis": 46.3432,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
+    },
+    {
+      "symbol": "NA:TSX",
+      "qty": 101.39544,
+      "costBasis": 167.6636,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
+    },
+    {
+      "symbol": "RY:TSX",
+      "qty": 124.72857,
+      "costBasis": 215.1585,
+      "openedAt": "",
+      "notes": "TFSA — CAD; imported from TD Direct Investing screenshot"
+    },
+    {
+      "symbol": "BTC/CAD",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — crypto quoted in CAD"
+    },
+    {
+      "symbol": "NVDA",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — trade candidate"
+    },
+    {
+      "symbol": "SPY",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — trade candidate"
+    },
+    {
+      "symbol": "AAPL",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — trade candidate"
+    },
+    {
+      "symbol": "GLD",
+      "qty": 0,
+      "costBasis": 0,
+      "openedAt": "",
+      "notes": "Watchlist — trade candidate"
+    },
+    {
+      "symbol": "ETH/CAD",
+      "qty": 31.459862,
+      "costBasis": 2561.183834817839,
+      "openedAt": "2023-04-26",
+      "notes": "Crypto holding — CAD; weighted cost from three Newton purchases totaling CAD $80,574.49. Purchase quantities sum to 31.459863; current balance supplied as 31.459862."
+    }
+  ],
+  "symbols": [
+    {
+      "symbol": "BMO:TSX",
+      "held": true,
+      "qty": 94.93817,
+      "costBasis": 176.4525,
+      "plPct": 42.910981708958516,
+      "price": 252.17,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": 8,
+      "action": "HOLD",
+      "summary": "Mixed or transitioning trend. Hold existing positions with stops in place; wait for weekly confirmation before new entries.",
+      "reasons": [
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 59 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": -6,
+          "text": "Daily MACD histogram negative",
+          "bullish": false
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 4.1501808088913466,
+        "atrPct": 1.6457868933224995,
+        "suggestedStop": 241.79454797777163,
+        "trailingStop": 241.79454797777163
+      },
+      "vol": {
+        "hv20": 17.353702946059308,
+        "hvRank": 44.70588235294118
+      },
+      "range52": {
+        "high": 258.21,
+        "low": 180.3
+      },
+      "optionsIdeas": [
+        {
+          "name": "Stand aside / small starter only",
+          "fit": "No trend edge and no volatility edge",
+          "setup": "No options position. Keep the symbol on watch for a weekly MA reclaim or breakdown.",
+          "why": "Trend traders make money in trends; a mixed weekly tape is where premium and patience get burned."
+        }
+      ],
+      "optionsVolNote": "Volatility is mid-range (HV rank 45/100).",
+      "recentWeeklyCloses": [
+        207.41,
+        209.27,
+        209.94,
+        222.46,
+        223.93,
+        229.23,
+        235.25,
+        242.43,
+        248.66,
+        247.08,
+        253.39,
+        255.15
+      ],
+      "recentDailyCloses": [
+        247.07,
+        250.61,
+        253.39,
+        252.99,
+        254.45,
+        257.76,
+        256.44,
+        255.15,
+        250.25,
+        252.17
+      ]
+    },
+    {
+      "symbol": "DOL:TSX",
+      "held": true,
+      "qty": 45.83719,
+      "costBasis": 201.835,
+      "plPct": -6.889290757301763,
+      "price": 187.93,
+      "source": "alphavantage (TSX fallback)",
+      "dataError": null,
+      "score": 8,
+      "action": "HOLD",
+      "summary": "Mixed or transitioning trend. Hold existing positions with stops in place; wait for weekly confirmation before new entries.",
+      "reasons": [
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 53 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": -6,
+          "text": "Daily MACD histogram negative",
+          "bullish": false
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 3.816711407357029,
+        "atrPct": 2.0309218365120145,
+        "suggestedStop": 178.38822148160745,
+        "trailingStop": 182.74600000000018
+      },
+      "vol": {
+        "hv20": 19.199481131402543,
+        "hvRank": 26.25
+      },
+      "range52": {
+        "high": 203.5,
+        "low": 166
+      },
+      "optionsIdeas": [
+        {
+          "name": "Stand aside / small starter only",
+          "fit": "No trend edge and no volatility edge",
+          "setup": "No options position. Keep the symbol on watch for a weekly MA reclaim or breakdown.",
+          "why": "Trend traders make money in trends; a mixed weekly tape is where premium and patience get burned."
+        }
+      ],
+      "optionsVolNote": "Realized volatility is depressed (HV rank 26/100) — favors buying premium / debit structures.",
+      "recentWeeklyCloses": [
+        174,
+        173.83,
+        170.03,
+        178.81,
+        176.3,
+        181.22,
+        190.94,
+        186.89,
+        193.93,
+        188.11,
+        185.25,
+        190.87
+      ],
+      "recentDailyCloses": [
+        186.25,
+        183.43,
+        185.25,
+        186.31,
+        186.04,
+        185.97,
+        188.95,
+        190.87,
+        190,
+        187.93
+      ]
+    },
+    {
+      "symbol": "XIU:TSX",
+      "held": true,
+      "qty": 134.01077,
+      "costBasis": 46.3432,
+      "plPct": 13.997307048283222,
+      "price": 52.83,
+      "source": "twelvedata (stale 2026-07-19)",
+      "dataError": "Twelve Data HTTP 404: This symbol is available starting with the Grow or Venture plan. Consider upgrading now at https://twelvedata.com/pricing; Alpha Vantage fallback: Alpha Vantage rate limit reached (free tier: 25 requests/day). Cached data will be used where available.",
+      "score": 20,
+      "action": "HOLD",
+      "summary": "Mixed or transitioning trend. Hold existing positions with stops in place; wait for weekly confirmation before new entries.",
+      "reasons": [
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 63 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 0.47740613789166375,
+        "atrPct": 0.903664845526526,
+        "suggestedStop": 51.63648465527084,
+        "trailingStop": 51.63648465527084
+      },
+      "vol": {
+        "hv20": 6.560571566444165,
+        "hvRank": 1.2048192771084338
+      },
+      "range52": {
+        "high": 53.12,
+        "low": 46.02
+      },
+      "optionsIdeas": [
+        {
+          "name": "Collar",
+          "fit": "Holding through a mixed/undecided trend",
+          "setup": "Per 100 shares: buy a ~0.25 delta put (near $49.13), finance it by selling a ~0.25 delta call (near $56.53), 45–60 DTE.",
+          "why": "Brackets the position at low/zero cost while the weekly trend resolves."
+        },
+        {
+          "name": "Stand aside / small starter only",
+          "fit": "No trend edge and no volatility edge",
+          "setup": "No options position. Keep the symbol on watch for a weekly MA reclaim or breakdown.",
+          "why": "Trend traders make money in trends; a mixed weekly tape is where premium and patience get burned."
+        }
+      ],
+      "optionsVolNote": "Realized volatility is depressed (HV rank 1/100) — favors buying premium / debit structures.",
+      "recentWeeklyCloses": [
+        49.97,
+        50.05,
+        50.09,
+        49.82,
+        50.78,
+        50.86,
+        50.85,
+        51.75,
+        51.56,
+        51.96,
+        52.28,
+        52.69
+      ],
+      "recentDailyCloses": [
+        52.28,
+        52.56,
+        52.06,
+        52.42,
+        52.69,
+        52.74,
+        52.79,
+        52.97,
+        52.98,
+        52.83
+      ]
+    },
+    {
+      "symbol": "NA:TSX",
+      "held": true,
+      "qty": 101.39544,
+      "costBasis": 167.6636,
+      "plPct": 39.60096288043437,
+      "price": 234.06,
+      "source": "twelvedata (stale 2026-07-18)",
+      "dataError": "Twelve Data HTTP 404: This symbol is available starting with the Grow or Venture plan. Consider upgrading now at https://twelvedata.com/pricing; Alpha Vantage fallback: Alpha Vantage rate limit reached (free tier: 25 requests/day). Cached data will be used where available.",
+      "score": 20,
+      "action": "HOLD",
+      "summary": "Mixed or transitioning trend. Hold existing positions with stops in place; wait for weekly confirmation before new entries.",
+      "reasons": [
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 68 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 4.12995805243173,
+        "atrPct": 1.7644869061060113,
+        "suggestedStop": 223.73510486892067,
+        "trailingStop": 223.73510486892067
+      },
+      "vol": {
+        "hv20": 18.738673737832272,
+        "hvRank": 51.19047619047619
+      },
+      "range52": {
+        "high": 237.13,
+        "low": 174.15
+      },
+      "optionsIdeas": [
+        {
+          "name": "Collar",
+          "fit": "Holding through a mixed/undecided trend",
+          "setup": "Per 100 shares: buy a ~0.25 delta put (near $217.68), finance it by selling a ~0.25 delta call (near $250.44), 45–60 DTE.",
+          "why": "Brackets the position at low/zero cost while the weekly trend resolves."
+        },
+        {
+          "name": "Stand aside / small starter only",
+          "fit": "No trend edge and no volatility edge",
+          "setup": "No options position. Keep the symbol on watch for a weekly MA reclaim or breakdown.",
+          "why": "Trend traders make money in trends; a mixed weekly tape is where premium and patience get burned."
+        }
+      ],
+      "optionsVolNote": "Volatility is mid-range (HV rank 51/100).",
+      "recentWeeklyCloses": [
+        203.68,
+        205.21,
+        207.84,
+        204.62,
+        211.73,
+        201.34,
+        204.35,
+        209.8,
+        221.68,
+        222.03,
+        223.42,
+        229.93
+      ],
+      "recentDailyCloses": [
+        226.75,
+        228.78,
+        223.12,
+        224.95,
+        229.93,
+        228.33,
+        230.09,
+        235.32,
+        234.34,
+        234.06
+      ]
+    },
+    {
+      "symbol": "RY:TSX",
+      "held": true,
+      "qty": 124.72857,
+      "costBasis": 215.1585,
+      "plPct": 38.381704650292676,
+      "price": 297.74,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": 8,
+      "action": "HOLD",
+      "summary": "Mixed or transitioning trend. Hold existing positions with stops in place; wait for weekly confirmation before new entries.",
+      "reasons": [
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 60 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": -6,
+          "text": "Daily MACD histogram negative",
+          "bullish": false
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 4.474903843736305,
+        "atrPct": 1.5029568898153776,
+        "suggestedStop": 286.55274039065927,
+        "trailingStop": 286.55274039065927
+      },
+      "vol": {
+        "hv20": 17.034777902221478,
+        "hvRank": 95.29411764705881
+      },
+      "range52": {
+        "high": 306.38,
+        "low": 217.01
+      },
+      "optionsIdeas": [
+        {
+          "name": "Collar",
+          "fit": "Holding through a mixed/undecided trend",
+          "setup": "Per 100 shares: buy a ~0.25 delta put (near $276.90), finance it by selling a ~0.25 delta call (near $318.58), 45–60 DTE.",
+          "why": "Brackets the position at low/zero cost while the weekly trend resolves."
+        },
+        {
+          "name": "Iron condor (neutral premium sale)",
+          "fit": "Range-bound tape with rich volatility",
+          "setup": "Sell a 30–45 DTE ~0.20 delta call spread and put spread around the range (short strikes near $318.58 / $276.90).",
+          "why": "Monetizes chop; defined risk on both sides. Exit if the weekly trend picks a direction."
+        }
+      ],
+      "optionsVolNote": "Realized volatility is elevated (HV rank 95/100) — favors selling premium.",
+      "recentWeeklyCloses": [
+        244.2,
+        248.79,
+        252.5,
+        261.97,
+        264.44,
+        270.6,
+        278.93,
+        284.08,
+        288.01,
+        290.38,
+        298.81,
+        302.13
+      ],
+      "recentDailyCloses": [
+        291.62,
+        295.84,
+        298.81,
+        297.86,
+        300.95,
+        305.74,
+        303.16,
+        302.13,
+        295.77,
+        297.74
+      ]
+    },
+    {
+      "symbol": "BTC/CAD",
+      "held": false,
+      "qty": 0,
+      "costBasis": 0,
+      "plPct": null,
+      "price": 93216.6,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": -25,
+      "action": "SELL",
+      "summary": "Downtrend developing. Reduce exposure into strength; avoid new long entries until the weekly trend repairs.",
+      "reasons": [
+        {
+          "points": -15,
+          "text": "Weekly close below the 30-week MA (primary downtrend)",
+          "bullish": false
+        },
+        {
+          "points": -12,
+          "text": "10-week MA below 30-week MA (bearish alignment)",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "30-week MA is falling",
+          "bullish": false
+        },
+        {
+          "points": -8,
+          "text": "Price below the 40-week (≈200-day) MA",
+          "bullish": false
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": -10,
+          "text": "Death cross intact (50-day below 200-day MA)",
+          "bullish": false
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 59 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 2428.7239153560117,
+        "atrPct": 2.6054628846750596,
+        "suggestedStop": 87144.79021160997,
+        "trailingStop": 88990.76399999998
+      },
+      "vol": {
+        "hv20": 23.526735819098672,
+        "hvRank": 18.650793650793652
+      },
+      "range52": {
+        "high": 145719.3,
+        "low": 82224
+      },
+      "optionsIdeas": [],
+      "optionsVolNote": "Crypto pair — options ideas are not generated.",
+      "recentWeeklyCloses": [
+        106747.7,
+        112482.8,
+        106673.7,
+        106369.8,
+        101577.4,
+        88382.4,
+        91810.5,
+        89713,
+        84504.8,
+        90366.2,
+        90404.3,
+        90754.5
+      ],
+      "recentDailyCloses": [
+        88199.2,
+        91365.1,
+        90936.6,
+        89671,
+        89769.8,
+        91069.6,
+        90754.5,
+        91906.6,
+        93916.3,
+        93216.6
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "held": false,
+      "qty": 0,
+      "costBasis": 0,
+      "plPct": null,
+      "price": 213.905,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": 80,
+      "action": "STRONG BUY",
+      "summary": "Weekly and daily trends aligned to the upside. Trend-following long entries are favored; add on pullbacks to the 10-week MA.",
+      "reasons": [
+        {
+          "points": 15,
+          "text": "Weekly close above the 30-week MA (primary uptrend)",
+          "bullish": true
+        },
+        {
+          "points": 12,
+          "text": "10-week MA above 30-week MA (bullish alignment)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "30-week MA is rising",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 40-week (≈200-day) MA",
+          "bullish": true
+        },
+        {
+          "points": -10,
+          "text": "Weekly MACD below its signal line (momentum against the trend)",
+          "bullish": false
+        },
+        {
+          "points": 10,
+          "text": "Golden cross intact (50-day above 200-day MA)",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 58 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        },
+        {
+          "points": 15,
+          "text": "New 20-day high — breakout in progress",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 7.351359998066727,
+        "atrPct": 3.436740608245121,
+        "suggestedStop": 195.5266000048332,
+        "trailingStop": 209.71370018000007
+      },
+      "vol": {
+        "hv20": 36.12442483523099,
+        "hvRank": 55.158730158730165
+      },
+      "range52": {
+        "high": 236.53999,
+        "low": 164.070007
+      },
+      "optionsIdeas": [
+        {
+          "name": "Bull call spread",
+          "fit": "Bullish continuation with cheap volatility",
+          "setup": "Buy a 60–90 DTE call near the money (~$213.91), sell one ~10% higher (~$235.30).",
+          "why": "Defined-risk upside participation; debit stays modest while HV is low."
+        },
+        {
+          "name": "Long call (LEAPS-style)",
+          "fit": "Strong, confirmed uptrend and low volatility",
+          "setup": "Buy a 6–12 month call, 0.70–0.80 delta (strike ~$192.51). Risk only the premium; size ≤ the risk of a stock position.",
+          "why": "Stock-replacement with less capital; low HV keeps the time premium reasonable."
+        }
+      ],
+      "optionsVolNote": "Volatility is mid-range (HV rank 55/100).",
+      "recentWeeklyCloses": [
+        198.45,
+        215.2,
+        225.32001,
+        215.33,
+        211.14,
+        205.10001,
+        205.19,
+        210.69,
+        192.53,
+        194.83,
+        210.96001,
+        202.81
+      ],
+      "recentDailyCloses": [
+        202.78,
+        210.96001,
+        203.53,
+        211.8,
+        212.5,
+        207.39999,
+        202.81,
+        203.28,
+        207.28999,
+        213.905
+      ]
+    },
+    {
+      "symbol": "SPY",
+      "held": false,
+      "qty": 0,
+      "costBasis": 0,
+      "plPct": null,
+      "price": 749.6,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": 73,
+      "action": "STRONG BUY",
+      "summary": "Weekly and daily trends aligned to the upside. Trend-following long entries are favored; add on pullbacks to the 10-week MA.",
+      "reasons": [
+        {
+          "points": 15,
+          "text": "Weekly close above the 30-week MA (primary uptrend)",
+          "bullish": true
+        },
+        {
+          "points": 12,
+          "text": "10-week MA above 30-week MA (bullish alignment)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "30-week MA is rising",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 40-week (≈200-day) MA",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Golden cross intact (50-day above 200-day MA)",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 53 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": -6,
+          "text": "Daily MACD histogram negative",
+          "bullish": false
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 7.974124437870244,
+        "atrPct": 1.0637839431523803,
+        "suggestedStop": 729.6646889053244,
+        "trailingStop": 745.1192020399999
+      },
+      "vol": {
+        "hv20": 10.618768157545908,
+        "hvRank": 34.523809523809526
+      },
+      "range52": {
+        "high": 760.40002,
+        "low": 619.28998
+      },
+      "optionsIdeas": [
+        {
+          "name": "Bull call spread",
+          "fit": "Bullish continuation with cheap volatility",
+          "setup": "Buy a 60–90 DTE call near the money (~$749.60), sell one ~10% higher (~$824.56).",
+          "why": "Defined-risk upside participation; debit stays modest while HV is low."
+        },
+        {
+          "name": "Long call (LEAPS-style)",
+          "fit": "Strong, confirmed uptrend and low volatility",
+          "setup": "Buy a 6–12 month call, 0.70–0.80 delta (strike ~$674.64). Risk only the premium; size ≤ the risk of a stock position.",
+          "why": "Stock-replacement with less capital; low HV keeps the time premium reasonable."
+        }
+      ],
+      "optionsVolNote": "Volatility is mid-range (HV rank 35/100).",
+      "recentWeeklyCloses": [
+        720.65002,
+        737.62,
+        739.16998,
+        745.64001,
+        756.47998,
+        737.54999,
+        741.75,
+        746.73999,
+        728.98999,
+        744.78003,
+        754.95001,
+        743.28998
+      ],
+      "recentDailyCloses": [
+        751.71002,
+        754.95001,
+        749.16998,
+        751.83002,
+        754.81,
+        750.71997,
+        743.28998,
+        742.090027,
+        748.28003,
+        749.6
+      ]
+    },
+    {
+      "symbol": "AAPL",
+      "held": false,
+      "qty": 0,
+      "costBasis": 0,
+      "plPct": null,
+      "price": 323.91,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": 85,
+      "action": "STRONG BUY",
+      "summary": "Weekly and daily trends aligned to the upside. Trend-following long entries are favored; add on pullbacks to the 10-week MA.",
+      "reasons": [
+        {
+          "points": 15,
+          "text": "Weekly close above the 30-week MA (primary uptrend)",
+          "bullish": true
+        },
+        {
+          "points": 12,
+          "text": "10-week MA above 30-week MA (bullish alignment)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "30-week MA is rising",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 40-week (≈200-day) MA",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": 10,
+          "text": "Golden cross intact (50-day above 200-day MA)",
+          "bullish": true
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 61 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 8.01229984642671,
+        "atrPct": 2.4736191678017687,
+        "suggestedStop": 303.87925038393325,
+        "trailingStop": 304.84779970000017
+      },
+      "vol": {
+        "hv20": 37.74367782719132,
+        "hvRank": 98.4126984126984
+      },
+      "range52": {
+        "high": 334.98999,
+        "low": 201.5
+      },
+      "optionsIdeas": [
+        {
+          "name": "Cash-secured put / bull put spread",
+          "fit": "Want to add exposure into an uptrend while volatility is rich",
+          "setup": "Sell a 30–45 DTE put ~0.25–0.30 delta (strike near $304.48), or define risk with a spread 5–10% wide below it.",
+          "why": "Gets paid to buy the pullback. Assignment is acceptable because the weekly trend is up."
+        }
+      ],
+      "optionsVolNote": "Realized volatility is elevated (HV rank 98/100) — favors selling premium.",
+      "recentWeeklyCloses": [
+        280.14001,
+        293.32001,
+        300.23001,
+        308.82001,
+        312.059998,
+        307.34,
+        291.13,
+        298.01001,
+        283.78,
+        308.63,
+        315.32001,
+        333.73999
+      ],
+      "recentDailyCloses": [
+        316.22,
+        315.32001,
+        317.31,
+        314.85999,
+        327.5,
+        333.26001,
+        333.73999,
+        326.59,
+        327.73999,
+        323.91
+      ]
+    },
+    {
+      "symbol": "GLD",
+      "held": false,
+      "qty": 0,
+      "costBasis": 0,
+      "plPct": null,
+      "price": 380.43,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": -61,
+      "action": "STRONG SELL",
+      "summary": "Weekly and daily trends aligned to the downside. Exit or hedge long exposure; trend traders stand aside or look elsewhere.",
+      "reasons": [
+        {
+          "points": -15,
+          "text": "Weekly close below the 30-week MA (primary downtrend)",
+          "bullish": false
+        },
+        {
+          "points": -12,
+          "text": "10-week MA below 30-week MA (bearish alignment)",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "30-week MA is falling",
+          "bullish": false
+        },
+        {
+          "points": -8,
+          "text": "Price below the 40-week (≈200-day) MA",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "Weekly MACD below its signal line (momentum against the trend)",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "Death cross intact (50-day below 200-day MA)",
+          "bullish": false
+        },
+        {
+          "points": -8,
+          "text": "Price below the 50-day MA",
+          "bullish": false
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 51 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 7.257026140564595,
+        "atrPct": 1.9075851380187143,
+        "suggestedStop": 362.28743464858854,
+        "trailingStop": 392.6157990000007
+      },
+      "vol": {
+        "hv20": 23.601491155536824,
+        "hvRank": 55.55555555555556
+      },
+      "range52": {
+        "high": 509.70001,
+        "low": 300.95999
+      },
+      "optionsIdeas": [
+        {
+          "name": "Long put / bear put spread",
+          "fit": "Confirmed downtrend and volatility still cheap",
+          "setup": "Buy a 60–90 DTE put near the money, optionally sell one ~10% lower (near $342.39) to cut the debit.",
+          "why": "Direct downside participation with defined risk while HV is low."
+        }
+      ],
+      "optionsVolNote": "Volatility is mid-range (HV rank 56/100).",
+      "recentWeeklyCloses": [
+        423.17999,
+        433.76999,
+        417.29001,
+        413.82001,
+        417.12,
+        396.23999,
+        386.54001,
+        387.12,
+        373.63,
+        378.13,
+        377.01001,
+        368.41
+      ],
+      "recentDailyCloses": [
+        378.17999,
+        377.01001,
+        367.13,
+        372.14999,
+        372.35001,
+        364.95999,
+        368.41,
+        367.60001,
+        374.81,
+        380.43
+      ]
+    },
+    {
+      "symbol": "ETH/CAD",
+      "held": true,
+      "qty": 31.459862,
+      "costBasis": 2561.183834817839,
+      "plPct": 6.907202941749922,
+      "price": 2738.09,
+      "source": "twelvedata (cached today)",
+      "dataError": null,
+      "score": -25,
+      "action": "SELL",
+      "summary": "Downtrend developing. Reduce exposure into strength; avoid new long entries until the weekly trend repairs.",
+      "reasons": [
+        {
+          "points": -15,
+          "text": "Weekly close below the 30-week MA (primary downtrend)",
+          "bullish": false
+        },
+        {
+          "points": -12,
+          "text": "10-week MA below 30-week MA (bearish alignment)",
+          "bullish": false
+        },
+        {
+          "points": -10,
+          "text": "30-week MA is falling",
+          "bullish": false
+        },
+        {
+          "points": -8,
+          "text": "Price below the 40-week (≈200-day) MA",
+          "bullish": false
+        },
+        {
+          "points": 10,
+          "text": "Weekly MACD above its signal line (momentum with the trend)",
+          "bullish": true
+        },
+        {
+          "points": -10,
+          "text": "Death cross intact (50-day below 200-day MA)",
+          "bullish": false
+        },
+        {
+          "points": 8,
+          "text": "Price above the 50-day MA",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily RSI 66 — bullish regime (≥50)",
+          "bullish": true
+        },
+        {
+          "points": 6,
+          "text": "Daily MACD histogram positive",
+          "bullish": true
+        }
+      ],
+      "notes": [],
+      "risk": {
+        "atr": 91.39054617712394,
+        "atrPct": 3.3377480717260553,
+        "suggestedStop": 2509.6136345571904,
+        "trailingStop": 2509.6136345571904
+      },
+      "vol": {
+        "hv20": 31.37013588743175,
+        "hvRank": 15.476190476190476
+      },
+      "range52": {
+        "high": 4990,
+        "low": 2100.4
+      },
+      "optionsIdeas": [],
+      "optionsVolNote": "Crypto pair — options ideas are not generated.",
+      "recentWeeklyCloses": [
+        3153.85,
+        3241.86,
+        2930.5,
+        2897.06,
+        2765.73,
+        2356.24,
+        2410.58,
+        2416.83,
+        2232.29,
+        2537.05,
+        2561.17,
+        2627.58
+      ],
+      "recentDailyCloses": [
+        2513.4,
+        2655.56,
+        2694.16,
+        2618.86,
+        2586.68,
+        2616.1,
+        2627.58,
+        2681.64,
+        2724.01,
+        2738.09
+      ]
+    }
+  ],
+  "engineActions": {
+    "schemaVersion": 1,
+    "kind": "trendlab-weekly-actions",
+    "reportDate": "2026-07-22",
+    "generatedAt": "2026-07-22T17:49:12.024510+00:00",
+    "provider": "tiingo",
+    "strategy": {
+      "id": "trend-30w",
+      "version": 1
+    },
+    "configHash": "0b8db9ee6bf4322f82c22c5aaa259601ff7542a0a1abefa11d58e0d463d0f4d0",
+    "requiresHumanApproval": true,
+    "executionTiming": "next market open after Kyle reviews and approves",
+    "actions": [
+      {
+        "symbol": "GLD",
+        "held": false,
+        "state": "downtrend",
+        "action": "AVOID",
+        "signalDate": "2026-07-21",
+        "referencePrice": 374.81,
+        "protectiveStop": 353.0693,
+        "atr14": 7.2469,
+        "quantity": 0,
+        "risk": null,
+        "weekly": {
+          "close": 368.41,
+          "fastSma": 391.531,
+          "slowSma": 423.4863
+        },
+        "rationale": "Completed weekly close is below the 30-week SMA."
+      },
+      {
+        "symbol": "SPY",
+        "held": false,
+        "state": "uptrend",
+        "action": "BUY",
+        "signalDate": "2026-07-21",
+        "referencePrice": 748.28,
+        "protectiveStop": 723.3506,
+        "atr14": 8.3098,
+        "quantity": 5,
+        "risk": {
+          "quantity": 5,
+          "risk_budget": 124.65,
+          "risk_per_unit": 24.9294,
+          "position_value": 3741.4,
+          "portfolio_heat_after": 124.65
+        },
+        "weekly": {
+          "close": 743.29,
+          "fastSma": 742.988,
+          "slowSma": 703.1832
+        },
+        "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA."
+      },
+      {
+        "symbol": "TLT",
+        "held": false,
+        "state": "downtrend",
+        "action": "AVOID",
+        "signalDate": "2026-07-21",
+        "referencePrice": 83.66,
+        "protectiveStop": 81.9402,
+        "atr14": 0.5733,
+        "quantity": 0,
+        "risk": null,
+        "weekly": {
+          "close": 84.52,
+          "fastSma": 85.0329,
+          "slowSma": 85.6614
+        },
+        "rationale": "Completed weekly close is below the 30-week SMA."
+      }
+    ],
+    "validation": {
+      "GLD": {
+        "status": "pass",
+        "rows": 5450,
+        "from": "2004-11-18 00:00:00",
+        "to": "2026-07-21 00:00:00",
+        "warnings": [],
+        "crossSource": {
+          "status": "pass_with_warning",
+          "overlapRows": 5005,
+          "maximumDifferencePct": 0.509968,
+          "tolerancePct": 0.5,
+          "hardLimitPct": 1,
+          "outlierCount": 1,
+          "outlierFraction": 0.0001998,
+          "maximumOutlierFraction": 0.001
+        }
+      },
+      "SPY": {
+        "status": "pass",
+        "rows": 8425,
+        "from": "1993-01-29 00:00:00",
+        "to": "2026-07-21 00:00:00",
+        "warnings": [],
+        "crossSource": {
+          "status": "pass",
+          "overlapRows": 5005,
+          "maximumDifferencePct": 0.113129,
+          "tolerancePct": 0.5,
+          "hardLimitPct": 1,
+          "outlierCount": 0,
+          "outlierFraction": 0,
+          "maximumOutlierFraction": 0.001
+        }
+      },
+      "TLT": {
+        "status": "pass",
+        "rows": 6032,
+        "from": "2002-07-30 00:00:00",
+        "to": "2026-07-21 00:00:00",
+        "warnings": [],
+        "crossSource": {
+          "status": "pass",
+          "overlapRows": 4999,
+          "maximumDifferencePct": 0.411194,
+          "tolerancePct": 0.5,
+          "hardLimitPct": 1,
+          "outlierCount": 0,
+          "outlierFraction": 0,
+          "maximumOutlierFraction": 0.001
+        }
+      }
+    },
+    "runContext": {
+      "model": "unspecified",
+      "role": "quant-implementation",
+      "commit": "354b5eb6cbc25022ba3ffe896663edd0bcad6622",
+      "workingTreeDirty": true,
+      "sourceHash": "085f130e19fd7eca04f23df13d7ec404c877f2a94480f94e69015a4c5f31b431"
+    },
+    "snapshots": {
+      "GLD": "data\\raw\\tiingo\\2026-07-22\\GLD.parquet",
+      "SPY": "data\\raw\\tiingo\\2026-07-22\\SPY.parquet",
+      "TLT": "data\\raw\\tiingo\\2026-07-22\\TLT.parquet"
+    }
+  }
+}

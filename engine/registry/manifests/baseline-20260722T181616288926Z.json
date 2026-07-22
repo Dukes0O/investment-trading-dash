@@ -1,0 +1,2146 @@
+{
+  "configHash": "0b8db9ee6bf4322f82c22c5aaa259601ff7542a0a1abefa11d58e0d463d0f4d0",
+  "date": "2026-07-22",
+  "foldScheme": {
+    "embargo_sessions": 5,
+    "step_years": 1,
+    "test_years": 1,
+    "train_years": 8
+  },
+  "hypothesis": "The pre-registered 30-week trend baseline provides transparent out-of-sample reference evidence.",
+  "id": "baseline-20260722T181616288926Z",
+  "results": {
+    "GLD": {
+      "aggregate": {
+        "foldCount": 13,
+        "foldsBeatingBuyAndHold": 4,
+        "foldsBeatingCash": 6,
+        "meanMaxDrawdownPct": 8.18,
+        "medianTotalReturnPct": 0.0,
+        "totalTrades": 25
+      },
+      "folds": [
+        {
+          "buyAndHold": {
+            "avgTradePct": -29.23,
+            "cagrPct": -28.92,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 31.28,
+            "totalReturnPct": -29.01,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 1,
+            "test_end": "2013-11-26",
+            "test_start": "2012-11-27",
+            "train_end": "2012-11-16",
+            "train_start": "2004-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": -2.85,
+            "cagrPct": -2.84,
+            "exposurePct": 7.11,
+            "maxDrawdownPct": 4.46,
+            "totalReturnPct": -2.85,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -3.55,
+            "cagrPct": -4.49,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 17.51,
+            "totalReturnPct": -4.49,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 2,
+            "test_end": "2014-11-24",
+            "test_start": "2013-11-25",
+            "train_end": "2013-11-15",
+            "train_start": "2005-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": -3.3,
+            "cagrPct": -9.6,
+            "exposurePct": 34.52,
+            "maxDrawdownPct": 10.25,
+            "totalReturnPct": -9.6,
+            "trades": 3,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -10.65,
+            "cagrPct": -10.83,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 18.34,
+            "totalReturnPct": -10.83,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 3,
+            "test_end": "2015-11-24",
+            "test_start": "2014-11-25",
+            "train_end": "2014-11-17",
+            "train_start": "2006-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 10.41,
+            "cagrPct": 10.48,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 13.28,
+            "totalReturnPct": 10.48,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 4,
+            "test_end": "2016-11-23",
+            "test_start": "2015-11-25",
+            "train_end": "2015-11-17",
+            "train_start": "2007-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": 3.98,
+            "cagrPct": 3.98,
+            "exposurePct": 63.89,
+            "maxDrawdownPct": 8.32,
+            "totalReturnPct": 3.98,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 8.37,
+            "cagrPct": 7.88,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 6.35,
+            "totalReturnPct": 7.88,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 5,
+            "test_end": "2017-11-27",
+            "test_start": "2016-11-28",
+            "train_end": "2016-11-17",
+            "train_start": "2008-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": -0.45,
+            "cagrPct": -1.41,
+            "exposurePct": 55.56,
+            "maxDrawdownPct": 7.13,
+            "totalReturnPct": -1.41,
+            "trades": 3,
+            "winRatePct": 66.67,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -6.68,
+            "cagrPct": -6.45,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 13.76,
+            "totalReturnPct": -6.45,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 6,
+            "test_end": "2018-11-27",
+            "test_start": "2017-11-28",
+            "train_end": "2017-11-17",
+            "train_start": "2009-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": -2.89,
+            "cagrPct": -5.71,
+            "exposurePct": 39.68,
+            "maxDrawdownPct": 5.71,
+            "totalReturnPct": -5.71,
+            "trades": 2,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 19.08,
+            "cagrPct": 19.77,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 6.55,
+            "totalReturnPct": 19.77,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 7,
+            "test_end": "2019-11-26",
+            "test_start": "2018-11-27",
+            "train_end": "2018-11-16",
+            "train_start": "2010-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": 15.08,
+            "cagrPct": 15.08,
+            "exposurePct": 92.46,
+            "maxDrawdownPct": 6.55,
+            "totalReturnPct": 15.08,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 23.38,
+            "cagrPct": 23.55,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 12.58,
+            "totalReturnPct": 23.65,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 8,
+            "test_end": "2020-11-24",
+            "test_start": "2019-11-25",
+            "train_end": "2019-11-15",
+            "train_start": "2011-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": 5.74,
+            "cagrPct": 11.47,
+            "exposurePct": 95.26,
+            "maxDrawdownPct": 15.41,
+            "totalReturnPct": 11.52,
+            "trades": 2,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -1.78,
+            "cagrPct": -1.46,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 13.88,
+            "totalReturnPct": -1.46,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 9,
+            "test_end": "2021-11-24",
+            "test_start": "2020-11-25",
+            "train_end": "2020-11-17",
+            "train_start": "2012-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": -2.08,
+            "cagrPct": -11.9,
+            "exposurePct": 15.08,
+            "maxDrawdownPct": 14.93,
+            "totalReturnPct": -11.9,
+            "trades": 6,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -3.29,
+            "cagrPct": -2.22,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 21.03,
+            "totalReturnPct": -2.22,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 10,
+            "test_end": "2022-11-25",
+            "test_start": "2021-11-26",
+            "train_end": "2021-11-17",
+            "train_start": "2013-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": -0.55,
+            "cagrPct": -1.65,
+            "exposurePct": 38.49,
+            "maxDrawdownPct": 13.48,
+            "totalReturnPct": -1.65,
+            "trades": 3,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 14.52,
+            "cagrPct": 15.35,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 11.35,
+            "totalReturnPct": 15.28,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 11,
+            "test_end": "2023-11-27",
+            "test_start": "2022-11-28",
+            "train_end": "2022-11-17",
+            "train_start": "2014-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": 5.05,
+            "cagrPct": 5.07,
+            "exposurePct": 58.96,
+            "maxDrawdownPct": 7.33,
+            "totalReturnPct": 5.05,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 29.46,
+            "cagrPct": 28.46,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 8.12,
+            "totalReturnPct": 28.59,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 12,
+            "test_end": "2024-11-27",
+            "test_start": "2023-11-28",
+            "train_end": "2023-11-17",
+            "train_start": "2015-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": 28.3,
+            "cagrPct": 28.17,
+            "exposurePct": 98.02,
+            "maxDrawdownPct": 8.12,
+            "totalReturnPct": 28.3,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 3.52,
+            "cagrPct": null,
+            "exposurePct": 97.3,
+            "maxDrawdownPct": 4.66,
+            "totalReturnPct": 4.34,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 0.15
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": null,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 0.15
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 13,
+            "test_end": "2025-01-21",
+            "test_start": "2024-11-25",
+            "train_end": "2024-11-15",
+            "train_start": "2016-11-18"
+          },
+          "trend30w": {
+            "avgTradePct": 4.19,
+            "cagrPct": null,
+            "exposurePct": 94.59,
+            "maxDrawdownPct": 4.66,
+            "totalReturnPct": 4.19,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 0.15
+          }
+        }
+      ],
+      "holdoutCutoff": "2025-01-21"
+    },
+    "SPY": {
+      "aggregate": {
+        "foldCount": 24,
+        "foldsBeatingBuyAndHold": 5,
+        "foldsBeatingCash": 19,
+        "meanMaxDrawdownPct": 8.41,
+        "medianTotalReturnPct": 8.16,
+        "totalTrades": 53
+      },
+      "folds": [
+        {
+          "buyAndHold": {
+            "avgTradePct": -17.53,
+            "cagrPct": -18.36,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 27.6,
+            "totalReturnPct": -18.1,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 0.98
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 0.98
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 1,
+            "test_end": "2002-02-04",
+            "test_start": "2001-02-05",
+            "train_end": "2001-01-26",
+            "train_start": "1993-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": -2.51,
+            "cagrPct": -5.04,
+            "exposurePct": 6.05,
+            "maxDrawdownPct": 6.57,
+            "totalReturnPct": -4.96,
+            "trades": 2,
+            "winRatePct": 0.0,
+            "years": 0.98
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -20.67,
+            "cagrPct": -20.46,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 32.79,
+            "totalReturnPct": -20.46,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 2,
+            "test_end": "2003-02-04",
+            "test_start": "2002-02-05",
+            "train_end": "2002-01-28",
+            "train_start": "1994-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": -4.0,
+            "cagrPct": -11.57,
+            "exposurePct": 19.05,
+            "maxDrawdownPct": 14.44,
+            "totalReturnPct": -11.57,
+            "trades": 3,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 33.37,
+            "cagrPct": 34.85,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 5.97,
+            "totalReturnPct": 34.85,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 3,
+            "test_end": "2004-02-04",
+            "test_start": "2003-02-05",
+            "train_end": "2003-01-28",
+            "train_start": "1995-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 21.94,
+            "cagrPct": 21.94,
+            "exposurePct": 73.41,
+            "maxDrawdownPct": 4.8,
+            "totalReturnPct": 21.94,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 8.07,
+            "cagrPct": 8.08,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 7.49,
+            "totalReturnPct": 8.12,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 4,
+            "test_end": "2005-02-04",
+            "test_start": "2004-02-05",
+            "train_end": "2004-01-28",
+            "train_start": "1996-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 0.92,
+            "cagrPct": 2.51,
+            "exposurePct": 62.06,
+            "maxDrawdownPct": 6.29,
+            "totalReturnPct": 2.52,
+            "trades": 3,
+            "winRatePct": 33.33,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 6.96,
+            "cagrPct": 7.17,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 6.94,
+            "totalReturnPct": 7.17,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 5,
+            "test_end": "2006-02-06",
+            "test_start": "2005-02-07",
+            "train_end": "2005-01-28",
+            "train_start": "1997-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 0.31,
+            "cagrPct": 0.65,
+            "exposurePct": 73.81,
+            "maxDrawdownPct": 7.79,
+            "totalReturnPct": 0.65,
+            "trades": 3,
+            "winRatePct": 33.33,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 16.38,
+            "cagrPct": 16.36,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 7.56,
+            "totalReturnPct": 16.29,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 6,
+            "test_end": "2007-02-05",
+            "test_start": "2006-02-06",
+            "train_end": "2006-01-27",
+            "train_start": "1998-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 2.97,
+            "cagrPct": 8.78,
+            "exposurePct": 70.12,
+            "maxDrawdownPct": 6.8,
+            "totalReturnPct": 8.74,
+            "trades": 3,
+            "winRatePct": 66.67,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -2.98,
+            "cagrPct": -3.04,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 15.77,
+            "totalReturnPct": -3.04,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 7,
+            "test_end": "2008-02-04",
+            "test_start": "2007-02-05",
+            "train_end": "2007-01-26",
+            "train_start": "1999-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": -1.12,
+            "cagrPct": -4.47,
+            "exposurePct": 69.05,
+            "maxDrawdownPct": 11.34,
+            "totalReturnPct": -4.47,
+            "trades": 4,
+            "winRatePct": 25.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -36.76,
+            "cagrPct": -35.76,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 46.1,
+            "totalReturnPct": -35.88,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 8,
+            "test_end": "2009-02-04",
+            "test_start": "2008-02-05",
+            "train_end": "2008-01-28",
+            "train_start": "2000-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 31.21,
+            "cagrPct": 28.37,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 21.8,
+            "totalReturnPct": 28.37,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 9,
+            "test_end": "2010-02-04",
+            "test_start": "2009-02-05",
+            "train_end": "2009-01-28",
+            "train_start": "2001-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 20.55,
+            "cagrPct": 20.55,
+            "exposurePct": 71.83,
+            "maxDrawdownPct": 7.43,
+            "totalReturnPct": 20.55,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 25.08,
+            "cagrPct": 24.91,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 15.6,
+            "totalReturnPct": 25.02,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 10,
+            "test_end": "2011-02-04",
+            "test_start": "2010-02-05",
+            "train_end": "2010-01-28",
+            "train_start": "2002-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 5.2,
+            "cagrPct": 15.48,
+            "exposurePct": 56.92,
+            "maxDrawdownPct": 10.59,
+            "totalReturnPct": 15.55,
+            "trades": 3,
+            "winRatePct": 66.67,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 4.15,
+            "cagrPct": 3.78,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 18.43,
+            "totalReturnPct": 3.78,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 11,
+            "test_end": "2012-02-06",
+            "test_start": "2011-02-07",
+            "train_end": "2011-01-28",
+            "train_start": "2003-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 0.43,
+            "cagrPct": 1.04,
+            "exposurePct": 52.38,
+            "maxDrawdownPct": 9.45,
+            "totalReturnPct": 1.04,
+            "trades": 3,
+            "winRatePct": 33.33,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 14.94,
+            "cagrPct": 14.66,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 9.65,
+            "totalReturnPct": 14.6,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 12,
+            "test_end": "2013-02-05",
+            "test_start": "2012-02-06",
+            "train_end": "2012-01-27",
+            "train_start": "2004-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 1.37,
+            "cagrPct": 5.15,
+            "exposurePct": 93.63,
+            "maxDrawdownPct": 13.48,
+            "totalReturnPct": 5.13,
+            "trades": 4,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 18.77,
+            "cagrPct": 18.27,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 5.59,
+            "totalReturnPct": 18.27,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 13,
+            "test_end": "2014-02-04",
+            "test_start": "2013-02-05",
+            "train_end": "2013-01-28",
+            "train_start": "2005-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 18.63,
+            "cagrPct": 18.63,
+            "exposurePct": 99.21,
+            "maxDrawdownPct": 5.59,
+            "totalReturnPct": 18.63,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 18.83,
+            "cagrPct": 18.62,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 7.18,
+            "totalReturnPct": 18.62,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 14,
+            "test_end": "2015-02-04",
+            "test_start": "2014-02-05",
+            "train_end": "2014-01-28",
+            "train_start": "2006-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 7.32,
+            "cagrPct": 15.1,
+            "exposurePct": 95.24,
+            "maxDrawdownPct": 5.17,
+            "totalReturnPct": 15.1,
+            "trades": 2,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -4.51,
+            "cagrPct": -5.05,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 11.83,
+            "totalReturnPct": -5.05,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 15,
+            "test_end": "2016-02-04",
+            "test_start": "2015-02-05",
+            "train_end": "2015-01-28",
+            "train_start": "2007-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": -5.92,
+            "cagrPct": -16.79,
+            "exposurePct": 59.92,
+            "maxDrawdownPct": 20.28,
+            "totalReturnPct": -16.79,
+            "trades": 3,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 22.33,
+            "cagrPct": 24.38,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 5.48,
+            "totalReturnPct": 24.38,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 16,
+            "test_end": "2017-02-03",
+            "test_start": "2016-02-05",
+            "train_end": "2016-01-28",
+            "train_start": "2008-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 3.74,
+            "cagrPct": 7.57,
+            "exposurePct": 78.17,
+            "maxDrawdownPct": 5.51,
+            "totalReturnPct": 7.57,
+            "trades": 2,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 17.3,
+            "cagrPct": 17.33,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 7.82,
+            "totalReturnPct": 17.33,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 17,
+            "test_end": "2018-02-05",
+            "test_start": "2017-02-06",
+            "train_end": "2017-01-27",
+            "train_start": "2009-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 17.04,
+            "cagrPct": 17.04,
+            "exposurePct": 99.21,
+            "maxDrawdownPct": 7.82,
+            "totalReturnPct": 17.04,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 1.22,
+            "cagrPct": 4.94,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 19.09,
+            "totalReturnPct": 4.92,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 18,
+            "test_end": "2019-02-04",
+            "test_start": "2018-02-05",
+            "train_end": "2018-01-26",
+            "train_start": "2010-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 0.14,
+            "cagrPct": 0.53,
+            "exposurePct": 71.71,
+            "maxDrawdownPct": 10.37,
+            "totalReturnPct": 0.53,
+            "trades": 4,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 22.72,
+            "cagrPct": 22.49,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 6.59,
+            "totalReturnPct": 22.49,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 19,
+            "test_end": "2020-02-04",
+            "test_start": "2019-02-05",
+            "train_end": "2019-01-28",
+            "train_start": "2011-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 8.29,
+            "cagrPct": 16.93,
+            "exposurePct": 86.51,
+            "maxDrawdownPct": 6.62,
+            "totalReturnPct": 16.93,
+            "trades": 2,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 17.82,
+            "cagrPct": 17.6,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 33.69,
+            "totalReturnPct": 17.67,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 20,
+            "test_end": "2021-02-04",
+            "test_start": "2020-02-05",
+            "train_end": "2020-01-28",
+            "train_start": "2012-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 6.04,
+            "cagrPct": 9.58,
+            "exposurePct": 64.82,
+            "maxDrawdownPct": 12.67,
+            "totalReturnPct": 9.62,
+            "trades": 2,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 16.94,
+            "cagrPct": 17.07,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 9.61,
+            "totalReturnPct": 17.15,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 21,
+            "test_end": "2022-02-04",
+            "test_start": "2021-02-05",
+            "train_end": "2021-01-28",
+            "train_start": "2013-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 12.34,
+            "cagrPct": 12.29,
+            "exposurePct": 95.65,
+            "maxDrawdownPct": 9.49,
+            "totalReturnPct": 12.34,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -7.51,
+            "cagrPct": -7.03,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 21.99,
+            "totalReturnPct": -7.0,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 22,
+            "test_end": "2023-02-06",
+            "test_start": "2022-02-07",
+            "train_end": "2022-01-28",
+            "train_start": "2014-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 4.88,
+            "cagrPct": 4.9,
+            "exposurePct": 7.57,
+            "maxDrawdownPct": 2.47,
+            "totalReturnPct": 4.88,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 21.69,
+            "cagrPct": 21.84,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 9.88,
+            "totalReturnPct": 21.74,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 23,
+            "test_end": "2024-02-05",
+            "test_start": "2023-02-06",
+            "train_end": "2023-01-27",
+            "train_start": "2015-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 4.94,
+            "cagrPct": 14.44,
+            "exposurePct": 93.23,
+            "maxDrawdownPct": 8.4,
+            "totalReturnPct": 14.38,
+            "trades": 3,
+            "winRatePct": 66.67,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 23.46,
+            "cagrPct": 25.02,
+            "exposurePct": 99.59,
+            "maxDrawdownPct": 8.36,
+            "totalReturnPct": 23.81,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 0.96
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 0.96
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 24,
+            "test_end": "2025-01-21",
+            "test_start": "2024-02-05",
+            "train_end": "2024-01-26",
+            "train_start": "2016-01-29"
+          },
+          "trend30w": {
+            "avgTradePct": 23.5,
+            "cagrPct": 24.7,
+            "exposurePct": 99.17,
+            "maxDrawdownPct": 8.36,
+            "totalReturnPct": 23.5,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 0.96
+          }
+        }
+      ],
+      "holdoutCutoff": "2025-01-21"
+    },
+    "TLT": {
+      "aggregate": {
+        "foldCount": 15,
+        "foldsBeatingBuyAndHold": 8,
+        "foldsBeatingCash": 7,
+        "meanMaxDrawdownPct": 8.11,
+        "medianTotalReturnPct": -0.25,
+        "totalTrades": 33
+      },
+      "folds": [
+        {
+          "buyAndHold": {
+            "avgTradePct": 6.53,
+            "cagrPct": 6.23,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 16.91,
+            "totalReturnPct": 6.26,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 1,
+            "test_end": "2011-08-05",
+            "test_start": "2010-08-06",
+            "train_end": "2010-07-29",
+            "train_start": "2002-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": 4.2,
+            "cagrPct": 8.34,
+            "exposurePct": 47.83,
+            "maxDrawdownPct": 9.03,
+            "totalReturnPct": 8.38,
+            "trades": 2,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 25.25,
+            "cagrPct": 22.4,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 10.86,
+            "totalReturnPct": 22.5,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 2,
+            "test_end": "2012-08-07",
+            "test_start": "2011-08-08",
+            "train_end": "2011-07-29",
+            "train_start": "2003-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": 5.26,
+            "cagrPct": 10.67,
+            "exposurePct": 79.84,
+            "maxDrawdownPct": 10.86,
+            "totalReturnPct": 10.72,
+            "trades": 2,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -14.83,
+            "cagrPct": -14.76,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 15.05,
+            "totalReturnPct": -14.66,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 0.99
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 0.99
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 3,
+            "test_end": "2013-08-05",
+            "test_start": "2012-08-06",
+            "train_end": "2012-07-27",
+            "train_start": "2004-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -1.84,
+            "cagrPct": -7.33,
+            "exposurePct": 18.4,
+            "maxDrawdownPct": 9.67,
+            "totalReturnPct": -7.28,
+            "trades": 4,
+            "winRatePct": 25.0,
+            "years": 0.99
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 11.79,
+            "cagrPct": 11.34,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 5.11,
+            "totalReturnPct": 11.34,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 4,
+            "test_end": "2014-08-05",
+            "test_start": "2013-08-06",
+            "train_end": "2013-07-29",
+            "train_start": "2005-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": 9.01,
+            "cagrPct": 9.01,
+            "exposurePct": 48.41,
+            "maxDrawdownPct": 3.03,
+            "totalReturnPct": 9.01,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 8.05,
+            "cagrPct": 8.83,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 15.55,
+            "totalReturnPct": 8.83,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 5,
+            "test_end": "2015-08-05",
+            "test_start": "2014-08-06",
+            "train_end": "2014-07-29",
+            "train_start": "2006-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": 10.26,
+            "cagrPct": 10.26,
+            "exposurePct": 73.41,
+            "maxDrawdownPct": 10.2,
+            "totalReturnPct": 10.26,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 15.54,
+            "cagrPct": 14.85,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 5.8,
+            "totalReturnPct": 14.91,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 6,
+            "test_end": "2016-08-05",
+            "test_start": "2015-08-06",
+            "train_end": "2015-07-29",
+            "train_start": "2007-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": 5.94,
+            "cagrPct": 11.11,
+            "exposurePct": 79.45,
+            "maxDrawdownPct": 5.61,
+            "totalReturnPct": 11.15,
+            "trades": 2,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -6.95,
+            "cagrPct": -7.35,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 15.97,
+            "totalReturnPct": -7.35,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 7,
+            "test_end": "2017-08-07",
+            "test_start": "2016-08-08",
+            "train_end": "2016-07-29",
+            "train_start": "2008-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -0.05,
+            "cagrPct": -0.25,
+            "exposurePct": 40.08,
+            "maxDrawdownPct": 4.99,
+            "totalReturnPct": -0.25,
+            "trades": 2,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -2.03,
+            "cagrPct": -2.16,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 8.69,
+            "totalReturnPct": -2.16,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 8,
+            "test_end": "2018-08-06",
+            "test_start": "2017-08-07",
+            "train_end": "2017-07-28",
+            "train_start": "2009-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -0.96,
+            "cagrPct": -3.8,
+            "exposurePct": 45.63,
+            "maxDrawdownPct": 7.22,
+            "totalReturnPct": -3.8,
+            "trades": 4,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 18.74,
+            "cagrPct": 19.13,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 7.75,
+            "totalReturnPct": 19.05,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 9,
+            "test_end": "2019-08-05",
+            "test_start": "2018-08-06",
+            "train_end": "2018-07-27",
+            "train_start": "2010-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": 7.85,
+            "cagrPct": 15.67,
+            "exposurePct": 66.93,
+            "maxDrawdownPct": 4.61,
+            "totalReturnPct": 15.61,
+            "trades": 2,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 24.91,
+            "cagrPct": 23.28,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 15.57,
+            "totalReturnPct": 23.39,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 10,
+            "test_end": "2020-08-05",
+            "test_start": "2019-08-06",
+            "train_end": "2019-07-29",
+            "train_start": "2011-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": 5.99,
+            "cagrPct": 17.59,
+            "exposurePct": 96.05,
+            "maxDrawdownPct": 15.68,
+            "totalReturnPct": 17.67,
+            "trades": 3,
+            "winRatePct": 66.67,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -11.14,
+            "cagrPct": -10.91,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 20.99,
+            "totalReturnPct": -10.91,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 11,
+            "test_end": "2021-08-05",
+            "test_start": "2020-08-06",
+            "train_end": "2020-07-29",
+            "train_start": "2012-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -1.75,
+            "cagrPct": -6.96,
+            "exposurePct": 15.08,
+            "maxDrawdownPct": 8.41,
+            "totalReturnPct": -6.96,
+            "trades": 4,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -19.97,
+            "cagrPct": -19.64,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 28.61,
+            "totalReturnPct": -19.64,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 12,
+            "test_end": "2022-08-05",
+            "test_start": "2021-08-06",
+            "train_end": "2021-07-29",
+            "train_start": "2013-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -3.15,
+            "cagrPct": -6.22,
+            "exposurePct": 40.48,
+            "maxDrawdownPct": 8.53,
+            "totalReturnPct": -6.22,
+            "trades": 2,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -16.19,
+            "cagrPct": -16.71,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 21.52,
+            "totalReturnPct": -16.65,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 13,
+            "test_end": "2023-08-07",
+            "test_start": "2022-08-08",
+            "train_end": "2022-07-29",
+            "train_start": "2014-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -6.02,
+            "cagrPct": -6.04,
+            "exposurePct": 19.52,
+            "maxDrawdownPct": 6.58,
+            "totalReturnPct": -6.02,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": 4.14,
+            "cagrPct": 4.77,
+            "exposurePct": 99.6,
+            "maxDrawdownPct": 14.25,
+            "totalReturnPct": 4.77,
+            "trades": 1,
+            "winRatePct": 100.0,
+            "years": 1.0
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 1.0
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 14,
+            "test_end": "2024-08-06",
+            "test_start": "2023-08-07",
+            "train_end": "2023-07-28",
+            "train_start": "2015-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -0.34,
+            "cagrPct": -0.85,
+            "exposurePct": 28.97,
+            "maxDrawdownPct": 8.47,
+            "totalReturnPct": -0.85,
+            "trades": 2,
+            "winRatePct": 50.0,
+            "years": 1.0
+          }
+        },
+        {
+          "buyAndHold": {
+            "avgTradePct": -8.82,
+            "cagrPct": -15.3,
+            "exposurePct": 99.13,
+            "maxDrawdownPct": 14.5,
+            "totalReturnPct": -7.3,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 0.46
+          },
+          "cash": {
+            "avgTradePct": null,
+            "cagrPct": 0.0,
+            "exposurePct": 0.0,
+            "maxDrawdownPct": 0.0,
+            "totalReturnPct": 0.0,
+            "trades": 0,
+            "winRatePct": null,
+            "years": 0.46
+          },
+          "fold": {
+            "embargo_sessions": 5,
+            "id": 15,
+            "test_end": "2025-01-21",
+            "test_start": "2024-08-06",
+            "train_end": "2024-07-29",
+            "train_start": "2016-07-30"
+          },
+          "trend30w": {
+            "avgTradePct": -3.28,
+            "cagrPct": -7.04,
+            "exposurePct": 49.57,
+            "maxDrawdownPct": 8.8,
+            "totalReturnPct": -3.28,
+            "trades": 1,
+            "winRatePct": 0.0,
+            "years": 0.46
+          }
+        }
+      ],
+      "holdoutCutoff": "2025-01-21"
+    }
+  },
+  "runContext": {
+    "commit": "354b5eb6cbc25022ba3ffe896663edd0bcad6622",
+    "model": "unspecified",
+    "role": "quant-implementation",
+    "sourceHash": "9b2698093abf1d7b0bea42f01ec6340546f600687cc32c940b53caf3c64fd600",
+    "workingTreeDirty": true
+  },
+  "status": "complete",
+  "symbols": [
+    "GLD",
+    "SPY",
+    "TLT"
+  ]
+}

@@ -1,6 +1,51 @@
 # Weekly report contract (schemaVersion 1)
 
-The weekly report is a single JSON object, validated by
+## Engine actions contract (schemaVersion 1)
+
+Before the LLM-authored weekly report, TrendLab writes
+`data/reports/engine-actions-<YYYY-MM-DD>.json`. The existing dossier builder
+attaches that object verbatim as top-level `engineActions`; it does not replace
+the existing `symbols[].ruleSignal` or any LLM arbitration field.
+
+Required shape:
+
+```jsonc
+{
+  "schemaVersion": 1,
+  "kind": "trendlab-weekly-actions",
+  "reportDate": "2026-07-22",
+  "generatedAt": "2026-07-22T12:00:00Z",
+  "provider": "tiingo",
+  "strategy": { "id": "trend-30w", "version": 1 },
+  "configHash": "sha256 hex",
+  "requiresHumanApproval": true,
+  "executionTiming": "next market open after Kyle reviews and approves",
+  "actions": [{
+    "symbol": "GLD",
+    "held": false,
+    "state": "uptrend",
+    "action": "BUY", // BUY | HOLD | EXIT | AVOID
+    "signalDate": "2026-07-21",
+    "referencePrice": 300.0,
+    "protectiveStop": 285.0,
+    "atr14": 5.0,
+    "quantity": 8,
+    "risk": { "quantity": 8, "risk_budget": 120.0 },
+    "weekly": { "close": 300.0, "fastSma": 290.0, "slowSma": 280.0 },
+    "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA."
+  }],
+  "validation": {},
+  "snapshots": { "GLD": "data/raw/tiingo/2026-07-22/GLD.parquet" }
+}
+```
+
+The engine must halt instead of writing this document when required market data
+is missing, invalid, or stale. `BUY` requires a positive quantity and protective
+stop. Every document requires human approval and is decision support only.
+
+## LLM weekly report contract (schemaVersion 1)
+
+The LLM weekly report is a single JSON object, validated by
 `scripts/lib/report-schema.mjs` (run `node scripts/save-report.mjs <draft>`).
 It is written by an LLM session that has read the technicals dossier
 (`data/dossier-<date>.json`) and researched news per symbol. The LLM

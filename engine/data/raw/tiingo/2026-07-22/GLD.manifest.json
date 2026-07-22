@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "provider": "tiingo",
+  "symbol": "GLD",
+  "snapshotDate": "2026-07-22",
+  "rows": 5450,
+  "from": "2004-11-18",
+  "to": "2026-07-21",
+  "sha256": "3f951c0d2614fcea7502719f1c012158704654dfa5c4aeef4b9f46b9588bbae9",
+  "recordedAt": "2026-07-22T17:21:38.804918+00:00"
+}

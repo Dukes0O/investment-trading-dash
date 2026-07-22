@@ -1,0 +1,17 @@
+id: trend-30w
+version: 1
+name: 30-week trend following
+status: research
+registered: 2026-07-22
+economic_rationale: Persistent institutional flows and behavioural underreaction can make multi-month price trends continue.
+parameters:
+  weekly_fast_period: 10
+  weekly_slow_period: 30
+  entry: completed_week_close_above_slow_and_fast_above_slow
+  exit: completed_week_close_below_slow
+  execution: next_daily_open
+  week_exposure: from_final_session_close  # 2026-07-22 alignment fix; see DECISIONS.md
+  direction: long_flat
+protective_stop_in_baseline: false
+promotion: null
+retirement: null

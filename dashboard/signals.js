@@ -14,8 +14,12 @@ export function analyzeSymbol(dailyBars) {
   if (!dailyBars || dailyBars.length < 60) return null;
 
   const weeklyAll = toWeekly(dailyBars);
-  // Analysis uses completed weeks; the in-progress week only informs "last price".
-  const weekly = weeklyAll.length > 1 ? weeklyAll.slice(0, -1) : weeklyAll;
+  // Analysis uses completed weeks; an in-progress week only informs "last
+  // price". A week whose latest session is its Friday IS complete — weekend
+  // and Friday-evening runs must see the week that just ended, not the one
+  // before it. Only a genuinely partial (mid-week) tail is dropped.
+  const lastWeekDay = new Date(weeklyAll[weeklyAll.length - 1].date + 'T00:00:00Z').getUTCDay();
+  const weekly = lastWeekDay === 5 || weeklyAll.length < 2 ? weeklyAll : weeklyAll.slice(0, -1);
 
   const dCloses = dailyBars.map((b) => b.close);
   const wCloses = weekly.map((b) => b.close);

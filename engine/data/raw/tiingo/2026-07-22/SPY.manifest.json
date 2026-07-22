@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "provider": "tiingo",
+  "symbol": "SPY",
+  "snapshotDate": "2026-07-22",
+  "rows": 8425,
+  "from": "1993-01-29",
+  "to": "2026-07-21",
+  "sha256": "08ef9824cf7d8d91c265da92f1e1bfe5fe38b8761b67d76e522aaedc14594ea7",
+  "recordedAt": "2026-07-22T17:40:04.042828+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "configHash": "0b8db9ee6bf4322f82c22c5aaa259601ff7542a0a1abefa11d58e0d463d0f4d0",
+  "date": "2026-07-22",
+  "error": "Experiment calculations completed, but manifest serialization failed on typed fold dates before results could be persisted.",
+  "foldScheme": {
+    "embargo_sessions": 5,
+    "step_years": 1,
+    "test_years": 1,
+    "train_years": 8
+  },
+  "hypothesis": "The pre-registered 30-week trend baseline provides transparent out-of-sample reference evidence.",
+  "id": "baseline-20260722T174148472128Z",
+  "runContext": {
+    "commit": "354b5eb6cbc25022ba3ffe896663edd0bcad6622",
+    "model": "unspecified",
+    "role": "quant-implementation"
+  },
+  "status": "failed",
+  "symbols": [
+    "GLD",
+    "SPY",
+    "TLT"
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "kind": "trendlab-weekly-actions",
+  "reportDate": "2026-07-22",
+  "generatedAt": "2026-07-22T18:16:30.255428+00:00",
+  "provider": "tiingo",
+  "strategy": {
+    "id": "trend-30w",
+    "version": 1
+  },
+  "configHash": "0b8db9ee6bf4322f82c22c5aaa259601ff7542a0a1abefa11d58e0d463d0f4d0",
+  "requiresHumanApproval": true,
+  "executionTiming": "next market open after Kyle reviews and approves",
+  "actions": [
+    {
+      "symbol": "GLD",
+      "held": false,
+      "state": "downtrend",
+      "action": "AVOID",
+      "signalDate": "2026-07-21",
+      "referencePrice": 374.81,
+      "protectiveStop": 353.0693,
+      "atr14": 7.2469,
+      "quantity": 0,
+      "risk": null,
+      "weekly": {
+        "close": 368.41,
+        "fastSma": 391.531,
+        "slowSma": 423.4863
+      },
+      "rationale": "Completed weekly close is below the 30-week SMA."
+    },
+    {
+      "symbol": "SPY",
+      "held": false,
+      "state": "uptrend",
+      "action": "BUY",
+      "signalDate": "2026-07-21",
+      "referencePrice": 748.28,
+      "protectiveStop": 723.3506,
+      "atr14": 8.3098,
+      "quantity": 5,
+      "risk": {
+        "quantity": 5,
+        "risk_budget": 124.65,
+        "risk_per_unit": 24.9294,
+        "position_value": 3741.4,
+        "portfolio_heat_after": 124.65
+      },
+      "weekly": {
+        "close": 743.29,
+        "fastSma": 742.988,
+        "slowSma": 703.1832
+      },
+      "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA."
+    },
+    {
+      "symbol": "TLT",
+      "held": false,
+      "state": "downtrend",
+      "action": "AVOID",
+      "signalDate": "2026-07-21",
+      "referencePrice": 83.66,
+      "protectiveStop": 81.9402,
+      "atr14": 0.5733,
+      "quantity": 0,
+      "risk": null,
+      "weekly": {
+        "close": 84.52,
+        "fastSma": 85.0329,
+        "slowSma": 85.6614
+      },
+      "rationale": "Completed weekly close is below the 30-week SMA."
+    }
+  ],
+  "validation": {
+    "GLD": {
+      "status": "pass",
+      "rows": 5450,
+      "from": "2004-11-18 00:00:00",
+      "to": "2026-07-21 00:00:00",
+      "warnings": [],
+      "crossSource": {
+        "status": "pass_with_warning",
+        "overlapRows": 5005,
+        "maximumDifferencePct": 0.509968,
+        "tolerancePct": 0.5,
+        "hardLimitPct": 1.0,
+        "outlierCount": 1,
+        "outlierFraction": 0.0001998,
+        "maximumOutlierFraction": 0.001
+      }
+    },
+    "SPY": {
+      "status": "pass",
+      "rows": 8425,
+      "from": "1993-01-29 00:00:00",
+      "to": "2026-07-21 00:00:00",
+      "warnings": [],
+      "crossSource": {
+        "status": "pass",
+        "overlapRows": 5005,
+        "maximumDifferencePct": 0.113129,
+        "tolerancePct": 0.5,
+        "hardLimitPct": 1.0,
+        "outlierCount": 0,
+        "outlierFraction": 0.0,
+        "maximumOutlierFraction": 0.001
+      }
+    },
+    "TLT": {
+      "status": "pass",
+      "rows": 6032,
+      "from": "2002-07-30 00:00:00",
+      "to": "2026-07-21 00:00:00",
+      "warnings": [],
+      "crossSource": {
+        "status": "pass",
+        "overlapRows": 4999,
+        "maximumDifferencePct": 0.411194,
+        "tolerancePct": 0.5,
+        "hardLimitPct": 1.0,
+        "outlierCount": 0,
+        "outlierFraction": 0.0,
+        "maximumOutlierFraction": 0.001
+      }
+    }
+  },
+  "runContext": {
+    "model": "unspecified",
+    "role": "quant-implementation",
+    "commit": "354b5eb6cbc25022ba3ffe896663edd0bcad6622",
+    "workingTreeDirty": true,
+    "sourceHash": "9b2698093abf1d7b0bea42f01ec6340546f600687cc32c940b53caf3c64fd600"
+  },
+  "snapshots": {
+    "GLD": "data\\raw\\tiingo\\2026-07-22\\GLD.parquet",
+    "SPY": "data\\raw\\tiingo\\2026-07-22\\SPY.parquet",
+    "TLT": "data\\raw\\tiingo\\2026-07-22\\TLT.parquet"
+  }
+}

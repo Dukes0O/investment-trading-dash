@@ -17,6 +17,18 @@ Thumbs.db
 .env
 .env.*
 
+# Python research engine local/runtime artifacts
+engine/.venv/
+engine/.pytest_cache/
+engine/*.egg-info/
+engine/**/__pycache__/
+engine/**/*.py[cod]
+# Raw immutable snapshots and their hash manifests ARE committed — they are
+# the reproducibility base and must survive hardware loss. Only the derived
+# DuckDB store stays local (rebuildable from the snapshots).
+engine/data/curated/
+engine/output/
+
 # Trend Desk live state (JSON printouts in data/ ARE committed — including
 # dossiers, which are the evidence archive for outcome attribution)
 data/*.db

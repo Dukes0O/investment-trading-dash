@@ -20,8 +20,11 @@ export const STRATEGIES = [
     style: 'Own the weekly uptrend; exit when the 30-week MA is lost',
     warmup: 210,
     prepare(bars) {
-      // Weekly values mapped onto daily bars, using only COMPLETED weeks
-      // (the current week's partial bar never leaks into a daily signal).
+      // Weekly values mapped onto daily bars, using only COMPLETED weeks.
+      // A week is exposed from its FINAL session's close onward: the Friday
+      // row sees its own completed week (decide at Friday close, fill at
+      // Monday open); mid-week rows see the prior completed week. The
+      // current week's partial bar never leaks into a mid-week daily signal.
       const closes = bars.map((b) => b.close);
       const weekly = toWeekly(bars);
       const wCloses = weekly.map((w) => w.close);
@@ -32,9 +35,9 @@ export const STRATEGIES = [
       const w30 = new Array(bars.length).fill(null);
       let wi = 0;
       for (let i = 0; i < bars.length; i++) {
-        // advance to the last weekly bar that ENDS before this daily bar
-        while (wi < weekly.length - 1 && weekly[wi + 1].date < bars[i].date) wi++;
-        if (weekly[wi].date < bars[i].date) {
+        // advance to the last weekly bar that ENDS on or before this daily bar
+        while (wi < weekly.length - 1 && weekly[wi + 1].date <= bars[i].date) wi++;
+        if (weekly[wi].date <= bars[i].date) {
           wClose[i] = wCloses[wi];
           w10[i] = wSma10[wi];
           w30[i] = wSma30[wi];

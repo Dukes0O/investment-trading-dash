@@ -1,0 +1,9 @@
+account:
+  base_currency: CAD
+  closed_equity: 50000.0
+  risk_fraction_per_trade: 0.0025
+  maximum_portfolio_heat_fraction: 0.01
+protection:
+  atr_period: 14
+  atr_multiple: 3.0
+  minimum_stop_distance_fraction: 0.005

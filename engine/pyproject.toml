@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trendlab"
+version = "0.1.0"
+description = "Deterministic research engine for Trend Desk"
+requires-python = ">=3.11"
+dependencies = [
+  "duckdb>=1.1,<2",
+  "httpx>=0.27,<1",
+  "jinja2>=3.1,<4",
+  "pandas>=2.1,<3",
+  "pyarrow>=17,<20",
+  "PyYAML>=6,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+trendlab = "trendlab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["trendlab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
