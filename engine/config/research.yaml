@@ -11,6 +11,8 @@ walk_forward:
   embargo_sessions: 5
 holdout:
   months: 18
+diagnostics:
+  major_drawdown_threshold_pct: 15.0
 costs:
   commission_bps_per_side: 0.0
   slippage_bps_per_side: 5.0

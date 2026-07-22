@@ -13,6 +13,7 @@ def build_status(repo_root: Path, registry_root: Path) -> dict[str, Any]:
     actions_path, actions = latest_actions_document(repo_root / "data" / "reports")
     strategies = _strategies(registry_root / "strategies")
     experiments = _jsonl(registry_root / "experiments.jsonl")
+    diagnostics = [item for item in experiments if item.get("kind") == "diagnostics" and item.get("verdict") == "recorded"]
     costs = _effective_costs(registry_root / "costs.jsonl")
     return {
         "ok": True,
@@ -30,6 +31,9 @@ def build_status(repo_root: Path, registry_root: Path) -> dict[str, Any]:
             {"id": item.get("id"), "date": item.get("date"), "verdict": item.get("verdict")}
             for item in experiments[-5:]
         ],
+        "lastDiagnostics": None if not diagnostics else {
+            "id": diagnostics[-1].get("id"), "date": diagnostics[-1].get("date"),
+        },
         "costLedger": {
             "complete": bool(costs) and all(item.get("status") == "complete" for item in costs),
             "latestWeek": costs[-1].get("week") if costs else None,

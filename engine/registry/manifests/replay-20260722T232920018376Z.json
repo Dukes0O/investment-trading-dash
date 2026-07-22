@@ -1,0 +1,120 @@
+{
+  "actionDocuments": {
+    "documents": 1,
+    "format": "jsonl",
+    "path": "engine/registry/replay-actions/replay-20260722T232920018376Z.jsonl",
+    "sha256": "fadbb30b72d0f960e47292457f27531cf1c7d297bbe5e8aad750fb98d488f5fe"
+  },
+  "completedWeeks": 1,
+  "configHash": "945d60f77ad3814bf8120f27d294cd7a1ef598ec360da64f16b2a882ad2ed908",
+  "haltedWeeks": 0,
+  "heatCappedActions": 0,
+  "holdoutEvaluated": false,
+  "holdoutSafeBoundary": "2025-01-21",
+  "id": "replay-20260722T232920018376Z",
+  "kind": "operational-replay",
+  "requestedWeeks": 1,
+  "runContext": {
+    "commit": "011eb711cfd7f1f10a62e4368905c9a497462865",
+    "model": "unspecified",
+    "role": "quant-implementation",
+    "sourceHash": "70709972520a6dfb28f1a099ca4a0df24fbe1362f344f4fb4133d84546a01067",
+    "workingTreeDirty": true
+  },
+  "status": "complete",
+  "summary": "C:\\Users\\kyleb\\dev\\investment-trading-dash\\engine\\output\\replay-20260722T232920018376Z.csv",
+  "weeks": [
+    {
+      "actionDocumentRef": {
+        "sha256": "84dd6b2aaf2fd9cb22a80b6c799f9d7e06a2d183a322b8e5a6912311c0675979",
+        "sidecarLine": 1
+      },
+      "actionSummary": {
+        "actions": [
+          {
+            "action": "BUY",
+            "activeStop": null,
+            "proposedStop": 242.23,
+            "quantity": 17,
+            "signalIntent": "BUY",
+            "state": "uptrend",
+            "symbol": "GLD"
+          },
+          {
+            "action": "BUY",
+            "activeStop": null,
+            "proposedStop": 575.2629,
+            "quantity": 5,
+            "signalIntent": "BUY",
+            "state": "uptrend",
+            "symbol": "SPY"
+          },
+          {
+            "action": "AVOID",
+            "activeStop": null,
+            "proposedStop": 84.3836,
+            "quantity": 0,
+            "signalIntent": "AVOID",
+            "state": "downtrend",
+            "symbol": "TLT"
+          }
+        ],
+        "portfolioHeat": {
+          "afterProposedBuys": 231.27,
+          "current": 0.0,
+          "maximum": 500.0,
+          "positions": []
+        }
+      },
+      "date": "2025-01-17",
+      "holidayShortened": false,
+      "lastSessions": {
+        "GLD": "2025-01-17",
+        "SPY": "2025-01-17",
+        "TLT": "2025-01-17"
+      },
+      "signalChecks": [
+        {
+          "actualAction": "BUY",
+          "actualIntent": "BUY",
+          "actualState": "uptrend",
+          "calendarWeekComplete": true,
+          "dataThrough": "2025-01-17",
+          "expectedIntent": "BUY",
+          "expectedState": "uptrend",
+          "matches": true,
+          "oracleDataThrough": "2025-01-17",
+          "status": "complete",
+          "symbol": "GLD"
+        },
+        {
+          "actualAction": "BUY",
+          "actualIntent": "BUY",
+          "actualState": "uptrend",
+          "calendarWeekComplete": true,
+          "dataThrough": "2025-01-17",
+          "expectedIntent": "BUY",
+          "expectedState": "uptrend",
+          "matches": true,
+          "oracleDataThrough": "2025-01-17",
+          "status": "complete",
+          "symbol": "SPY"
+        },
+        {
+          "actualAction": "AVOID",
+          "actualIntent": "AVOID",
+          "actualState": "downtrend",
+          "calendarWeekComplete": true,
+          "dataThrough": "2025-01-17",
+          "expectedIntent": "AVOID",
+          "expectedState": "downtrend",
+          "matches": true,
+          "oracleDataThrough": "2025-01-17",
+          "status": "complete",
+          "symbol": "TLT"
+        }
+      ],
+      "status": "complete"
+    }
+  ]
+}

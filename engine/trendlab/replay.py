@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import csv
+import hashlib
+import json
 from datetime import date, timedelta
 from pathlib import Path
 from typing import Any, Callable
@@ -13,7 +15,7 @@ from trendlab.data.snapshot import latest_snapshot
 from trendlab.data.validate import reconcile_close, trenddesk_bars, validate_bars
 from trendlab.features.weekly import week_is_complete
 from trendlab.models import Bar, bars_from_frame
-from trendlab.registry import experiment_id, write_manifest
+from trendlab.registry import append_jsonl, experiment_id, write_manifest
 from trendlab.reporting.weekly import build_actions
 from trendlab.states.trend30w import Trend30Week
 
@@ -35,6 +37,7 @@ def run_replay(
     identifier = experiment_id("replay")
     summary_path = output_root / f"{identifier}.csv"
     manifest_path = registry_root / "manifests" / f"{identifier}.json"
+    sidecar_path = registry_root / "replay-actions" / f"{identifier}.jsonl"
     strategy_config = configs["research"]["strategy"]
     strategy = Trend30Week(
         int(strategy_config["weekly_fast_period"]), int(strategy_config["weekly_slow_period"]),
@@ -50,6 +53,10 @@ def run_replay(
         "requestedWeeks": weeks, "holdoutEvaluated": False,
         "holdoutSafeBoundary": boundary.isoformat(), "configHash": config_hash(configs),
         "runContext": run_context(), "weeks": entries,
+        "actionDocuments": {
+            "format": "jsonl", "path": f"engine/registry/replay-actions/{identifier}.jsonl",
+            "documents": 0, "sha256": None,
+        },
     }
     write_manifest(manifest_path, manifest)
 
@@ -68,11 +75,17 @@ def run_replay(
             mismatches = [item for item in checks if not item["matches"]]
             if mismatches:
                 raise RuntimeError(f"signal regression mismatch: {mismatches}")
+            append_jsonl(sidecar_path, document)
             entries.append({
                 "date": decision_date.isoformat(), "status": "complete",
                 "lastSessions": {symbol: bars[-1].date.isoformat() for symbol, bars in bars_by_symbol.items()},
                 "holidayShortened": any(bars[-1].date < decision_date for bars in bars_by_symbol.values()),
-                "signalChecks": checks, "actionDocument": document,
+                "signalChecks": checks,
+                "actionSummary": _action_summary(document),
+                "actionDocumentRef": {
+                    "sidecarLine": sum(item["status"] == "complete" for item in entries) + 1,
+                    "sha256": _document_hash(document),
+                },
             })
             for action in document["actions"]:
                 symbol = str(action["symbol"])
@@ -117,6 +130,11 @@ def run_replay(
         "status": "complete", "completedWeeks": len(entries) - halt_count,
         "haltedWeeks": halt_count, "heatCappedActions": heat_capped_count,
         "summary": str(summary_path),
+        "actionDocuments": {
+            "format": "jsonl", "path": f"engine/registry/replay-actions/{identifier}.jsonl",
+            "documents": len(entries) - halt_count,
+            "sha256": _file_hash(sidecar_path) if sidecar_path.exists() else None,
+        },
     })
     write_manifest(manifest_path, manifest)
     return {
@@ -259,3 +277,27 @@ def _write_summary(path: Path, rows: list[dict[str, object]]) -> None:
         writer = csv.DictWriter(stream, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
+
+
+def _action_summary(document: dict[str, Any]) -> dict[str, object]:
+    return {
+        "portfolioHeat": document["portfolioHeat"],
+        "actions": [
+            {
+                "symbol": action["symbol"], "state": action["state"],
+                "signalIntent": action["signalIntent"], "action": action["action"],
+                "quantity": action["quantity"], "activeStop": action["activeStop"],
+                "proposedStop": action["proposedStop"],
+            }
+            for action in document["actions"]
+        ],
+    }
+
+
+def _document_hash(document: dict[str, Any]) -> str:
+    body = json.dumps(document, sort_keys=True, separators=(",", ":")).encode()
+    return hashlib.sha256(body).hexdigest()
+
+
+def _file_hash(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()

@@ -12,6 +12,8 @@ from typing import Any
 
 import pandas as pd
 
+from trendlab.backtest.core import buy_and_hold, simulate
+from trendlab.backtest.diagnostics import cycle_diagnostics
 from trendlab.backtest.walkforward import (
     holdout_cutoff,
     make_folds,
@@ -62,6 +64,7 @@ def parser() -> argparse.ArgumentParser:
     replay.add_argument("--weeks", type=int, default=52)
     mirror = commands.add_parser("experiment-long-short", help="register the symmetric long/short 30-week experiment")
     mirror.add_argument("--symbol", action="append", help="repeatable; defaults to configured assets")
+    commands.add_parser("diagnose", help="measure pre-holdout cycle capture and whipsaw for the registered baseline")
     commands.add_parser("status", help="show actions, strategies, experiments, and cost-ledger readiness")
     return root
 
@@ -82,6 +85,8 @@ def main(argv: list[str] | None = None) -> int:
             output = run_replay(args.weeks)
         elif args.command == "experiment-long-short":
             output = run_long_short_experiment(args.symbol)
+        elif args.command == "diagnose":
+            output = run_diagnostics()
         else:
             output = build_status(REPO_ROOT, REGISTRY_ROOT)
     except Exception as exc:
@@ -320,6 +325,110 @@ def run_long_short_experiment(symbols: list[str] | None = None) -> dict[str, Any
     return {"ok": True, "experimentId": identifier, "manifest": str(manifest_path), "results": results}
 
 
+def run_diagnostics() -> dict[str, Any]:
+    configs = load_configs()
+    provider = configs["assets"]["provider"]
+    selected = _selected_symbols(configs, None)
+    research = configs["research"]
+    strategy = _strategy(research)
+    threshold = float(research["diagnostics"]["major_drawdown_threshold_pct"])
+    costs = research["costs"]
+    store = MarketStore(STORE_PATH)
+    identifier = experiment_id("diagnostics")
+    manifest_path = REGISTRY_ROOT / "manifests" / f"{identifier}.json"
+    hypothesis = (
+        "Measure whether late exits, late re-entry, or whipsaw is the binding constraint "
+        "for the registered long/flat baseline before allocating M4 parameter budget."
+    )
+    manifest: dict[str, Any] = {
+        "id": identifier,
+        "kind": "diagnostics",
+        "date": date.today().isoformat(),
+        "hypothesis": hypothesis,
+        "strategy": {"id": strategy.id, "version": int(research["strategy"]["version"])},
+        "configHash": config_hash(configs),
+        "symbols": selected,
+        "status": "running",
+        "verdict": "recorded",
+        "holdoutEvaluated": False,
+        "majorDrawdownThresholdPct": threshold,
+        "costs": costs,
+        "runContext": _run_context(),
+    }
+    write_manifest(manifest_path, manifest)
+    results: dict[str, Any] = {}
+    try:
+        for symbol in selected:
+            bars_all = bars_from_frame(store.read(provider, symbol))
+            cutoff = holdout_cutoff(bars_all[-1].date, int(research["holdout"]["months"]))
+            research_bars = [bar for bar in bars_all if bar.date <= cutoff]
+            if len(research_bars) <= strategy.warmup:
+                raise RuntimeError(f"not enough pre-holdout history for {symbol} diagnostics")
+            baseline = simulate(
+                research_bars,
+                strategy,
+                commission_bps_per_side=float(costs["commission_bps_per_side"]),
+                slippage_bps_per_side=float(costs["slippage_bps_per_side"]),
+                evaluation_end=research_bars[-1].date,
+            )
+            if not baseline.equity:
+                raise RuntimeError(f"baseline produced no pre-holdout equity for {symbol}")
+            evaluation_start = date.fromisoformat(baseline.equity[0].date)
+            reference = buy_and_hold(
+                research_bars,
+                evaluation_start=evaluation_start,
+                evaluation_end=research_bars[-1].date,
+                commission_bps_per_side=float(costs["commission_bps_per_side"]),
+                slippage_bps_per_side=float(costs["slippage_bps_per_side"]),
+            )
+            diagnostics = cycle_diagnostics(
+                reference,
+                baseline,
+                major_drawdown_threshold_pct=threshold,
+            )
+            results[symbol] = {
+                "dataRange": {
+                    "from": evaluation_start.isoformat(),
+                    "through": research_bars[-1].date.isoformat(),
+                    "holdoutCutoff": cutoff.isoformat(),
+                    "sessions": len(baseline.equity),
+                },
+                "strategyMetrics": baseline.metrics,
+                "buyAndHoldMetrics": reference.metrics,
+                **diagnostics,
+            }
+        manifest.update({"status": "complete", "results": results})
+    except Exception as exc:
+        manifest.update({"status": "failed", "verdict": "failed", "error": str(exc)})
+        write_manifest(manifest_path, manifest)
+        append_jsonl(REGISTRY_ROOT / "experiments.jsonl", _diagnostics_registry_line(manifest))
+        raise
+    write_manifest(manifest_path, manifest)
+    append_jsonl(REGISTRY_ROOT / "experiments.jsonl", _diagnostics_registry_line(manifest))
+    summary = {
+        symbol: {
+            "wealthRatio": value["wealthRatio"],
+            "episodes": value["episodeCount"],
+            "completeEpisodes": value["completeEpisodeCount"],
+            "meanDeclineAvoidedPct": value["meanDeclineAvoidedPct"],
+            "meanRecoveryCapturedPct": value["meanRecoveryCapturedPct"],
+            "whipsawCount": value["whipsaw"]["whipsawCount"],
+            "whipsawCostPct": value["whipsaw"]["whipsawCostPct"],
+            "avgSessionsOut": value["whipsaw"]["avgSessionsOut"],
+            "bindingConstraint": value["conclusion"]["bindingConstraint"],
+            "costComparisonPct": value["conclusion"]["costComparisonPct"],
+        }
+        for symbol, value in results.items()
+    }
+    return {
+        "ok": True,
+        "diagnosticsId": identifier,
+        "holdoutEvaluated": False,
+        "manifest": str(manifest_path),
+        "summary": summary,
+    }
+
+
 def _strategy(research: dict[str, Any]) -> Trend30Week:
     item = research["strategy"]
     return Trend30Week(int(item["weekly_fast_period"]), int(item["weekly_slow_period"]), int(item["warmup_daily_bars"]))
@@ -384,6 +493,35 @@ def _registry_line(manifest: dict[str, Any], verdict: str) -> dict[str, Any]:
     if "expectedPrior" in manifest:
         line["expectedPrior"] = manifest["expectedPrior"]
     return line
+
+
+def _diagnostics_registry_line(manifest: dict[str, Any]) -> dict[str, Any]:
+    results = manifest.get("results", {})
+    return {
+        "id": manifest["id"],
+        "kind": "diagnostics",
+        "date": manifest["date"],
+        "hypothesis": manifest["hypothesis"],
+        "configHash": manifest["configHash"],
+        "dataRange": {symbol: value.get("dataRange") for symbol, value in results.items()},
+        "headlineMetrics": {
+            symbol: {
+                "wealthRatio": value.get("wealthRatio"),
+                "episodeCount": value.get("episodeCount"),
+                "completeEpisodeCount": value.get("completeEpisodeCount"),
+                "meanDeclineAvoidedPct": value.get("meanDeclineAvoidedPct"),
+                "meanRecoveryCapturedPct": value.get("meanRecoveryCapturedPct"),
+                "whipsawCount": value.get("whipsaw", {}).get("whipsawCount"),
+                "whipsawCostPct": value.get("whipsaw", {}).get("whipsawCostPct"),
+                "bindingConstraint": value.get("conclusion", {}).get("bindingConstraint"),
+            }
+            for symbol, value in results.items()
+        },
+        "verdict": manifest["verdict"],
+        "holdoutEvaluated": False,
+        "manifest": f"engine/registry/manifests/{manifest['id']}.json",
+        "runContext": manifest["runContext"],
+    }
 
 
 def _run_context() -> dict[str, object]:

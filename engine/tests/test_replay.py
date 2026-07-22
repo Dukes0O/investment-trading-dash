@@ -3,7 +3,7 @@ from datetime import date, timedelta
 import pandas as pd
 
 from trendlab.models import Bar
-from trendlab.replay import _calendar_friday_decisions, _signal_checks
+from trendlab.replay import _action_summary, _calendar_friday_decisions, _document_hash, _signal_checks
 from trendlab.reporting.weekly import build_actions
 from trendlab.states.trend30w import Trend30Week
 
@@ -61,3 +61,21 @@ def test_replay_oracle_records_heat_cap_without_signal_mismatch_or_halt(bars):
     assert sum(check["status"] == "heat-capped" for check in checks) == 1
     capped = next(action for action in document["actions"] if action["action"] == "DEFER")
     assert capped["signalIntent"] == "BUY"
+
+
+def test_replay_manifest_summary_omits_full_action_documents(bars):
+    rising = _rising(bars)
+    decision_date = rising[-1].date
+    document = build_actions(
+        bars_by_symbol={"GLD": rising, "SPY": rising}, configs=_configs(),
+        provider="tiingo", report_date=decision_date,
+    )
+
+    summary = _action_summary(document)
+
+    assert set(summary) == {"portfolioHeat", "actions"}
+    assert all(set(action) == {
+        "symbol", "state", "signalIntent", "action", "quantity", "activeStop", "proposedStop",
+    } for action in summary["actions"])
+    assert "validation" not in summary
+    assert len(_document_hash(document)) == 64

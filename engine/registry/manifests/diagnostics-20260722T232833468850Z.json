@@ -1,0 +1,1578 @@
+{
+  "configHash": "945d60f77ad3814bf8120f27d294cd7a1ef598ec360da64f16b2a882ad2ed908",
+  "costs": {
+    "commission_bps_per_side": 0.0,
+    "short_borrow_bps_per_year": 25.0,
+    "slippage_bps_per_side": 5.0
+  },
+  "date": "2026-07-22",
+  "holdoutEvaluated": false,
+  "hypothesis": "Measure whether late exits, late re-entry, or whipsaw is the binding constraint for the registered long/flat baseline before allocating M4 parameter budget.",
+  "id": "diagnostics-20260722T232833468850Z",
+  "kind": "diagnostics",
+  "majorDrawdownThresholdPct": 15.0,
+  "results": {
+    "GLD": {
+      "buyAndHoldFinalWealth": 5.435877,
+      "buyAndHoldMetrics": {
+        "avgTradePct": 443.59,
+        "borrowCostPct": 0.0,
+        "cagrPct": 9.2,
+        "exposurePct": 99.98,
+        "longContributionPct": 446.59,
+        "longExposurePct": 99.98,
+        "maxDrawdownPct": 45.56,
+        "sharpeRatio": 0.586,
+        "shortContributionPct": 0.0,
+        "shortExposurePct": 0.0,
+        "totalReturnPct": 447.27,
+        "trades": 1,
+        "winRatePct": 100.0,
+        "years": 19.31
+      },
+      "completeEpisodeCount": 4,
+      "conclusion": {
+        "arithmetic": {
+          "late-exit": "max(0, 100 - meanDeclineAvoidedPct)",
+          "late-reentry": "max(0, 100 - meanRecoveryCapturedPct)",
+          "selection": "largest available measured cost; none only when all are zero",
+          "whipsaw": "sum(max(0, reentryFill / exitFill - 1) * 100)"
+        },
+        "bindingConstraint": "whipsaw",
+        "costComparisonPct": {
+          "late-exit": 85.970977,
+          "late-reentry": 73.805842,
+          "whipsaw": 97.958988
+        },
+        "largestMeasuredCostPct": 97.958988
+      },
+      "dataRange": {
+        "from": "2005-09-20",
+        "holdoutCutoff": "2025-01-21",
+        "sessions": 4865,
+        "through": "2025-01-21"
+      },
+      "episodeCount": 4,
+      "episodes": [
+        {
+          "buyAndHoldCycleReturnPct": 0.815523,
+          "buyAndHoldDeclineReturnPct": -21.794151,
+          "buyAndHoldRecoveryReturnPct": 28.910464,
+          "cycleCapturePct": -60.428384,
+          "declineAvoidedPct": 0.0,
+          "exitDelaySessions": null,
+          "incomplete": false,
+          "peakDate": "2006-05-12",
+          "peakWealth": 1.528041,
+          "recoveryCapturedPct": 19.124666,
+          "recoveryDate": "2007-09-18",
+          "reentryDelaySessions": 0,
+          "strategyCycleReturnPct": -17.470126,
+          "strategyDeclineReturnPct": -21.794151,
+          "strategyRecoveryReturnPct": 5.52903,
+          "troughDate": "2006-06-14",
+          "troughWealth": 1.195017
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.746193,
+          "buyAndHoldDeclineReturnPct": -29.414137,
+          "buyAndHoldRecoveryReturnPct": 42.728571,
+          "cycleCapturePct": -32.063172,
+          "declineAvoidedPct": 34.68899,
+          "exitDelaySessions": 34,
+          "incomplete": false,
+          "peakDate": "2008-03-17",
+          "peakWealth": 2.130706,
+          "recoveryCapturedPct": 15.963252,
+          "recoveryDate": "2009-09-16",
+          "reentryDelaySessions": 49,
+          "strategyCycleReturnPct": -13.700135,
+          "strategyDeclineReturnPct": -19.21067,
+          "strategyRecoveryReturnPct": 6.82087,
+          "troughDate": "2008-11-12",
+          "troughWealth": 1.503977
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.29254,
+          "buyAndHoldDeclineReturnPct": -45.555014,
+          "buyAndHoldRecoveryReturnPct": 84.208955,
+          "cycleCapturePct": -5.124316,
+          "declineAvoidedPct": 36.792327,
+          "exitDelaySessions": 83,
+          "incomplete": false,
+          "peakDate": "2011-08-22",
+          "peakWealth": 3.965988,
+          "recoveryCapturedPct": 40.824675,
+          "recoveryDate": "2020-07-29",
+          "reentryDelaySessions": 43,
+          "strategyCycleReturnPct": -4.315133,
+          "strategyDeclineReturnPct": -28.794264,
+          "strategyRecoveryReturnPct": 34.378033,
+          "troughDate": "2015-12-17",
+          "troughWealth": 2.159281
+        },
+        {
+          "buyAndHoldCycleReturnPct": 1.093403,
+          "buyAndHoldDeclineReturnPct": -22.002166,
+          "buyAndHoldRecoveryReturnPct": 29.610527,
+          "cycleCapturePct": -64.184856,
+          "declineAvoidedPct": -15.365223,
+          "exitDelaySessions": 80,
+          "incomplete": false,
+          "peakDate": "2020-08-06",
+          "peakWealth": 4.165802,
+          "recoveryCapturedPct": 28.864038,
+          "recoveryDate": "2024-03-04",
+          "reentryDelaySessions": 68,
+          "strategyCycleReturnPct": -19.005474,
+          "strategyDeclineReturnPct": -25.382848,
+          "strategyRecoveryReturnPct": 8.546794,
+          "troughDate": "2022-09-26",
+          "troughWealth": 3.249235
+        }
+      ],
+      "meanDeclineAvoidedPct": 14.029023,
+      "meanRecoveryCapturedPct": 26.194158,
+      "strategyFinalWealth": 2.90993,
+      "strategyMetrics": {
+        "avgTradePct": 4.2,
+        "borrowCostPct": 0.0,
+        "cagrPct": 5.69,
+        "exposurePct": 59.71,
+        "longContributionPct": 190.99,
+        "longExposurePct": 59.71,
+        "maxDrawdownPct": 31.43,
+        "sharpeRatio": 0.48,
+        "shortContributionPct": 0.0,
+        "shortExposurePct": 0.0,
+        "totalReturnPct": 190.99,
+        "trades": 32,
+        "winRatePct": 37.5,
+        "years": 19.31
+      },
+      "wealthRatio": 0.535319,
+      "whipsaw": {
+        "avgSessionsOut": 63.16129,
+        "exitReentryPairCount": 31,
+        "pairs": [
+          {
+            "costPct": 5.866221,
+            "exitDate": "2006-09-11",
+            "exitFill": 58.820575,
+            "isWhipsaw": true,
+            "reentryDate": "2006-12-26",
+            "reentryFill": 62.27112,
+            "sessionsOut": 74
+          },
+          {
+            "costPct": 3.117309,
+            "exitDate": "2007-01-08",
+            "exitFill": 60.34981,
+            "isWhipsaw": true,
+            "reentryDate": "2007-01-16",
+            "reentryFill": 62.2311,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 1.170888,
+            "exitDate": "2007-06-11",
+            "exitFill": 64.46775,
+            "isWhipsaw": true,
+            "reentryDate": "2007-06-18",
+            "reentryFill": 65.222595,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 2.754688,
+            "exitDate": "2007-06-25",
+            "exitFill": 64.44776,
+            "isWhipsaw": true,
+            "reentryDate": "2007-07-16",
+            "reentryFill": 66.223095,
+            "sessionsOut": 14
+          },
+          {
+            "costPct": 7.639095,
+            "exitDate": "2007-08-20",
+            "exitFill": 65.02747,
+            "isWhipsaw": true,
+            "reentryDate": "2007-09-10",
+            "reentryFill": 69.99498,
+            "sessionsOut": 14
+          },
+          {
+            "costPct": 1.703055,
+            "exitDate": "2008-05-05",
+            "exitFill": 85.507225,
+            "isWhipsaw": true,
+            "reentryDate": "2008-05-12",
+            "reentryFill": 86.96346,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 1.256283,
+            "exitDate": "2008-06-02",
+            "exitFill": 87.39628,
+            "isWhipsaw": true,
+            "reentryDate": "2008-06-09",
+            "reentryFill": 88.494225,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 7.912737,
+            "exitDate": "2008-06-16",
+            "exitFill": 88.105925,
+            "isWhipsaw": true,
+            "reentryDate": "2008-07-14",
+            "reentryFill": 95.077515,
+            "sessionsOut": 19
+          },
+          {
+            "costPct": 0.279844,
+            "exitDate": "2008-08-04",
+            "exitFill": 89.03546,
+            "isWhipsaw": true,
+            "reentryDate": "2009-01-26",
+            "reentryFill": 89.28462,
+            "sessionsOut": 120
+          },
+          {
+            "costPct": 4.755346,
+            "exitDate": "2009-07-13",
+            "exitFill": 89.405275,
+            "isWhipsaw": true,
+            "reentryDate": "2009-07-20",
+            "reentryFill": 93.656805,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 10.587764,
+            "exitDate": "2011-12-19",
+            "exitFill": 155.40226,
+            "isWhipsaw": true,
+            "reentryDate": "2012-09-17",
+            "reentryFill": 171.855885,
+            "sessionsOut": 187
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2012-12-24",
+            "exitFill": 160.79956,
+            "isWhipsaw": false,
+            "reentryDate": "2014-03-24",
+            "reentryFill": 126.933435,
+            "sessionsOut": 312
+          },
+          {
+            "costPct": 5.708925,
+            "exitDate": "2014-06-02",
+            "exitFill": 119.870035,
+            "isWhipsaw": true,
+            "reentryDate": "2014-06-23",
+            "reentryFill": 126.713325,
+            "sessionsOut": 15
+          },
+          {
+            "costPct": 1.291334,
+            "exitDate": "2014-08-04",
+            "exitFill": 124.29782,
+            "isWhipsaw": true,
+            "reentryDate": "2014-08-11",
+            "reentryFill": 125.90292,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2014-08-25",
+            "exitFill": 122.85854,
+            "isWhipsaw": false,
+            "reentryDate": "2016-02-22",
+            "reentryFill": 115.49772,
+            "sessionsOut": 375
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2016-10-10",
+            "exitFill": 120.09992,
+            "isWhipsaw": false,
+            "reentryDate": "2017-04-10",
+            "reentryFill": 119.09952,
+            "sessionsOut": 125
+          },
+          {
+            "costPct": 4.016327,
+            "exitDate": "2017-07-10",
+            "exitFill": 114.96249,
+            "isWhipsaw": true,
+            "reentryDate": "2017-07-24",
+            "reentryFill": 119.57976,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 0.513926,
+            "exitDate": "2017-10-30",
+            "exitFill": 120.869535,
+            "isWhipsaw": true,
+            "reentryDate": "2017-11-13",
+            "reentryFill": 121.490715,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 5.875866,
+            "exitDate": "2017-12-11",
+            "exitFill": 118.310815,
+            "isWhipsaw": true,
+            "reentryDate": "2018-01-08",
+            "reentryFill": 125.2626,
+            "sessionsOut": 18
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2018-05-21",
+            "exitFill": 122.09892,
+            "isWhipsaw": false,
+            "reentryDate": "2018-12-24",
+            "reentryFill": 119.629785,
+            "sessionsOut": 150
+          },
+          {
+            "costPct": 10.90614,
+            "exitDate": "2020-03-16",
+            "exitFill": 137.49122,
+            "isWhipsaw": true,
+            "reentryDate": "2020-03-30",
+            "reentryFill": 152.486205,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 5.871357,
+            "exitDate": "2020-11-30",
+            "exitFill": 166.59666,
+            "isWhipsaw": true,
+            "reentryDate": "2020-12-21",
+            "reentryFill": 176.378145,
+            "sessionsOut": 15
+          },
+          {
+            "costPct": 0.693184,
+            "exitDate": "2021-01-11",
+            "exitFill": 172.05393,
+            "isWhipsaw": true,
+            "reentryDate": "2021-06-14",
+            "reentryFill": 173.24658,
+            "sessionsOut": 106
+          },
+          {
+            "costPct": 1.897427,
+            "exitDate": "2021-06-21",
+            "exitFill": 166.43674,
+            "isWhipsaw": true,
+            "reentryDate": "2021-07-19",
+            "reentryFill": 169.594755,
+            "sessionsOut": 19
+          },
+          {
+            "costPct": 0.527574,
+            "exitDate": "2021-07-26",
+            "exitFill": 168.49571,
+            "isWhipsaw": true,
+            "reentryDate": "2021-08-02",
+            "reentryFill": 169.38465,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 4.183636,
+            "exitDate": "2021-08-09",
+            "exitFill": 162.928495,
+            "isWhipsaw": true,
+            "reentryDate": "2021-08-30",
+            "reentryFill": 169.74483,
+            "sessionsOut": 15
+          },
+          {
+            "costPct": 1.002714,
+            "exitDate": "2021-09-13",
+            "exitFill": 167.366275,
+            "isWhipsaw": true,
+            "reentryDate": "2021-12-27",
+            "reentryFill": 169.04448,
+            "sessionsOut": 73
+          },
+          {
+            "costPct": 1.090372,
+            "exitDate": "2022-01-31",
+            "exitFill": 167.706105,
+            "isWhipsaw": true,
+            "reentryDate": "2022-02-07",
+            "reentryFill": 169.534725,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 1.734409,
+            "exitDate": "2022-05-16",
+            "exitFill": 168.345785,
+            "isWhipsaw": true,
+            "reentryDate": "2022-06-13",
+            "reentryFill": 171.26559,
+            "sessionsOut": 19
+          },
+          {
+            "costPct": 0.252196,
+            "exitDate": "2022-06-21",
+            "exitFill": 170.97447,
+            "isWhipsaw": true,
+            "reentryDate": "2023-01-03",
+            "reentryFill": 171.40566,
+            "sessionsOut": 135
+          },
+          {
+            "costPct": 5.350371,
+            "exitDate": "2023-08-07",
+            "exitFill": 180.059925,
+            "isWhipsaw": true,
+            "reentryDate": "2023-12-04",
+            "reentryFill": 189.6938,
+            "sessionsOut": 83
+          }
+        ],
+        "whipsawCostPct": 97.958988,
+        "whipsawCount": 27
+      }
+    },
+    "SPY": {
+      "buyAndHoldFinalWealth": 15.058166,
+      "buyAndHoldMetrics": {
+        "avgTradePct": 1405.82,
+        "borrowCostPct": 0.0,
+        "cagrPct": 9.13,
+        "exposurePct": 99.99,
+        "longContributionPct": 1416.01,
+        "longExposurePct": 99.99,
+        "maxDrawdownPct": 47.24,
+        "sharpeRatio": 0.629,
+        "shortContributionPct": 0.0,
+        "shortExposurePct": 0.0,
+        "totalReturnPct": 1416.74,
+        "trades": 1,
+        "winRatePct": 100.0,
+        "years": 31.11
+      },
+      "completeEpisodeCount": 6,
+      "conclusion": {
+        "arithmetic": {
+          "late-exit": "max(0, 100 - meanDeclineAvoidedPct)",
+          "late-reentry": "max(0, 100 - meanRecoveryCapturedPct)",
+          "selection": "largest available measured cost; none only when all are zero",
+          "whipsaw": "sum(max(0, reentryFill / exitFill - 1) * 100)"
+        },
+        "bindingConstraint": "whipsaw",
+        "costComparisonPct": {
+          "late-exit": 46.790274,
+          "late-reentry": 72.374543,
+          "whipsaw": 177.064642
+        },
+        "largestMeasuredCostPct": 177.064642
+      },
+      "dataRange": {
+        "from": "1993-11-29",
+        "holdoutCutoff": "2025-01-21",
+        "sessions": 7840,
+        "through": "2025-01-21"
+      },
+      "episodeCount": 6,
+      "episodes": [
+        {
+          "buyAndHoldCycleReturnPct": 0.938452,
+          "buyAndHoldDeclineReturnPct": -18.08137,
+          "buyAndHoldRecoveryReturnPct": 23.217945,
+          "cycleCapturePct": -45.572483,
+          "declineAvoidedPct": 41.481238,
+          "exitDelaySessions": 21,
+          "incomplete": false,
+          "peakDate": "1998-07-17",
+          "peakWealth": 2.674976,
+          "recoveryCapturedPct": 0.0,
+          "recoveryDate": "1998-11-23",
+          "reentryDelaySessions": null,
+          "strategyCycleReturnPct": -10.580994,
+          "strategyDeclineReturnPct": -10.580994,
+          "strategyRecoveryReturnPct": 0.0,
+          "troughDate": "1998-08-31",
+          "troughWealth": 2.191304
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.014414,
+          "buyAndHoldDeclineReturnPct": -44.251162,
+          "buyAndHoldRecoveryReturnPct": 79.40179,
+          "cycleCapturePct": -5.344716,
+          "declineAvoidedPct": 45.754279,
+          "exitDelaySessions": 16,
+          "incomplete": false,
+          "peakDate": "2000-03-24",
+          "peakWealth": 3.480274,
+          "recoveryCapturedPct": 32.747663,
+          "recoveryDate": "2006-12-05",
+          "reentryDelaySessions": 60,
+          "strategyCycleReturnPct": -4.243801,
+          "strategyDeclineReturnPct": -24.004362,
+          "strategyRecoveryReturnPct": 26.00223,
+          "troughDate": "2002-10-09",
+          "troughWealth": 1.940212
+        },
+        {
+          "buyAndHoldCycleReturnPct": 1.074026,
+          "buyAndHoldDeclineReturnPct": -47.238213,
+          "buyAndHoldRecoveryReturnPct": 91.566723,
+          "cycleCapturePct": 34.250335,
+          "declineAvoidedPct": 78.471721,
+          "exitDelaySessions": 24,
+          "incomplete": false,
+          "peakDate": "2007-10-09",
+          "peakWealth": 3.851598,
+          "recoveryCapturedPct": 50.491273,
+          "recoveryDate": "2012-09-13",
+          "reentryDelaySessions": 49,
+          "strategyCycleReturnPct": 31.361909,
+          "strategyDeclineReturnPct": -10.169574,
+          "strategyRecoveryReturnPct": 46.233204,
+          "troughDate": "2009-03-09",
+          "troughWealth": 2.032172
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.161571,
+          "buyAndHoldDeclineReturnPct": -15.979409,
+          "buyAndHoldRecoveryReturnPct": 19.210742,
+          "cycleCapturePct": -35.108623,
+          "declineAvoidedPct": 40.757656,
+          "exitDelaySessions": 27,
+          "incomplete": false,
+          "peakDate": "2018-09-20",
+          "peakWealth": 7.577282,
+          "recoveryCapturedPct": 15.650453,
+          "recoveryDate": "2019-04-12",
+          "reentryDelaySessions": 56,
+          "strategyCycleReturnPct": -6.744627,
+          "strategyDeclineReturnPct": -9.466576,
+          "strategyRecoveryReturnPct": 3.006568,
+          "troughDate": "2018-12-24",
+          "troughWealth": 6.366477
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.000443,
+          "buyAndHoldDeclineReturnPct": -28.0333,
+          "buyAndHoldRecoveryReturnPct": 38.95377,
+          "cycleCapturePct": -16.676278,
+          "declineAvoidedPct": 57.900454,
+          "exitDelaySessions": 8,
+          "incomplete": false,
+          "peakDate": "2020-02-19",
+          "peakWealth": 8.716365,
+          "recoveryCapturedPct": 15.443526,
+          "recoveryDate": "2020-08-10",
+          "reentryDelaySessions": 72,
+          "strategyCycleReturnPct": -6.496039,
+          "strategyDeclineReturnPct": -11.801892,
+          "strategyRecoveryReturnPct": 6.015836,
+          "troughDate": "2020-03-23",
+          "troughWealth": 6.27288
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.688654,
+          "buyAndHoldDeclineReturnPct": -20.921224,
+          "buyAndHoldRecoveryReturnPct": 27.327027,
+          "cycleCapturePct": 12.034031,
+          "declineAvoidedPct": 54.893006,
+          "exitDelaySessions": 14,
+          "incomplete": false,
+          "peakDate": "2022-01-03",
+          "peakWealth": 11.948557,
+          "recoveryCapturedPct": 51.419828,
+          "recoveryDate": "2023-12-13",
+          "reentryDelaySessions": 60,
+          "strategyCycleReturnPct": 3.288543,
+          "strategyDeclineReturnPct": -9.436935,
+          "strategyRecoveryReturnPct": 14.05151,
+          "troughDate": "2022-10-12",
+          "troughWealth": 9.448772
+        }
+      ],
+      "meanDeclineAvoidedPct": 53.209726,
+      "meanRecoveryCapturedPct": 27.625457,
+      "strategyFinalWealth": 9.341921,
+      "strategyMetrics": {
+        "avgTradePct": 4.99,
+        "borrowCostPct": 0.0,
+        "cagrPct": 7.45,
+        "exposurePct": 69.59,
+        "longContributionPct": 834.19,
+        "longExposurePct": 69.59,
+        "maxDrawdownPct": 37.11,
+        "sharpeRatio": 0.687,
+        "shortContributionPct": 0.0,
+        "shortExposurePct": 0.0,
+        "totalReturnPct": 834.19,
+        "trades": 53,
+        "winRatePct": 43.4,
+        "years": 31.11
+      },
+      "wealthRatio": 0.620389,
+      "whipsaw": {
+        "avgSessionsOut": 45.807692,
+        "exitReentryPairCount": 52,
+        "pairs": [
+          {
+            "costPct": 4.04421,
+            "exitDate": "1994-03-28",
+            "exitFill": 45.977,
+            "isWhipsaw": true,
+            "reentryDate": "1994-08-29",
+            "reentryFill": 47.836406,
+            "sessionsOut": 106
+          },
+          {
+            "costPct": 0.753909,
+            "exitDate": "1994-11-28",
+            "exitFill": 45.430371,
+            "isWhipsaw": true,
+            "reentryDate": "1994-12-19",
+            "reentryFill": 45.772875,
+            "sessionsOut": 15
+          },
+          {
+            "costPct": 0.818667,
+            "exitDate": "1995-01-03",
+            "exitFill": 45.680246,
+            "isWhipsaw": true,
+            "reentryDate": "1995-01-09",
+            "reentryFill": 46.054216,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 4.900763,
+            "exitDate": "1996-07-22",
+            "exitFill": 63.499434,
+            "isWhipsaw": true,
+            "reentryDate": "1996-08-05",
+            "reentryFill": 66.611391,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 2.768822,
+            "exitDate": "1996-09-03",
+            "exitFill": 64.436463,
+            "isWhipsaw": true,
+            "reentryDate": "1996-09-09",
+            "reentryFill": 66.220594,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 4.194099,
+            "exitDate": "1997-04-14",
+            "exitFill": 73.697432,
+            "isWhipsaw": true,
+            "reentryDate": "1997-04-21",
+            "reentryFill": 76.788375,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 6.21041,
+            "exitDate": "1998-01-12",
+            "exitFill": 91.079437,
+            "isWhipsaw": true,
+            "reentryDate": "1998-01-20",
+            "reentryFill": 96.735844,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 11.491152,
+            "exitDate": "1998-08-17",
+            "exitFill": 105.947,
+            "isWhipsaw": true,
+            "reentryDate": "1998-12-07",
+            "reentryFill": 118.121531,
+            "sessionsOut": 78
+          },
+          {
+            "costPct": 2.040288,
+            "exitDate": "1999-08-09",
+            "exitFill": 130.528407,
+            "isWhipsaw": true,
+            "reentryDate": "1999-08-16",
+            "reentryFill": 133.191563,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 9.526948,
+            "exitDate": "1999-09-27",
+            "exitFill": 128.685625,
+            "isWhipsaw": true,
+            "reentryDate": "1999-11-29",
+            "reentryFill": 140.945437,
+            "sessionsOut": 44
+          },
+          {
+            "costPct": 5.07511,
+            "exitDate": "2000-01-31",
+            "exitFill": 135.744594,
+            "isWhipsaw": true,
+            "reentryDate": "2000-02-07",
+            "reentryFill": 142.633781,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 4.265101,
+            "exitDate": "2000-02-22",
+            "exitFill": 135.119906,
+            "isWhipsaw": true,
+            "reentryDate": "2000-03-06",
+            "reentryFill": 140.882906,
+            "sessionsOut": 9
+          },
+          {
+            "costPct": 4.774162,
+            "exitDate": "2000-04-17",
+            "exitFill": 135.119906,
+            "isWhipsaw": true,
+            "reentryDate": "2000-04-24",
+            "reentryFill": 141.57075,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 4.507077,
+            "exitDate": "2000-05-22",
+            "exitFill": 141.179375,
+            "isWhipsaw": true,
+            "reentryDate": "2000-06-05",
+            "reentryFill": 147.542438,
+            "sessionsOut": 9
+          },
+          {
+            "costPct": 2.748051,
+            "exitDate": "2000-07-31",
+            "exitFill": 142.866031,
+            "isWhipsaw": true,
+            "reentryDate": "2000-08-07",
+            "reentryFill": 146.792063,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2000-09-25",
+            "exitFill": 145.864531,
+            "isWhipsaw": false,
+            "reentryDate": "2002-01-07",
+            "reentryFill": 117.758847,
+            "sessionsOut": 319
+          },
+          {
+            "costPct": 0.232052,
+            "exitDate": "2002-01-22",
+            "exitFill": 113.693125,
+            "isWhipsaw": true,
+            "reentryDate": "2002-01-28",
+            "reentryFill": 113.956952,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 1.589554,
+            "exitDate": "2002-02-04",
+            "exitFill": 112.173888,
+            "isWhipsaw": true,
+            "reentryDate": "2002-03-04",
+            "reentryFill": 113.956952,
+            "sessionsOut": 19
+          },
+          {
+            "costPct": 0.781607,
+            "exitDate": "2002-04-15",
+            "exitFill": 111.564193,
+            "isWhipsaw": true,
+            "reentryDate": "2002-04-22",
+            "reentryFill": 112.436187,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2002-04-29",
+            "exitFill": 107.876035,
+            "isWhipsaw": false,
+            "reentryDate": "2003-01-06",
+            "reentryFill": 91.285618,
+            "sessionsOut": 174
+          },
+          {
+            "costPct": 9.172452,
+            "exitDate": "2003-01-27",
+            "exitFill": 85.687138,
+            "isWhipsaw": true,
+            "reentryDate": "2003-05-12",
+            "reentryFill": 93.54675,
+            "sessionsOut": 73
+          },
+          {
+            "costPct": 2.862311,
+            "exitDate": "2004-05-10",
+            "exitFill": 109.385282,
+            "isWhipsaw": true,
+            "reentryDate": "2004-06-01",
+            "reentryFill": 112.516229,
+            "sessionsOut": 15
+          },
+          {
+            "costPct": 1.931149,
+            "exitDate": "2004-07-12",
+            "exitFill": 111.464237,
+            "isWhipsaw": true,
+            "reentryDate": "2004-11-01",
+            "reentryFill": 113.616778,
+            "sessionsOut": 79
+          },
+          {
+            "costPct": 4.599813,
+            "exitDate": "2005-04-18",
+            "exitFill": 114.062943,
+            "isWhipsaw": true,
+            "reentryDate": "2005-07-05",
+            "reentryFill": 119.309625,
+            "sessionsOut": 54
+          },
+          {
+            "costPct": 1.355512,
+            "exitDate": "2005-10-17",
+            "exitFill": 118.740603,
+            "isWhipsaw": true,
+            "reentryDate": "2005-10-31",
+            "reentryFill": 120.350146,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 1.439686,
+            "exitDate": "2006-05-22",
+            "exitFill": 126.216859,
+            "isWhipsaw": true,
+            "reentryDate": "2006-05-30",
+            "reentryFill": 128.033986,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 4.799692,
+            "exitDate": "2006-06-12",
+            "exitFill": 125.817057,
+            "isWhipsaw": true,
+            "reentryDate": "2006-09-18",
+            "reentryFill": 131.855888,
+            "sessionsOut": 68
+          },
+          {
+            "costPct": 1.417075,
+            "exitDate": "2007-07-30",
+            "exitFill": 145.857028,
+            "isWhipsaw": true,
+            "reentryDate": "2007-08-27",
+            "reentryFill": 147.923931,
+            "sessionsOut": 20
+          },
+          {
+            "costPct": 1.322944,
+            "exitDate": "2007-09-10",
+            "exitFill": 146.446744,
+            "isWhipsaw": true,
+            "reentryDate": "2007-09-17",
+            "reentryFill": 148.384153,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 4.284379,
+            "exitDate": "2007-11-12",
+            "exitFill": 145.137402,
+            "isWhipsaw": true,
+            "reentryDate": "2007-12-10",
+            "reentryFill": 151.355639,
+            "sessionsOut": 19
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2007-12-17",
+            "exitFill": 146.536696,
+            "isWhipsaw": false,
+            "reentryDate": "2009-05-18",
+            "reentryFill": 89.594778,
+            "sessionsOut": 356
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2010-05-10",
+            "exitFill": 115.752095,
+            "isWhipsaw": false,
+            "reentryDate": "2010-05-17",
+            "reentryFill": 114.2571,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 8.60468,
+            "exitDate": "2010-05-24",
+            "exitFill": 108.46574,
+            "isWhipsaw": true,
+            "reentryDate": "2010-10-18",
+            "reentryFill": 117.79887,
+            "sessionsOut": 102
+          },
+          {
+            "costPct": 4.710178,
+            "exitDate": "2011-06-13",
+            "exitFill": 127.826055,
+            "isWhipsaw": true,
+            "reentryDate": "2011-07-05",
+            "reentryFill": 133.84689,
+            "sessionsOut": 15
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2011-08-01",
+            "exitFill": 130.77458,
+            "isWhipsaw": false,
+            "reentryDate": "2011-12-27",
+            "reentryFill": 126.233085,
+            "sessionsOut": 103
+          },
+          {
+            "costPct": 2.407212,
+            "exitDate": "2012-05-21",
+            "exitFill": 130.09492,
+            "isWhipsaw": true,
+            "reentryDate": "2012-05-29",
+            "reentryFill": 133.22658,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 4.606462,
+            "exitDate": "2012-06-04",
+            "exitFill": 128.325805,
+            "isWhipsaw": true,
+            "reentryDate": "2012-06-11",
+            "reentryFill": 134.237085,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 2.096244,
+            "exitDate": "2012-11-19",
+            "exitFill": 137.83105,
+            "isWhipsaw": true,
+            "reentryDate": "2012-11-26",
+            "reentryFill": 140.720325,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 2.869804,
+            "exitDate": "2014-10-13",
+            "exitFill": 190.36477,
+            "isWhipsaw": true,
+            "reentryDate": "2014-10-27",
+            "reentryFill": 195.827865,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 11.706933,
+            "exitDate": "2015-08-24",
+            "exitFill": 187.39626,
+            "isWhipsaw": true,
+            "reentryDate": "2015-12-07",
+            "reentryFill": 209.334615,
+            "sessionsOut": 73
+          },
+          {
+            "costPct": 1.482141,
+            "exitDate": "2015-12-14",
+            "exitFill": 201.968965,
+            "isWhipsaw": true,
+            "reentryDate": "2015-12-28",
+            "reentryFill": 204.96243,
+            "sessionsOut": 9
+          },
+          {
+            "costPct": 7.760162,
+            "exitDate": "2016-01-11",
+            "exitFill": 192.91349,
+            "isWhipsaw": true,
+            "reentryDate": "2016-04-18",
+            "reentryFill": 207.883889,
+            "sessionsOut": 67
+          },
+          {
+            "costPct": 4.170287,
+            "exitDate": "2016-11-07",
+            "exitFill": 208.445728,
+            "isWhipsaw": true,
+            "reentryDate": "2016-11-14",
+            "reentryFill": 217.138514,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.260436,
+            "exitDate": "2018-03-26",
+            "exitFill": 261.998935,
+            "isWhipsaw": true,
+            "reentryDate": "2018-04-02",
+            "reentryFill": 262.681275,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 2.25624,
+            "exitDate": "2018-04-09",
+            "exitFill": 261.239315,
+            "isWhipsaw": true,
+            "reentryDate": "2018-04-16",
+            "reentryFill": 267.1335,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 3.224453,
+            "exitDate": "2018-10-29",
+            "exitFill": 268.6656,
+            "isWhipsaw": true,
+            "reentryDate": "2018-11-12",
+            "reentryFill": 277.328595,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 3.216148,
+            "exitDate": "2018-11-19",
+            "exitFill": 272.913475,
+            "isWhipsaw": true,
+            "reentryDate": "2019-03-18",
+            "reentryFill": 281.690775,
+            "sessionsOut": 79
+          },
+          {
+            "costPct": 1.249944,
+            "exitDate": "2019-08-26",
+            "exitFill": 287.126365,
+            "isWhipsaw": true,
+            "reentryDate": "2019-09-03",
+            "reentryFill": 290.715285,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 6.195811,
+            "exitDate": "2020-03-02",
+            "exitFill": 298.060895,
+            "isWhipsaw": true,
+            "reentryDate": "2020-07-06",
+            "reentryFill": 316.528185,
+            "sessionsOut": 87
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2022-01-24",
+            "exitFill": 431.813985,
+            "isWhipsaw": false,
+            "reentryDate": "2023-01-09",
+            "reentryFill": 390.565185,
+            "sessionsOut": 241
+          },
+          {
+            "costPct": 2.45698,
+            "exitDate": "2023-03-13",
+            "exitFill": 381.619095,
+            "isWhipsaw": true,
+            "reentryDate": "2023-03-20",
+            "reentryFill": 390.9954,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 3.883532,
+            "exitDate": "2023-10-23",
+            "exitFill": 419.400195,
+            "isWhipsaw": true,
+            "reentryDate": "2023-11-06",
+            "reentryFill": 435.687735,
+            "sessionsOut": 10
+          }
+        ],
+        "whipsawCostPct": 177.064642,
+        "whipsawCount": 46
+      }
+    },
+    "TLT": {
+      "buyAndHoldFinalWealth": 1.725519,
+      "buyAndHoldMetrics": {
+        "avgTradePct": 72.55,
+        "borrowCostPct": 0.0,
+        "cagrPct": 2.55,
+        "exposurePct": 99.98,
+        "longContributionPct": 72.47,
+        "longExposurePct": 99.98,
+        "maxDrawdownPct": 34.47,
+        "sharpeRatio": 0.288,
+        "shortContributionPct": 0.0,
+        "shortExposurePct": 0.0,
+        "totalReturnPct": 72.36,
+        "trades": 1,
+        "winRatePct": 100.0,
+        "years": 21.62
+      },
+      "completeEpisodeCount": 3,
+      "conclusion": {
+        "arithmetic": {
+          "late-exit": "max(0, 100 - meanDeclineAvoidedPct)",
+          "late-reentry": "max(0, 100 - meanRecoveryCapturedPct)",
+          "selection": "largest available measured cost; none only when all are zero",
+          "whipsaw": "sum(max(0, reentryFill / exitFill - 1) * 100)"
+        },
+        "bindingConstraint": "late-exit",
+        "costComparisonPct": {
+          "late-exit": 66.778932,
+          "late-reentry": 36.597123,
+          "whipsaw": 52.147331
+        },
+        "largestMeasuredCostPct": 66.778932
+      },
+      "dataRange": {
+        "from": "2003-05-30",
+        "holdoutCutoff": "2025-01-21",
+        "sessions": 5447,
+        "through": "2025-01-21"
+      },
+      "episodeCount": 4,
+      "episodes": [
+        {
+          "buyAndHoldCycleReturnPct": 0.067843,
+          "buyAndHoldDeclineReturnPct": -15.576296,
+          "buyAndHoldRecoveryReturnPct": 18.530505,
+          "cycleCapturePct": -22.26847,
+          "declineAvoidedPct": 38.093263,
+          "exitDelaySessions": 25,
+          "incomplete": false,
+          "peakDate": "2003-06-13",
+          "peakWealth": 1.032606,
+          "recoveryCapturedPct": 32.945723,
+          "recoveryDate": "2005-01-18",
+          "reentryDelaySessions": 104,
+          "strategyCycleReturnPct": -4.12646,
+          "strategyDeclineReturnPct": -9.642776,
+          "strategyRecoveryReturnPct": 6.105009,
+          "troughDate": "2003-08-13",
+          "troughWealth": 0.871764
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.613513,
+          "buyAndHoldDeclineReturnPct": -22.140831,
+          "buyAndHoldRecoveryReturnPct": 29.225003,
+          "cycleCapturePct": -3.559842,
+          "declineAvoidedPct": 33.629204,
+          "exitDelaySessions": 70,
+          "incomplete": false,
+          "peakDate": "2008-12-30",
+          "peakWealth": 1.540849,
+          "recoveryCapturedPct": 54.771266,
+          "recoveryDate": "2011-09-02",
+          "reentryDelaySessions": 86,
+          "strategyCycleReturnPct": -1.040364,
+          "strategyDeclineReturnPct": -14.695046,
+          "strategyRecoveryReturnPct": 16.006904,
+          "troughDate": "2009-06-10",
+          "troughWealth": 1.199692
+        },
+        {
+          "buyAndHoldCycleReturnPct": 0.267912,
+          "buyAndHoldDeclineReturnPct": -15.741832,
+          "buyAndHoldRecoveryReturnPct": 19.000822,
+          "cycleCapturePct": 31.165778,
+          "declineAvoidedPct": 27.940737,
+          "exitDelaySessions": 37,
+          "incomplete": false,
+          "peakDate": "2012-07-25",
+          "peakWealth": 1.78931,
+          "recoveryCapturedPct": 102.491642,
+          "recoveryDate": "2014-12-11",
+          "reentryDelaySessions": 118,
+          "strategyCycleReturnPct": 5.921754,
+          "strategyDeclineReturnPct": -11.343448,
+          "strategyRecoveryReturnPct": 19.474254,
+          "troughDate": "2013-08-21",
+          "troughWealth": 1.50764
+        },
+        {
+          "buyAndHoldCycleReturnPct": null,
+          "buyAndHoldDeclineReturnPct": -34.471256,
+          "buyAndHoldRecoveryReturnPct": null,
+          "cycleCapturePct": null,
+          "declineAvoidedPct": 44.501073,
+          "exitDelaySessions": 19,
+          "incomplete": true,
+          "peakDate": "2020-08-04",
+          "peakWealth": 2.475016,
+          "recoveryCapturedPct": null,
+          "recoveryDate": null,
+          "reentryDelaySessions": 54,
+          "strategyCycleReturnPct": null,
+          "strategyDeclineReturnPct": -19.131177,
+          "strategyRecoveryReturnPct": null,
+          "troughDate": "2023-10-19",
+          "troughWealth": 1.621847
+        }
+      ],
+      "meanDeclineAvoidedPct": 33.221068,
+      "meanRecoveryCapturedPct": 63.402877,
+      "strategyFinalWealth": 1.847769,
+      "strategyMetrics": {
+        "avgTradePct": 1.95,
+        "borrowCostPct": 0.0,
+        "cagrPct": 2.88,
+        "exposurePct": 51.85,
+        "longContributionPct": 84.78,
+        "longExposurePct": 51.85,
+        "maxDrawdownPct": 24.23,
+        "sharpeRatio": 0.319,
+        "shortContributionPct": 0.0,
+        "shortExposurePct": 0.0,
+        "totalReturnPct": 84.78,
+        "trades": 36,
+        "winRatePct": 41.67,
+        "years": 21.62
+      },
+      "wealthRatio": 1.070849,
+      "whipsaw": {
+        "avgSessionsOut": 73.285714,
+        "exitReentryPairCount": 35,
+        "pairs": [
+          {
+            "costPct": 0.0,
+            "exitDate": "2003-07-21",
+            "exitFill": 87.45625,
+            "isWhipsaw": false,
+            "reentryDate": "2004-01-12",
+            "reentryFill": 86.6433,
+            "sessionsOut": 121
+          },
+          {
+            "costPct": 1.586509,
+            "exitDate": "2004-04-19",
+            "exitFill": 84.807575,
+            "isWhipsaw": true,
+            "reentryDate": "2004-08-23",
+            "reentryFill": 86.153055,
+            "sessionsOut": 87
+          },
+          {
+            "costPct": 0.720002,
+            "exitDate": "2005-10-17",
+            "exitFill": 90.37479,
+            "isWhipsaw": true,
+            "reentryDate": "2006-02-06",
+            "reentryFill": 91.02549,
+            "sessionsOut": 76
+          },
+          {
+            "costPct": 0.832165,
+            "exitDate": "2006-02-13",
+            "exitFill": 90.19488,
+            "isWhipsaw": true,
+            "reentryDate": "2006-02-21",
+            "reentryFill": 90.94545,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2006-03-06",
+            "exitFill": 88.93551,
+            "isWhipsaw": false,
+            "reentryDate": "2006-09-05",
+            "reentryFill": 87.633795,
+            "sessionsOut": 127
+          },
+          {
+            "costPct": 0.490976,
+            "exitDate": "2007-01-29",
+            "exitFill": 87.01647,
+            "isWhipsaw": true,
+            "reentryDate": "2007-02-05",
+            "reentryFill": 87.4437,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.947579,
+            "exitDate": "2007-04-16",
+            "exitFill": 87.3563,
+            "isWhipsaw": true,
+            "reentryDate": "2007-04-23",
+            "reentryFill": 88.18407,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 2.287903,
+            "exitDate": "2007-05-21",
+            "exitFill": 86.886535,
+            "isWhipsaw": true,
+            "reentryDate": "2007-09-04",
+            "reentryFill": 88.874415,
+            "sessionsOut": 73
+          },
+          {
+            "costPct": 1.445216,
+            "exitDate": "2008-04-28",
+            "exitFill": 91.484235,
+            "isWhipsaw": true,
+            "reentryDate": "2008-05-12",
+            "reentryFill": 92.80638,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 1.078439,
+            "exitDate": "2008-05-19",
+            "exitFill": 92.03396,
+            "isWhipsaw": true,
+            "reentryDate": "2008-09-02",
+            "reentryFill": 93.02649,
+            "sessionsOut": 73
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2009-04-13",
+            "exitFill": 102.90852,
+            "isWhipsaw": false,
+            "reentryDate": "2009-10-12",
+            "reentryFill": 96.078015,
+            "sessionsOut": 127
+          },
+          {
+            "costPct": 1.570216,
+            "exitDate": "2009-11-09",
+            "exitFill": 93.23336,
+            "isWhipsaw": true,
+            "reentryDate": "2009-11-16",
+            "reentryFill": 94.697325,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 7.026301,
+            "exitDate": "2009-12-14",
+            "exitFill": 92.303825,
+            "isWhipsaw": true,
+            "reentryDate": "2010-05-24",
+            "reentryFill": 98.78937,
+            "sessionsOut": 110
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2010-11-08",
+            "exitFill": 98.540705,
+            "isWhipsaw": false,
+            "reentryDate": "2011-05-16",
+            "reentryFill": 95.077515,
+            "sessionsOut": 130
+          },
+          {
+            "costPct": 10.91366,
+            "exitDate": "2012-03-19",
+            "exitFill": 111.30432,
+            "isWhipsaw": true,
+            "reentryDate": "2012-05-29",
+            "reentryFill": 123.451695,
+            "sessionsOut": 49
+          },
+          {
+            "costPct": 2.946337,
+            "exitDate": "2012-09-17",
+            "exitFill": 118.810565,
+            "isWhipsaw": true,
+            "reentryDate": "2012-09-24",
+            "reentryFill": 122.311125,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 1.577178,
+            "exitDate": "2012-10-08",
+            "exitFill": 121.91901,
+            "isWhipsaw": true,
+            "reentryDate": "2012-10-15",
+            "reentryFill": 123.84189,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 1.13048,
+            "exitDate": "2012-10-22",
+            "exitFill": 121.369285,
+            "isWhipsaw": true,
+            "reentryDate": "2012-10-31",
+            "reentryFill": 122.74134,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2012-11-05",
+            "exitFill": 122.75859,
+            "isWhipsaw": false,
+            "reentryDate": "2014-02-10",
+            "reentryFill": 106.663305,
+            "sessionsOut": 317
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2015-05-04",
+            "exitFill": 124.23785,
+            "isWhipsaw": false,
+            "reentryDate": "2015-10-05",
+            "reentryFill": 123.78186,
+            "sessionsOut": 107
+          },
+          {
+            "costPct": 2.159687,
+            "exitDate": "2015-11-09",
+            "exitFill": 118.04095,
+            "isWhipsaw": true,
+            "reentryDate": "2015-11-23",
+            "reentryFill": 120.590265,
+            "sessionsOut": 10
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2016-10-10",
+            "exitFill": 132.783575,
+            "isWhipsaw": false,
+            "reentryDate": "2017-05-15",
+            "reentryFill": 121.12053,
+            "sessionsOut": 149
+          },
+          {
+            "costPct": 1.772964,
+            "exitDate": "2017-10-30",
+            "exitFill": 123.79807,
+            "isWhipsaw": true,
+            "reentryDate": "2017-11-06",
+            "reentryFill": 125.992965,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2018-01-16",
+            "exitFill": 125.107415,
+            "isWhipsaw": false,
+            "reentryDate": "2018-07-16",
+            "reentryFill": 122.271105,
+            "sessionsOut": 125
+          },
+          {
+            "costPct": 0.562736,
+            "exitDate": "2018-07-30",
+            "exitFill": 118.930505,
+            "isWhipsaw": true,
+            "reentryDate": "2018-08-06",
+            "reentryFill": 119.59977,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 2.403927,
+            "exitDate": "2018-09-17",
+            "exitFill": 118.12091,
+            "isWhipsaw": true,
+            "reentryDate": "2019-01-14",
+            "reentryFill": 120.96045,
+            "sessionsOut": 81
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2019-12-23",
+            "exitFill": 136.741595,
+            "isWhipsaw": false,
+            "reentryDate": "2019-12-30",
+            "reentryFill": 135.957945,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 3.806658,
+            "exitDate": "2020-01-21",
+            "exitFill": 138.740595,
+            "isWhipsaw": true,
+            "reentryDate": "2020-01-27",
+            "reentryFill": 144.021975,
+            "sessionsOut": 4
+          },
+          {
+            "costPct": 1.815874,
+            "exitDate": "2020-08-31",
+            "exitFill": 161.5192,
+            "isWhipsaw": true,
+            "reentryDate": "2020-09-08",
+            "reentryFill": 164.452185,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.087909,
+            "exitDate": "2020-09-21",
+            "exitFill": 164.807555,
+            "isWhipsaw": true,
+            "reentryDate": "2020-09-28",
+            "reentryFill": 164.952435,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2020-10-05",
+            "exitFill": 160.869525,
+            "isWhipsaw": false,
+            "reentryDate": "2021-07-26",
+            "reentryFill": 149.069498,
+            "sessionsOut": 202
+          },
+          {
+            "costPct": 2.503582,
+            "exitDate": "2021-10-11",
+            "exitFill": 141.5292,
+            "isWhipsaw": true,
+            "reentryDate": "2021-10-18",
+            "reentryFill": 145.0725,
+            "sessionsOut": 5
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2022-01-10",
+            "exitFill": 141.579175,
+            "isWhipsaw": false,
+            "reentryDate": "2023-03-13",
+            "reentryFill": 108.2541,
+            "sessionsOut": 293
+          },
+          {
+            "costPct": 0.0,
+            "exitDate": "2023-05-22",
+            "exitFill": 101.199375,
+            "isWhipsaw": false,
+            "reentryDate": "2024-01-08",
+            "reentryFill": 96.278115,
+            "sessionsOut": 158
+          },
+          {
+            "costPct": 2.481033,
+            "exitDate": "2024-04-08",
+            "exitFill": 91.184385,
+            "isWhipsaw": true,
+            "reentryDate": "2024-07-22",
+            "reentryFill": 93.4467,
+            "sessionsOut": 72
+          }
+        ],
+        "whipsawCostPct": 52.147331,
+        "whipsawCount": 23
+      }
+    }
+  },
+  "runContext": {
+    "commit": "011eb711cfd7f1f10a62e4368905c9a497462865",
+    "model": "unspecified",
+    "role": "quant-implementation",
+    "sourceHash": "70709972520a6dfb28f1a099ca4a0df24fbe1362f344f4fb4133d84546a01067",
+    "workingTreeDirty": true
+  },
+  "status": "complete",
+  "strategy": {
+    "id": "trend-30w",
+    "version": 1
+  },
+  "symbols": [
+    "GLD",
+    "SPY",
+    "TLT"
+  ],
+  "verdict": "recorded"
+}
