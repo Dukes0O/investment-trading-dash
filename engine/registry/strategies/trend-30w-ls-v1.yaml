@@ -1,0 +1,23 @@
+id: trend-30w-ls
+version: 1
+name: Symmetric long/short 30-week trend following
+status: research
+registered: 2026-07-22
+economic_rationale: Persistent institutional flows and behavioural underreaction may continue in both rising and falling multi-month trends.
+parameters:
+  weekly_fast_period: 10
+  weekly_slow_period: 30
+  long_entry: completed_week_close_above_slow_and_fast_above_slow
+  long_exit: completed_week_close_below_slow
+  short_entry: completed_week_close_below_slow_and_fast_below_slow
+  short_exit: completed_week_close_above_slow
+  execution: next_daily_open
+  week_exposure: from_final_session_close
+  direction: long_flat_short
+protective_stop_in_baseline: false
+borrow_cost:
+  config: costs.short_borrow_bps_per_year
+  default_bps_per_year: 25.0
+execution_instrument_constraint: Outright short in a margin account versus an inverse ETF in a TFSA is a promotion-time decision for Kyle; this research strategy does not select an instrument.
+promotion: null
+retirement: null

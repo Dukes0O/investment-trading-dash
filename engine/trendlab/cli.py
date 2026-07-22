@@ -12,7 +12,12 @@ from typing import Any
 
 import pandas as pd
 
-from trendlab.backtest.walkforward import holdout_cutoff, make_folds, run_walk_forward
+from trendlab.backtest.walkforward import (
+    holdout_cutoff,
+    make_folds,
+    run_long_short_walk_forward,
+    run_walk_forward,
+)
 from trendlab.config import ENGINE_ROOT, REPO_ROOT, config_hash, load_configs
 from trendlab.data.base import EODRequest
 from trendlab.data.snapshot import latest_snapshot, write_snapshot
@@ -21,9 +26,17 @@ from trendlab.data.tiingo import TiingoProvider
 from trendlab.data.validate import reconcile_close, trenddesk_bars, validate_bars
 from trendlab.models import bars_from_frame
 from trendlab.parity import verify_node_parity
+from trendlab.portfolio.heat import (
+    action_stops,
+    latest_actions_document,
+    portfolio_active_stops,
+    portfolio_positions,
+)
+from trendlab.replay import run_replay as execute_replay
 from trendlab.registry import append_jsonl, experiment_id, write_manifest
 from trendlab.reporting.weekly import build_actions, write_actions, write_html
-from trendlab.states.trend30w import Trend30Week
+from trendlab.states.trend30w import Trend30Week, Trend30WeekLongShort
+from trendlab.status import build_status
 
 
 RAW_ROOT = ENGINE_ROOT / "data" / "raw"
@@ -45,6 +58,11 @@ def parser() -> argparse.ArgumentParser:
     backtest.add_argument("--symbol", action="append", help="repeatable; defaults to configured assets")
     parity = commands.add_parser("verify-node", help="compare Python and Node 30-week baselines on identical pre-holdout bars")
     parity.add_argument("--symbol", action="append", help="repeatable; defaults to configured assets")
+    replay = commands.add_parser("replay", help="run the holdout-safe weekly operational replay drill")
+    replay.add_argument("--weeks", type=int, default=52)
+    mirror = commands.add_parser("experiment-long-short", help="register the symmetric long/short 30-week experiment")
+    mirror.add_argument("--symbol", action="append", help="repeatable; defaults to configured assets")
+    commands.add_parser("status", help="show actions, strategies, experiments, and cost-ledger readiness")
     return root
 
 
@@ -58,8 +76,14 @@ def main(argv: list[str] | None = None) -> int:
             )
         elif args.command == "backtest":
             output = run_backtests(args.symbol)
-        else:
+        elif args.command == "verify-node":
             output = run_parity(args.symbol)
+        elif args.command == "replay":
+            output = run_replay(args.weeks)
+        elif args.command == "experiment-long-short":
+            output = run_long_short_experiment(args.symbol)
+        else:
+            output = build_status(REPO_ROOT, REGISTRY_ROOT)
     except Exception as exc:
         print(f"trendlab: {exc}", file=sys.stderr)
         return 1
@@ -127,10 +151,17 @@ def run_weekly(
         }
         bars_by_symbol[symbol] = bars_from_frame(curated)
         snapshot_paths[symbol] = str(snapshot.relative_to(ENGINE_ROOT))
-    held = _held_symbols(REPO_ROOT / "data" / "portfolio.json")
+    allowed = {str(asset["symbol"]).upper() for asset in assets}
+    held = portfolio_positions(REPO_ROOT / "data" / "portfolio.json", allowed)
+    _, latest_actions = latest_actions_document(REPO_ROOT / "data" / "reports", through=as_of)
+    confirmed_stops = action_stops(latest_actions)
+    # A stop copied from the broker into portfolio.json is explicit Kyle
+    # confirmation and therefore overrides the prior actions document.
+    confirmed_stops.update(portfolio_active_stops(REPO_ROOT / "data" / "portfolio.json", allowed))
     document = build_actions(
         bars_by_symbol=bars_by_symbol, configs=configs, provider=provider_name,
-        report_date=as_of, held_symbols=held, validation=validations,
+        report_date=as_of, held_positions=held, active_stops=confirmed_stops,
+        validation=validations,
     )
     document["runContext"] = _run_context()
     document["snapshots"] = snapshot_paths
@@ -221,9 +252,102 @@ def run_parity(symbols: list[str] | None = None) -> dict[str, Any]:
     return {"ok": all(value["ok"] for value in results.values()), "holdoutEvaluated": False, "results": results}
 
 
+def run_replay(weeks: int = 52) -> dict[str, Any]:
+    return execute_replay(
+        weeks, configs=load_configs(), raw_root=RAW_ROOT, repo_root=REPO_ROOT,
+        output_root=OUTPUT_ROOT, registry_root=REGISTRY_ROOT, run_context=_run_context,
+    )
+
+
+def run_long_short_experiment(symbols: list[str] | None = None) -> dict[str, Any]:
+    configs = load_configs()
+    provider = configs["assets"]["provider"]
+    selected = _selected_symbols(configs, symbols)
+    research = configs["research"]
+    long_flat = _strategy(research)
+    long_short = Trend30WeekLongShort(
+        long_flat.fast_period, long_flat.slow_period, long_flat.warmup,
+    )
+    store = MarketStore(STORE_PATH)
+    identifier = experiment_id("trend-30w-ls")
+    manifest_path = REGISTRY_ROOT / "manifests" / f"{identifier}.json"
+    hypothesis = (
+        "Participating symmetrically in downtrends until the completed weekly close reclaims "
+        "the 30-week SMA improves risk-adjusted results versus going to cash."
+    )
+    manifest: dict[str, Any] = {
+        "id": identifier, "date": date.today().isoformat(), "hypothesis": hypothesis,
+        "expectedPrior": "The short side helps GLD and TLT more than SPY.",
+        "strategy": {"id": "trend-30w-ls", "version": 1, "status": "research"},
+        "configHash": config_hash(configs), "symbols": selected, "status": "running",
+        "foldScheme": research["walk_forward"], "holdoutEvaluated": False,
+        "costs": research["costs"], "runContext": _run_context(),
+    }
+    write_manifest(manifest_path, manifest)
+    results: dict[str, Any] = {}
+    try:
+        for symbol in selected:
+            bars_all = bars_from_frame(store.read(provider, symbol))
+            cutoff = holdout_cutoff(bars_all[-1].date, int(research["holdout"]["months"]))
+            research_bars = [bar for bar in bars_all if bar.date <= cutoff]
+            fold_config = research["walk_forward"]
+            folds = make_folds(
+                [bar.date for bar in research_bars], through=cutoff,
+                train_years=int(fold_config["train_years"]), test_years=int(fold_config["test_years"]),
+                step_years=int(fold_config["step_years"]), embargo_sessions=int(fold_config["embargo_sessions"]),
+            )
+            if not folds:
+                raise RuntimeError(f"no walk-forward folds available for {symbol}")
+            results[symbol] = {
+                "holdoutCutoff": cutoff.isoformat(),
+                **run_long_short_walk_forward(
+                    research_bars, long_short, long_flat, folds,
+                    commission_bps_per_side=float(research["costs"]["commission_bps_per_side"]),
+                    slippage_bps_per_side=float(research["costs"]["slippage_bps_per_side"]),
+                    short_borrow_bps_per_year=float(research["costs"]["short_borrow_bps_per_year"]),
+                ),
+            }
+        verdict, conclusion = _long_short_verdict(results)
+        manifest.update({"status": "complete", "verdict": verdict, "conclusion": conclusion, "results": results})
+    except Exception as exc:
+        verdict = "failed"
+        manifest.update({"status": "failed", "error": str(exc)})
+        write_manifest(manifest_path, manifest)
+        append_jsonl(REGISTRY_ROOT / "experiments.jsonl", _registry_line(manifest, verdict))
+        raise
+    write_manifest(manifest_path, manifest)
+    append_jsonl(REGISTRY_ROOT / "experiments.jsonl", _registry_line(manifest, verdict))
+    return {"ok": True, "experimentId": identifier, "manifest": str(manifest_path), "results": results}
+
+
 def _strategy(research: dict[str, Any]) -> Trend30Week:
     item = research["strategy"]
     return Trend30Week(int(item["weekly_fast_period"]), int(item["weekly_slow_period"]), int(item["warmup_daily_bars"]))
+
+
+def _long_short_verdict(results: dict[str, Any]) -> tuple[str, dict[str, Any]]:
+    total_folds = sum(int(value["aggregate"]["foldCount"]) for value in results.values())
+    return_wins = sum(int(value["aggregate"]["foldsBeatingLongFlatReturn"]) for value in results.values())
+    sharpe_wins = sum(int(value["aggregate"]["foldsBeatingLongFlatSharpe"]) for value in results.values())
+    positive_short_assets = [
+        symbol for symbol, value in results.items()
+        if float(value["aggregate"]["shortContributionPct"]) > 0
+    ]
+    passes = return_wins > total_folds / 2 and sharpe_wins > total_folds / 2 and len(positive_short_assets) >= 2
+    verdict = "candidate" if passes else "rejected"
+    return verdict, {
+        "preHoldoutGatePassed": passes,
+        "folds": total_folds,
+        "foldsBeatingLongFlatReturn": return_wins,
+        "foldsBeatingLongFlatSharpe": sharpe_wins,
+        "assetsWithPositiveShortContribution": positive_short_assets,
+        "holdoutEvaluated": False,
+        "decision": (
+            "Candidate may proceed to independent promotion review; holdout remains untouched."
+            if passes else
+            "Reject the symmetric mirror without evaluating the holdout; it does not beat long/flat in a majority of folds and is carried by fewer than two assets."
+        ),
+    }
 
 
 def _selected_symbols(configs: dict[str, Any], selected: list[str] | None) -> list[str]:
@@ -245,7 +369,7 @@ def _held_symbols(path: Path) -> set[str]:
 
 
 def _registry_line(manifest: dict[str, Any], verdict: str) -> dict[str, Any]:
-    return {
+    line = {
         "id": manifest["id"], "date": manifest["date"], "hypothesis": manifest["hypothesis"],
         "configHash": manifest["configHash"], "dataRange": {
             symbol: {"holdoutCutoff": value.get("holdoutCutoff")} for symbol, value in manifest.get("results", {}).items()
@@ -255,6 +379,11 @@ def _registry_line(manifest: dict[str, Any], verdict: str) -> dict[str, Any]:
         "verdict": verdict, "manifest": f"engine/registry/manifests/{manifest['id']}.json",
         "runContext": manifest["runContext"],
     }
+    if "strategy" in manifest:
+        line["strategy"] = manifest["strategy"]
+    if "expectedPrior" in manifest:
+        line["expectedPrior"] = manifest["expectedPrior"]
+    return line
 
 
 def _run_context() -> dict[str, object]:

@@ -63,3 +63,36 @@ class Trend30Week:
         else:
             state, action = "transition", "HOLD"
         return TrendState(bars[index].date.isoformat(), state, action, weekly_close, fast, slow)
+
+
+class Trend30WeekLongShort(Trend30Week):
+    """Exact zero-parameter short mirror of the registered long/flat rule."""
+
+    id = "trend-30w-ls"
+
+    @staticmethod
+    def short_entry(index: int, context: tuple[list[float | None], list[float | None], list[float | None]]) -> bool:
+        weekly_close, fast, slow = (series[index] for series in context)
+        return weekly_close is not None and fast is not None and slow is not None and weekly_close < slow and fast < slow
+
+    @staticmethod
+    def short_exit(index: int, context: tuple[list[float | None], list[float | None], list[float | None]]) -> bool:
+        weekly_close, _, slow = (series[index] for series in context)
+        return weekly_close is not None and slow is not None and weekly_close > slow
+
+    def target(
+        self, index: int,
+        context: tuple[list[float | None], list[float | None], list[float | None]],
+        current_position: int,
+    ) -> int:
+        long_entry = self.entry(index, context)
+        short_entry = self.short_entry(index, context)
+        if current_position > 0:
+            return -1 if short_entry else 0 if self.exit(index, context) else 1
+        if current_position < 0:
+            return 1 if long_entry else 0 if self.short_exit(index, context) else -1
+        if long_entry:
+            return 1
+        if short_entry:
+            return -1
+        return 0

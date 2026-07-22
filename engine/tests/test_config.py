@@ -10,3 +10,4 @@ def test_real_yaml_config_with_dates_has_stable_hash():
     second = config_hash(load_configs())
     assert first == second
     assert len(first) == 64
+    assert configs["research"]["costs"]["short_borrow_bps_per_year"] == 25.0

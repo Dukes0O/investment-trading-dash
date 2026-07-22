@@ -1,6 +1,6 @@
-# Weekly report contract (schemaVersion 1)
+# Weekly report contracts
 
-## Engine actions contract (schemaVersion 1)
+## Engine actions contract (schemaVersion 2)
 
 Before the LLM-authored weekly report, TrendLab writes
 `data/reports/engine-actions-<YYYY-MM-DD>.json`. The existing dossier builder
@@ -11,7 +11,7 @@ Required shape:
 
 ```jsonc
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "kind": "trendlab-weekly-actions",
   "reportDate": "2026-07-22",
   "generatedAt": "2026-07-22T12:00:00Z",
@@ -20,14 +20,22 @@ Required shape:
   "configHash": "sha256 hex",
   "requiresHumanApproval": true,
   "executionTiming": "next market open after Kyle reviews and approves",
+  "portfolioHeat": {
+    "current": 0.0,
+    "maximum": 500.0,
+    "afterProposedBuys": 125.0,
+    "positions": []
+  },
   "actions": [{
     "symbol": "GLD",
     "held": false,
     "state": "uptrend",
-    "action": "BUY", // BUY | HOLD | EXIT | AVOID
+    "signalIntent": "BUY", // BUY | HOLD | EXIT | AVOID; before sizing
+    "action": "BUY", // BUY | HOLD | EXIT | AVOID | DEFER
     "signalDate": "2026-07-21",
     "referencePrice": 300.0,
-    "protectiveStop": 285.0,
+    "activeStop": null, // confirmed broker stop; required when held
+    "proposedStop": 285.0, // recomputed level awaiting Kyle's approval
     "atr14": 5.0,
     "quantity": 8,
     "risk": { "quantity": 8, "risk_budget": 120.0 },
@@ -40,8 +48,24 @@ Required shape:
 ```
 
 The engine must halt instead of writing this document when required market data
-is missing, invalid, or stale. `BUY` requires a positive quantity and protective
-stop. Every document requires human approval and is decision support only.
+is missing, invalid, or stale. `BUY` requires a positive quantity and proposed
+stop. `signalIntent` records the strategy decision before sizing. When a BUY
+signal has no remaining heat capacity, `action` is `DEFER`, quantity is zero,
+and `signalIntent` remains `BUY`; this is capacity-constrained, not bearish.
+
+For held positions, `activeStop` is the stop confirmed as working at the broker
+and is the only stop used for current heat. `proposedStop` is this week's fresh
+3x ATR level and does not become active merely because the engine emitted it.
+Kyle confirms a roll by recording `activeStop` on the corresponding in-scope
+position in `data/portfolio.json`; that value overrides the carried-forward
+`activeStop` in the previous engine-actions document. Missing confirmed stops
+halt the run. Replay is synthetic and assumes each proposed roll is approved
+before the next replay week.
+
+Proposed BUYs are sized sequentially in configured asset order and may not push
+`afterProposedBuys` above `maximum`. Every document requires human approval and
+is decision support only. The loader remains compatible with schema v1 evidence,
+where the historical `protectiveStop` field represented the single stop value.
 
 ## LLM weekly report contract (schemaVersion 1)
 

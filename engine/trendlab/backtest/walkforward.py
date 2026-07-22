@@ -7,7 +7,7 @@ import pandas as pd
 
 from trendlab.backtest.core import BacktestResult, buy_and_hold, cash_baseline, simulate
 from trendlab.models import Bar
-from trendlab.states.trend30w import Trend30Week
+from trendlab.states.trend30w import Trend30Week, Trend30WeekLongShort
 
 
 @dataclass(frozen=True, slots=True)
@@ -95,3 +95,78 @@ def run_walk_forward(
             "foldsBeatingCash": sum(item["trend30w"]["totalReturnPct"] > 0 for item in results),
         },
     }
+
+
+def run_long_short_walk_forward(
+    bars: list[Bar], long_short: Trend30WeekLongShort, long_flat: Trend30Week,
+    folds: list[Fold], *, commission_bps_per_side: float,
+    slippage_bps_per_side: float, short_borrow_bps_per_year: float,
+) -> dict[str, object]:
+    """Compare the symmetric mirror with the unchanged long/flat baseline."""
+    results: list[dict[str, object]] = []
+    for fold in folds:
+        common = {
+            "commission_bps_per_side": commission_bps_per_side,
+            "slippage_bps_per_side": slippage_bps_per_side,
+            "evaluation_start": fold.test_start,
+            "evaluation_end": fold.test_end,
+            "start_flat_at_evaluation": True,
+        }
+        mirror = simulate(
+            bars, long_short,
+            short_borrow_bps_per_year=short_borrow_bps_per_year,
+            **common,
+        )
+        baseline = simulate(bars, long_flat, **common)
+        buy_hold = buy_and_hold(
+            bars, evaluation_start=fold.test_start, evaluation_end=fold.test_end,
+            commission_bps_per_side=commission_bps_per_side,
+            slippage_bps_per_side=slippage_bps_per_side,
+        )
+        results.append({
+            "fold": asdict(fold),
+            "trend30wLongShort": mirror.metrics,
+            "trend30wLongFlat": baseline.metrics,
+            "buyAndHold": buy_hold.metrics,
+        })
+    valid = [item for item in results if item["trend30wLongShort"]["totalReturnPct"] is not None]
+    mirror_metrics = [item["trend30wLongShort"] for item in valid]
+    return {
+        "folds": results,
+        "aggregate": {
+            "foldCount": len(valid),
+            "medianTotalReturnPct": _median(mirror_metrics, "totalReturnPct"),
+            "medianSharpeRatio": _median(mirror_metrics, "sharpeRatio"),
+            "meanMaxDrawdownPct": _mean(mirror_metrics, "maxDrawdownPct"),
+            "longContributionPct": round(sum(float(item["longContributionPct"]) for item in mirror_metrics), 2),
+            "shortContributionPct": round(sum(float(item["shortContributionPct"]) for item in mirror_metrics), 2),
+            "borrowCostPct": round(sum(float(item["borrowCostPct"]) for item in mirror_metrics), 4),
+            "totalTrades": sum(int(item["trades"]) for item in mirror_metrics),
+            "foldsBeatingLongFlatReturn": sum(
+                item["trend30wLongShort"]["totalReturnPct"] > item["trend30wLongFlat"]["totalReturnPct"]
+                for item in valid
+            ),
+            "foldsBeatingLongFlatSharpe": sum(
+                _greater(item["trend30wLongShort"].get("sharpeRatio"), item["trend30wLongFlat"].get("sharpeRatio"))
+                for item in valid
+            ),
+            "foldsBeatingBuyAndHold": sum(
+                item["trend30wLongShort"]["totalReturnPct"] > item["buyAndHold"]["totalReturnPct"]
+                for item in valid
+            ),
+        },
+    }
+
+
+def _median(metrics: list[dict[str, object]], key: str) -> float | None:
+    values = [float(item[key]) for item in metrics if item.get(key) is not None]
+    return round(float(pd.Series(values).median()), 3) if values else None
+
+
+def _mean(metrics: list[dict[str, object]], key: str) -> float | None:
+    values = [float(item[key]) for item in metrics if item.get(key) is not None]
+    return round(float(pd.Series(values).mean()), 2) if values else None
+
+
+def _greater(left: object, right: object) -> bool:
+    return left is not None and right is not None and float(left) > float(right)

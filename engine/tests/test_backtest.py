@@ -17,6 +17,18 @@ class OneShot:
         return False
 
 
+class ShortOneShot:
+    warmup = 14
+
+    def prepare(self, bars):
+        return None
+
+    def target(self, index, context, current_position):
+        if current_position == 0:
+            return -1 if index == 14 else 0
+        return current_position
+
+
 def flat_bars():
     output = []
     current = date(2020, 1, 1)
@@ -78,3 +90,44 @@ def test_buy_hold_and_cash_references_are_explicit():
     assert buy_hold.metrics["trades"] == 1
     assert cash.metrics["totalReturnPct"] == 0
     assert cash.metrics["exposurePct"] == 0
+
+
+def test_short_gap_through_stop_fills_at_open():
+    values = flat_bars()
+    item = values[16]
+    values[16] = Bar(
+        item.date, 110, 111, 109, 110, item.volume,
+        110, 111, 109, 110, item.adj_volume, 0.0, 1.0,
+    )
+    result = simulate(
+        values, ShortOneShot(), commission_bps_per_side=0,
+        slippage_bps_per_side=0, stop_atr_multiple=1.0,
+    )
+    trade = result.trades[0]
+    assert trade.direction == "short"
+    assert trade.entry_date == "2020-01-16"
+    assert trade.exit_date == "2020-01-17"
+    assert trade.exit_price == 110
+    assert trade.reason == "stop"
+
+
+def test_short_borrow_and_distributions_are_debited():
+    values = flat_bars()
+    item = values[20]
+    values[20] = Bar(
+        item.date, item.open, item.high, item.low, item.close, item.volume,
+        item.adj_open, item.adj_high, item.adj_low, item.adj_close,
+        item.adj_volume, 1.0, 1.0,
+    )
+    no_carry = simulate(
+        values, ShortOneShot(), commission_bps_per_side=0,
+        slippage_bps_per_side=0, include_distributions=False,
+    )
+    with_carry = simulate(
+        values, ShortOneShot(), commission_bps_per_side=0,
+        slippage_bps_per_side=0, include_distributions=True,
+        short_borrow_bps_per_year=25,
+    )
+    assert with_carry.metrics["totalReturnPct"] < no_carry.metrics["totalReturnPct"]
+    assert with_carry.metrics["borrowCostPct"] > 0
+    assert with_carry.metrics["shortContributionPct"] < no_carry.metrics["shortContributionPct"]

@@ -1,15 +1,15 @@
 {
   "actions": "C:\\Users\\kyleb\\dev\\investment-trading-dash\\data\\reports\\engine-actions-2026-07-22.json",
-  "completedAt": "2026-07-22T18:16:30.305617+00:00",
-  "configHash": "0b8db9ee6bf4322f82c22c5aaa259601ff7542a0a1abefa11d58e0d463d0f4d0",
+  "completedAt": "2026-07-22T23:00:30.210729+00:00",
+  "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
   "date": "2026-07-22",
   "html": "C:\\Users\\kyleb\\dev\\investment-trading-dash\\engine\\output\\weekly-2026-07-22.html",
   "kind": "weekly-run",
   "runContext": {
-    "commit": "354b5eb6cbc25022ba3ffe896663edd0bcad6622",
+    "commit": "a95ba0f6e89f53b1da2cd3b323986c381b9f1eff",
     "model": "unspecified",
     "role": "quant-implementation",
-    "sourceHash": "9b2698093abf1d7b0bea42f01ec6340546f600687cc32c940b53caf3c64fd600",
+    "sourceHash": "54cdaf43d6fc99ff91a7c7caece8c664472262cabaaee1bb3306d9dbaf0b5c9b",
     "workingTreeDirty": true
   },
   "snapshots": {

@@ -1,0 +1,1062 @@
+{
+  "completedWeeks": 6,
+  "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
+  "haltedWeeks": 0,
+  "holdoutEvaluated": false,
+  "holdoutSafeBoundary": "2025-01-21",
+  "id": "replay-20260722T224334097035Z",
+  "kind": "operational-replay",
+  "requestedWeeks": 6,
+  "runContext": {
+    "commit": "a95ba0f6e89f53b1da2cd3b323986c381b9f1eff",
+    "model": "unspecified",
+    "role": "quant-implementation",
+    "sourceHash": "efacf174cf1735a273d03a1c17db6d0b77a0b3f035cb338ce72b3847ffc1d7a7",
+    "workingTreeDirty": true
+  },
+  "status": "complete",
+  "summary": "C:\\Users\\kyleb\\dev\\investment-trading-dash\\engine\\output\\replay-20260722T224334097035Z.csv",
+  "weeks": [
+    {
+      "actionDocument": {
+        "actions": [
+          {
+            "action": "BUY",
+            "atr14": 2.9582,
+            "held": false,
+            "protectiveStop": 235.4155,
+            "quantity": 14,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 244.29,
+            "risk": {
+              "portfolio_heat_after": 124.24,
+              "position_value": 3420.06,
+              "quantity": 14,
+              "risk_budget": 124.24,
+              "risk_per_unit": 8.8745
+            },
+            "signalDate": "2024-12-13",
+            "state": "uptrend",
+            "symbol": "GLD",
+            "weekly": {
+              "close": 244.29,
+              "fastSma": 246.975,
+              "slowSma": 233.041
+            }
+          },
+          {
+            "action": "BUY",
+            "atr14": 4.4095,
+            "held": false,
+            "protectiveStop": 590.9815,
+            "quantity": 9,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 604.21,
+            "risk": {
+              "portfolio_heat_after": 243.3,
+              "position_value": 5437.89,
+              "quantity": 9,
+              "risk_budget": 119.06,
+              "risk_per_unit": 13.2285
+            },
+            "signalDate": "2024-12-13",
+            "state": "uptrend",
+            "symbol": "SPY",
+            "weekly": {
+              "close": 592.0843,
+              "fastSma": 578.9699,
+              "slowSma": 550.8676
+            }
+          },
+          {
+            "action": "AVOID",
+            "atr14": 1.0964,
+            "held": false,
+            "protectiveStop": 86.8607,
+            "quantity": 0,
+            "rationale": "Completed weekly close is below the 30-week SMA.",
+            "referencePrice": 90.15,
+            "risk": null,
+            "signalDate": "2024-12-13",
+            "state": "downtrend",
+            "symbol": "TLT",
+            "weekly": {
+              "close": 84.0594,
+              "fastSma": 85.6469,
+              "slowSma": 86.8997
+            }
+          }
+        ],
+        "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
+        "executionTiming": "next market open after Kyle reviews and approves",
+        "generatedAt": "2026-07-22T22:43:34.343536+00:00",
+        "kind": "trendlab-weekly-actions",
+        "portfolioHeat": {
+          "afterProposedBuys": 243.3,
+          "current": 0.0,
+          "maximum": 500.0,
+          "positions": []
+        },
+        "provider": "tiingo",
+        "reportDate": "2024-12-13",
+        "requiresHumanApproval": true,
+        "schemaVersion": 1,
+        "strategy": {
+          "id": "trend-30w",
+          "version": 1
+        },
+        "validation": {
+          "GLD": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.509968,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 1,
+              "outlierFraction": 0.00021706,
+              "overlapRows": 4607,
+              "status": "pass_with_warning",
+              "tolerancePct": 0.5
+            },
+            "from": "2004-11-18",
+            "rows": 5052,
+            "status": "pass",
+            "to": "2024-12-13",
+            "warnings": []
+          },
+          "SPY": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.113129,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4607,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "1993-01-29",
+            "rows": 8027,
+            "status": "pass",
+            "to": "2024-12-13",
+            "warnings": []
+          },
+          "TLT": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.411194,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4601,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "2002-07-30",
+            "rows": 5634,
+            "status": "pass",
+            "to": "2024-12-13",
+            "warnings": []
+          }
+        }
+      },
+      "date": "2024-12-13",
+      "signalChecks": [
+        {
+          "actualAction": "BUY",
+          "actualState": "uptrend",
+          "expectedAction": "BUY",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "GLD"
+        },
+        {
+          "actualAction": "BUY",
+          "actualState": "uptrend",
+          "expectedAction": "BUY",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "SPY"
+        },
+        {
+          "actualAction": "AVOID",
+          "actualState": "downtrend",
+          "expectedAction": "AVOID",
+          "expectedState": "downtrend",
+          "matches": true,
+          "symbol": "TLT"
+        }
+      ],
+      "status": "complete"
+    },
+    {
+      "actionDocument": {
+        "actions": [
+          {
+            "action": "HOLD",
+            "atr14": 2.8455,
+            "held": true,
+            "protectiveStop": 233.5636,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 242.1,
+            "risk": null,
+            "signalDate": "2024-12-20",
+            "state": "uptrend",
+            "symbol": "GLD",
+            "weekly": {
+              "close": 242.1,
+              "fastSma": 246.638,
+              "slowSma": 233.9137
+            }
+          },
+          {
+            "action": "HOLD",
+            "atr14": 6.2548,
+            "held": true,
+            "protectiveStop": 572.3857,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 591.15,
+            "risk": null,
+            "signalDate": "2024-12-20",
+            "state": "uptrend",
+            "symbol": "SPY",
+            "weekly": {
+              "close": 581.2125,
+              "fastSma": 580.2962,
+              "slowSma": 553.056
+            }
+          },
+          {
+            "action": "AVOID",
+            "atr14": 1.1,
+            "held": false,
+            "protectiveStop": 85.01,
+            "quantity": 0,
+            "rationale": "Completed weekly close is below the 30-week SMA.",
+            "referencePrice": 88.31,
+            "risk": null,
+            "signalDate": "2024-12-20",
+            "state": "downtrend",
+            "symbol": "TLT",
+            "weekly": {
+              "close": 82.6679,
+              "fastSma": 85.2365,
+              "slowSma": 86.8801
+            }
+          }
+        ],
+        "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
+        "executionTiming": "next market open after Kyle reviews and approves",
+        "generatedAt": "2026-07-22T22:43:34.546050+00:00",
+        "kind": "trendlab-weekly-actions",
+        "portfolioHeat": {
+          "afterProposedBuys": 95.1,
+          "current": 95.1,
+          "maximum": 500.0,
+          "positions": [
+            {
+              "activeStop": 235.4155,
+              "currentPrice": 242.1,
+              "quantity": 14.0,
+              "risk": 93.58,
+              "symbol": "GLD"
+            },
+            {
+              "activeStop": 590.9815,
+              "currentPrice": 591.15,
+              "quantity": 9.0,
+              "risk": 1.52,
+              "symbol": "SPY"
+            }
+          ]
+        },
+        "provider": "tiingo",
+        "reportDate": "2024-12-20",
+        "requiresHumanApproval": true,
+        "schemaVersion": 1,
+        "strategy": {
+          "id": "trend-30w",
+          "version": 1
+        },
+        "validation": {
+          "GLD": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.509968,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 1,
+              "outlierFraction": 0.00021683,
+              "overlapRows": 4612,
+              "status": "pass_with_warning",
+              "tolerancePct": 0.5
+            },
+            "from": "2004-11-18",
+            "rows": 5057,
+            "status": "pass",
+            "to": "2024-12-20",
+            "warnings": []
+          },
+          "SPY": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.113129,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4612,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "1993-01-29",
+            "rows": 8032,
+            "status": "pass",
+            "to": "2024-12-20",
+            "warnings": []
+          },
+          "TLT": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.411194,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4606,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "2002-07-30",
+            "rows": 5639,
+            "status": "pass",
+            "to": "2024-12-20",
+            "warnings": []
+          }
+        }
+      },
+      "date": "2024-12-20",
+      "signalChecks": [
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "GLD"
+        },
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "SPY"
+        },
+        {
+          "actualAction": "AVOID",
+          "actualState": "downtrend",
+          "expectedAction": "AVOID",
+          "expectedState": "downtrend",
+          "matches": true,
+          "symbol": "TLT"
+        }
+      ],
+      "status": "complete"
+    },
+    {
+      "actionDocument": {
+        "actions": [
+          {
+            "action": "HOLD",
+            "atr14": 2.5351,
+            "held": true,
+            "protectiveStop": 233.7948,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 241.4,
+            "risk": null,
+            "signalDate": "2024-12-27",
+            "state": "uptrend",
+            "symbol": "GLD",
+            "weekly": {
+              "close": 241.4,
+              "fastSma": 245.651,
+              "slowSma": 234.7837
+            }
+          },
+          {
+            "action": "HOLD",
+            "atr14": 6.5437,
+            "held": true,
+            "protectiveStop": 575.3789,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 595.01,
+            "risk": null,
+            "signalDate": "2024-12-27",
+            "state": "uptrend",
+            "symbol": "SPY",
+            "weekly": {
+              "close": 585.0076,
+              "fastSma": 581.5112,
+              "slowSma": 555.4381
+            }
+          },
+          {
+            "action": "AVOID",
+            "atr14": 1.0283,
+            "held": false,
+            "protectiveStop": 84.0151,
+            "quantity": 0,
+            "rationale": "Completed weekly close is below the 30-week SMA.",
+            "referencePrice": 87.1,
+            "risk": null,
+            "signalDate": "2024-12-27",
+            "state": "downtrend",
+            "symbol": "TLT",
+            "weekly": {
+              "close": 81.5352,
+              "fastSma": 84.6972,
+              "slowSma": 86.851
+            }
+          }
+        ],
+        "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
+        "executionTiming": "next market open after Kyle reviews and approves",
+        "generatedAt": "2026-07-22T22:43:34.741589+00:00",
+        "kind": "trendlab-weekly-actions",
+        "portfolioHeat": {
+          "afterProposedBuys": 313.33,
+          "current": 313.33,
+          "maximum": 500.0,
+          "positions": [
+            {
+              "activeStop": 233.5636,
+              "currentPrice": 241.4,
+              "quantity": 14.0,
+              "risk": 109.71,
+              "symbol": "GLD"
+            },
+            {
+              "activeStop": 572.3857,
+              "currentPrice": 595.01,
+              "quantity": 9.0,
+              "risk": 203.62,
+              "symbol": "SPY"
+            }
+          ]
+        },
+        "provider": "tiingo",
+        "reportDate": "2024-12-27",
+        "requiresHumanApproval": true,
+        "schemaVersion": 1,
+        "strategy": {
+          "id": "trend-30w",
+          "version": 1
+        },
+        "validation": {
+          "GLD": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.509968,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 1,
+              "outlierFraction": 0.00021664,
+              "overlapRows": 4616,
+              "status": "pass_with_warning",
+              "tolerancePct": 0.5
+            },
+            "from": "2004-11-18",
+            "rows": 5061,
+            "status": "pass",
+            "to": "2024-12-27",
+            "warnings": []
+          },
+          "SPY": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.113129,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4616,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "1993-01-29",
+            "rows": 8036,
+            "status": "pass",
+            "to": "2024-12-27",
+            "warnings": []
+          },
+          "TLT": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.411194,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4610,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "2002-07-30",
+            "rows": 5643,
+            "status": "pass",
+            "to": "2024-12-27",
+            "warnings": []
+          }
+        }
+      },
+      "date": "2024-12-27",
+      "signalChecks": [
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "GLD"
+        },
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "SPY"
+        },
+        {
+          "actualAction": "AVOID",
+          "actualState": "downtrend",
+          "expectedAction": "AVOID",
+          "expectedState": "downtrend",
+          "matches": true,
+          "symbol": "TLT"
+        }
+      ],
+      "status": "complete"
+    },
+    {
+      "actionDocument": {
+        "actions": [
+          {
+            "action": "HOLD",
+            "atr14": 2.4779,
+            "held": true,
+            "protectiveStop": 236.0564,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 243.49,
+            "risk": null,
+            "signalDate": "2025-01-03",
+            "state": "uptrend",
+            "symbol": "GLD",
+            "weekly": {
+              "close": 243.49,
+              "fastSma": 244.668,
+              "slowSma": 235.8467
+            }
+          },
+          {
+            "action": "HOLD",
+            "atr14": 7.1279,
+            "held": true,
+            "protectiveStop": 570.5662,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 591.95,
+            "risk": null,
+            "signalDate": "2025-01-03",
+            "state": "uptrend",
+            "symbol": "SPY",
+            "weekly": {
+              "close": 581.999,
+              "fastSma": 582.9692,
+              "slowSma": 557.5043
+            }
+          },
+          {
+            "action": "AVOID",
+            "atr14": 0.9908,
+            "held": false,
+            "protectiveStop": 84.3175,
+            "quantity": 0,
+            "rationale": "Completed weekly close is below the 30-week SMA.",
+            "referencePrice": 87.29,
+            "risk": null,
+            "signalDate": "2025-01-03",
+            "state": "downtrend",
+            "symbol": "TLT",
+            "weekly": {
+              "close": 81.713,
+              "fastSma": 84.3358,
+              "slowSma": 86.7866
+            }
+          }
+        ],
+        "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
+        "executionTiming": "next market open after Kyle reviews and approves",
+        "generatedAt": "2026-07-22T22:43:34.940190+00:00",
+        "kind": "trendlab-weekly-actions",
+        "portfolioHeat": {
+          "afterProposedBuys": 284.87,
+          "current": 284.87,
+          "maximum": 500.0,
+          "positions": [
+            {
+              "activeStop": 233.7948,
+              "currentPrice": 243.49,
+              "quantity": 14.0,
+              "risk": 135.73,
+              "symbol": "GLD"
+            },
+            {
+              "activeStop": 575.3789,
+              "currentPrice": 591.95,
+              "quantity": 9.0,
+              "risk": 149.14,
+              "symbol": "SPY"
+            }
+          ]
+        },
+        "provider": "tiingo",
+        "reportDate": "2025-01-03",
+        "requiresHumanApproval": true,
+        "schemaVersion": 1,
+        "strategy": {
+          "id": "trend-30w",
+          "version": 1
+        },
+        "validation": {
+          "GLD": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.509968,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 1,
+              "outlierFraction": 0.00021645,
+              "overlapRows": 4620,
+              "status": "pass_with_warning",
+              "tolerancePct": 0.5
+            },
+            "from": "2004-11-18",
+            "rows": 5065,
+            "status": "pass",
+            "to": "2025-01-03",
+            "warnings": []
+          },
+          "SPY": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.113129,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4620,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "1993-01-29",
+            "rows": 8040,
+            "status": "pass",
+            "to": "2025-01-03",
+            "warnings": []
+          },
+          "TLT": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.411194,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4614,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "2002-07-30",
+            "rows": 5647,
+            "status": "pass",
+            "to": "2025-01-03",
+            "warnings": []
+          }
+        }
+      },
+      "date": "2025-01-03",
+      "signalChecks": [
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "GLD"
+        },
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "SPY"
+        },
+        {
+          "actualAction": "AVOID",
+          "actualState": "downtrend",
+          "expectedAction": "AVOID",
+          "expectedState": "downtrend",
+          "matches": true,
+          "symbol": "TLT"
+        }
+      ],
+      "status": "complete"
+    },
+    {
+      "actionDocument": {
+        "actions": [
+          {
+            "action": "HOLD",
+            "atr14": 2.4564,
+            "held": true,
+            "protectiveStop": 240.8407,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 248.21,
+            "risk": null,
+            "signalDate": "2025-01-10",
+            "state": "uptrend",
+            "symbol": "GLD",
+            "weekly": {
+              "close": 248.21,
+              "fastSma": 244.242,
+              "slowSma": 236.9293
+            }
+          },
+          {
+            "action": "HOLD",
+            "atr14": 7.5568,
+            "held": true,
+            "protectiveStop": 557.8196,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 580.49,
+            "risk": null,
+            "signalDate": "2025-01-10",
+            "state": "uptrend",
+            "symbol": "SPY",
+            "weekly": {
+              "close": 570.7317,
+              "fastSma": 584.0843,
+              "slowSma": 558.9104
+            }
+          },
+          {
+            "action": "AVOID",
+            "atr14": 0.9597,
+            "held": false,
+            "protectiveStop": 82.581,
+            "quantity": 0,
+            "rationale": "Completed weekly close is below the 30-week SMA.",
+            "referencePrice": 85.46,
+            "risk": null,
+            "signalDate": "2025-01-10",
+            "state": "downtrend",
+            "symbol": "TLT",
+            "weekly": {
+              "close": 80.0,
+              "fastSma": 83.8948,
+              "slowSma": 86.5685
+            }
+          }
+        ],
+        "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
+        "executionTiming": "next market open after Kyle reviews and approves",
+        "generatedAt": "2026-07-22T22:43:35.141505+00:00",
+        "kind": "trendlab-weekly-actions",
+        "portfolioHeat": {
+          "afterProposedBuys": 259.46,
+          "current": 259.46,
+          "maximum": 500.0,
+          "positions": [
+            {
+              "activeStop": 236.0564,
+              "currentPrice": 248.21,
+              "quantity": 14.0,
+              "risk": 170.15,
+              "symbol": "GLD"
+            },
+            {
+              "activeStop": 570.5662,
+              "currentPrice": 580.49,
+              "quantity": 9.0,
+              "risk": 89.31,
+              "symbol": "SPY"
+            }
+          ]
+        },
+        "provider": "tiingo",
+        "reportDate": "2025-01-10",
+        "requiresHumanApproval": true,
+        "schemaVersion": 1,
+        "strategy": {
+          "id": "trend-30w",
+          "version": 1
+        },
+        "validation": {
+          "GLD": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.509968,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 1,
+              "outlierFraction": 0.00021626,
+              "overlapRows": 4624,
+              "status": "pass_with_warning",
+              "tolerancePct": 0.5
+            },
+            "from": "2004-11-18",
+            "rows": 5069,
+            "status": "pass",
+            "to": "2025-01-10",
+            "warnings": []
+          },
+          "SPY": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.113129,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4624,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "1993-01-29",
+            "rows": 8044,
+            "status": "pass",
+            "to": "2025-01-10",
+            "warnings": []
+          },
+          "TLT": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.411194,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4618,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "2002-07-30",
+            "rows": 5651,
+            "status": "pass",
+            "to": "2025-01-10",
+            "warnings": []
+          }
+        }
+      },
+      "date": "2025-01-10",
+      "signalChecks": [
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "GLD"
+        },
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "SPY"
+        },
+        {
+          "actualAction": "AVOID",
+          "actualState": "downtrend",
+          "expectedAction": "AVOID",
+          "expectedState": "downtrend",
+          "matches": true,
+          "symbol": "TLT"
+        }
+      ],
+      "status": "complete"
+    },
+    {
+      "actionDocument": {
+        "actions": [
+          {
+            "action": "HOLD",
+            "atr14": 2.3467,
+            "held": true,
+            "protectiveStop": 242.23,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 249.27,
+            "risk": null,
+            "signalDate": "2025-01-17",
+            "state": "uptrend",
+            "symbol": "GLD",
+            "weekly": {
+              "close": 249.27,
+              "fastSma": 244.373,
+              "slowSma": 238.079
+            }
+          },
+          {
+            "action": "HOLD",
+            "atr14": 7.439,
+            "held": true,
+            "protectiveStop": 575.2629,
+            "quantity": 0,
+            "rationale": "Completed weekly close and 10-week SMA are above the 30-week SMA.",
+            "referencePrice": 597.58,
+            "risk": null,
+            "signalDate": "2025-01-17",
+            "state": "uptrend",
+            "symbol": "SPY",
+            "weekly": {
+              "close": 587.5344,
+              "fastSma": 584.2193,
+              "slowSma": 560.7632
+            }
+          },
+          {
+            "action": "AVOID",
+            "atr14": 0.9355,
+            "held": false,
+            "protectiveStop": 84.3836,
+            "quantity": 0,
+            "rationale": "Completed weekly close is below the 30-week SMA.",
+            "referencePrice": 87.19,
+            "risk": null,
+            "signalDate": "2025-01-17",
+            "state": "downtrend",
+            "symbol": "TLT",
+            "weekly": {
+              "close": 81.6194,
+              "fastSma": 83.4623,
+              "slowSma": 86.426
+            }
+          }
+        ],
+        "configHash": "60e4ec30a09d6d5f5ba9f51e6f9d672c53ab6accf6cbc56dbb24b0e6b814ef63",
+        "executionTiming": "next market open after Kyle reviews and approves",
+        "generatedAt": "2026-07-22T22:43:35.359530+00:00",
+        "kind": "trendlab-weekly-actions",
+        "portfolioHeat": {
+          "afterProposedBuys": 475.85,
+          "current": 475.85,
+          "maximum": 500.0,
+          "positions": [
+            {
+              "activeStop": 240.8407,
+              "currentPrice": 249.27,
+              "quantity": 14.0,
+              "risk": 118.01,
+              "symbol": "GLD"
+            },
+            {
+              "activeStop": 557.8196,
+              "currentPrice": 597.58,
+              "quantity": 9.0,
+              "risk": 357.84,
+              "symbol": "SPY"
+            }
+          ]
+        },
+        "provider": "tiingo",
+        "reportDate": "2025-01-17",
+        "requiresHumanApproval": true,
+        "schemaVersion": 1,
+        "strategy": {
+          "id": "trend-30w",
+          "version": 1
+        },
+        "validation": {
+          "GLD": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.509968,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 1,
+              "outlierFraction": 0.00021603,
+              "overlapRows": 4629,
+              "status": "pass_with_warning",
+              "tolerancePct": 0.5
+            },
+            "from": "2004-11-18",
+            "rows": 5074,
+            "status": "pass",
+            "to": "2025-01-17",
+            "warnings": []
+          },
+          "SPY": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.113129,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4629,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "1993-01-29",
+            "rows": 8049,
+            "status": "pass",
+            "to": "2025-01-17",
+            "warnings": []
+          },
+          "TLT": {
+            "crossSource": {
+              "hardLimitPct": 1.0,
+              "maximumDifferencePct": 0.411194,
+              "maximumOutlierFraction": 0.001,
+              "outlierCount": 0,
+              "outlierFraction": 0.0,
+              "overlapRows": 4623,
+              "status": "pass",
+              "tolerancePct": 0.5
+            },
+            "from": "2002-07-30",
+            "rows": 5656,
+            "status": "pass",
+            "to": "2025-01-17",
+            "warnings": []
+          }
+        }
+      },
+      "date": "2025-01-17",
+      "signalChecks": [
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "GLD"
+        },
+        {
+          "actualAction": "HOLD",
+          "actualState": "uptrend",
+          "expectedAction": "HOLD",
+          "expectedState": "uptrend",
+          "matches": true,
+          "symbol": "SPY"
+        },
+        {
+          "actualAction": "AVOID",
+          "actualState": "downtrend",
+          "expectedAction": "AVOID",
+          "expectedState": "downtrend",
+          "matches": true,
+          "symbol": "TLT"
+        }
+      ],
+      "status": "complete"
+    }
+  ]
+}

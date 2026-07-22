@@ -1,4 +1,5 @@
 from datetime import date
+import json
 from pathlib import Path
 
 from trendlab import cli
@@ -8,6 +9,11 @@ from trendlab.models import frame_from_bars
 class FakeTiingo:
     def fetch(self, request):
         return frame_from_bars(self.bars)
+
+
+def test_replay_defaults_to_52_weeks():
+    args = cli.parser().parse_args(["replay"])
+    assert args.weeks == 52
 
 
 def test_run_weekly_end_to_end_with_provider_boundary(monkeypatch, tmp_path, bars):
@@ -53,6 +59,9 @@ def test_run_weekly_end_to_end_with_provider_boundary(monkeypatch, tmp_path, bar
     assert result["ok"] is True
     assert set(result["symbols"]) == {"GLD", "SPY", "TLT"}
     assert Path(result["actions"]).exists()
+    actions = json.loads(Path(result["actions"]).read_text())
+    assert actions["schemaVersion"] == 2
+    assert all("activeStop" in item and "proposedStop" in item for item in actions["actions"])
     assert Path(result["html"]).exists()
     assert (engine_root / "data" / "curated" / "market.duckdb").exists()
     assert len(list((engine_root / "data" / "raw" / "tiingo").glob("*/*.parquet"))) == 3

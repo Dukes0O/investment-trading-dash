@@ -14,6 +14,10 @@ holdout:
 costs:
   commission_bps_per_side: 0.0
   slippage_bps_per_side: 5.0
+  # Placeholder locate/borrow assumption for research shorts. Accrued over
+  # calendar days at annual_bps / 365; replace with instrument-specific costs
+  # before any strategy promotion.
+  short_borrow_bps_per_year: 25.0
 validation:
   maximum_calendar_gap_days: 7
   reconcile_close_tolerance_pct: 0.5
